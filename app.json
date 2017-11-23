@@ -34,7 +34,7 @@
         "selectedIconPath": "images/tabbar/msg_selected.png"
       },
       {
-        "pagePath": "pages/test/index",
+        "pagePath": "pages/myinfo/myinfo",
         "text": "我的",
         "iconPath": "images/tabbar/myinfo.png",
         "selectedIconPath": "images/tabbar/myinfo_selected.png"
