@@ -1,5 +1,6 @@
 //index.js
 //获取应用实例
+
 var app = getApp()
 var utils = require('../../utils/util.js')
 Page({
@@ -43,6 +44,7 @@ Page({
     //     userInfo:userInfo
     //   })
     // })
+
 
   }
 })

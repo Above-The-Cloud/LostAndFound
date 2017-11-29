@@ -49,6 +49,7 @@ App({
         console.log('sucess-----------------')
       }
     })
+
   },
   globalData: {
     userInfo: null

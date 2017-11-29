@@ -4,6 +4,7 @@
 		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
+
 		"minified": true,
 		"newFeature": true
 	},
@@ -21,6 +22,7 @@
 			"list": []
 		},
 		"miniprogram": {
+
 			"current": -1,
 			"list": []
 		}
