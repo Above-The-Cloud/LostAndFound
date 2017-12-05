@@ -63,7 +63,7 @@ echo "数据表 user_info 创建成功\n","<br>";
 $user_id = 10152150127;
 $user_password = '123456';
 $user_name = '壹汪春雨';
-//$submission_time = '2017-12-03 12:00:00';
+$submission_time = '2017-12-03 12:00:00';
 $submission_time = date("Y-m-d h:m:s");
 $sql = "INSERT INTO user_info ".
         "(user_id,user_password, user_name, submission_time) ".
@@ -83,21 +83,29 @@ $sql = "CREATE TABLE image (".
   "image_id INT unsigned NOT NULL auto_increment,".
   "publish_id INT ,".
   "type VARCHAR(100) NOT NULL,".  
-  "binarydata mediumblob NOT NULL,".
-  "time DATETIME,".  
+  "image_url VARCHAR(300) NOT NULL,".
+  "submission_time DATETIME,".  
   "PRIMARY KEY  ( image_id )" .
   ") ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
 $retval = mysqli_query($conn,$sql );
 if(! $retval )
 {
-    die('数据表创建失败: ' . mysqli_error($conn));
+    die('数据表image创建失败: ' . mysqli_error($conn));
 }
 echo "数据表 image 创建成功\n","<br>";
 
 //插入初始测试数据
 //image_fun/image_index.php
-
-
+$time = date("Y-m-d h:m:s");
+$sql = "INSERT INTO image ".
+        "(publish_id, type, image_url, submission_time)".
+        "VALUES(1, 'jpg', 'image/test.jpg', '$time')";
+$retval = mysqli_query( $conn, $sql );
+if(! $retval )
+{
+  die('image无法插入数据: ' . mysqli_error($conn));
+}
+echo "image数据插入成功\n","<br>";
 
 
 

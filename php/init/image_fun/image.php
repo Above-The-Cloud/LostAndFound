@@ -11,6 +11,7 @@ if ($num < 1)
     die("暂无图片");
 $data = mysql_result($result, 0, 'binarydata');
 $type = mysql_result($result, 0, 'type');
+$data = base64_decode($data);
 mysql_close($image_id);
 Header("Content-type: $type");
 echo $data;

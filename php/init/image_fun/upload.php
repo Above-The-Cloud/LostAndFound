@@ -8,10 +8,13 @@ if ($_POST['submit']) {
         $date  = date('Y-m-d H:i:s'); //上传日期
         $fp    = fopen($_FILES['image']['tmp_name'], 'rb');
         $type  = $_FILES['image']['type'];
+        //$image = file_get_contents($_FILES['image']['tmp_name']);
+        //$image = base64_encode($image);
         if (!$fp) {
             showInfo('读取图片失败！');
         } else {
-            @$image = mysql_escape_string(file_get_contents($_FILES['image']['tmp_name'])); 
+            //@$image = mysql_escape_string(file_get_contents($_FILES['image']['tmp_name'])); 
+            $image = addslashes(fread($fp, filesize($_FILES['image']['tmp_name'])));
             if ($image) {
                 $q      = "insert into image (publish_id, type, binarydata, time) values (1,'$type','$image','$date')";
                 $result = mysqli_query($conn,$q);
