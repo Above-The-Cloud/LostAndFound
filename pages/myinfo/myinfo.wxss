@@ -1,1 +1,44 @@
 /* pages/myinfo/myinfo.wxss */
+.contain{
+  /* background-image:url('../../images/index/swiper/2.jpg');  */
+  height: 1065rpx;  
+  /* background-color: #f00; */
+  
+  /* display: block; */
+  flex-direction: column;         /*主轴方向*/
+  justify-content: center; /*主轴上的对齐方式*/
+  /* align-items: center;  交叉轴对齐方式 */
+}
+.contain .mask{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;  
+  background-color: rgba(0, 0, 0, .6);
+}
+
+.user_ID{
+  position: absolute;
+  text-align: center;
+  margin-top: 43.8%;  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;  /*交叉轴对齐方式*/
+  /* border: 1px solid; */
+  height: 400rpx; 
+  width: 100%
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  font-size: 60rpx;   /*字体大小*/
+  color: #fff;        /*字体颜色 */
+}

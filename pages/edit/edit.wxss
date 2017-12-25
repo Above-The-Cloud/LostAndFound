@@ -1,1 +1,71 @@
-/* pages/edit/edit.wxss */
+/* pages/wyq/wyq.wxss */
+/* flex布局：http://www.jianshu.com/p/f82262002f8a*/
+.contain{
+  display: flex;
+  flex-direction: column;/*主轴方向*/
+  justify-content: space-between; /*主轴上的对齐方式*/
+  align-items: center;  /*交叉轴对齐方式*/
+  background-color: #fff;
+}
+
+.user_ID{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;  /*交叉轴对齐方式*/
+  /* border: 1px solid; */
+  height: 150rpx;
+  width: 100%
+}
+
+.userinfo-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 10rpx;
+  border-radius: 20%;
+}
+
+.userinfo-nickname {
+  font-size: 30rpx;   /*字体大小*/
+  color: #000;        /*字体颜色 */
+}
+
+.lost_and_found{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;  /*交叉轴对齐方式*/
+  /* border: 1px solid; */
+  height: 150rpx;
+  width: 100%
+}
+
+.text{
+  border: 1px inset #aaa;
+  height: 300rpx;
+  width: 80%
+}
+
+.picture{
+  display: flex;
+  flex-direction: row;/*主轴方向*/
+  justify-content: center; /*主轴上的对齐方式*/
+  /* border: 1px solid; */
+  height: 200rpx;
+  width: 100%
+}
+
+.choose_pic{
+  display: flex;
+  flex-direction: column;/*主轴方向*/
+  justify-content: center; /*主轴上的对齐方式*/
+  align-items: center;  /*交叉轴对齐方式*/
+  /* border: 1px solid #f00; */
+  width: 50%
+}
+
+.pic{
+  height: 80rpx;
+  width: 80rpx;
+  align-self: center;
+}

@@ -1,0 +1,63 @@
+<!--pages/wyq/wyq.wxml-->
+
+
+<form bindsubmit="formSubmit" bindreset="formReset">
+  <view class="contain">
+
+    <view class='user_ID'>
+      <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+      <block wx:else>
+        <image animation="{{animationData}}" bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image> 
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </block>
+    </view>
+
+
+
+    <view class='lost_and_found'> 
+      <radio-group class="radio-group" bindchange="radioChange" name='L&F'>
+        <label class="radio" wx:for="{{items}}">
+          <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+        </label>
+      </radio-group>
+    </view>
+
+
+    <view class='text'>
+      <input placeholder="来输入一些文字吧~" focus="{{focus}}" name="input" />
+    </view>
+
+
+     <view class='picture'>
+      <view class='choose_pic' bindtap="take_picture" >
+        <view>
+          <image src='../../images/edit/相机.png' class='pic' name='pic'></image>
+        </view>
+
+        <view>
+          <text>拍摄</text>
+        </view>
+      </view>
+
+
+      <view class='choose_pic' bindtap='choose_picture'>
+        <view>
+            <image src='../../images/edit/图片.png' class='pic' name='pic2'></image>
+        </view>
+
+        <view>
+            <text>相册</text>
+        </view>
+      </view>
+    </view> 
+    
+
+    <image wx:if='{{tempFilePaths}}' src='{{tempFilePaths}}' name='picc'></image>
+
+    <view><button type="primary" size='mini' formType="submit">发布</button></view>
+  
+  </view>
+
+</form>
+
+

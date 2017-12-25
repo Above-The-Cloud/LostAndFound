@@ -33,7 +33,7 @@ App({
       }
     })
     wx.request({
-      url: 'http://localhost/LostAndFound-dev/php/withUserInfo.php',
+      url: 'http://localhost/LostAndFound/php/withUserInfo.php',
       data:{
         name: '壹汪春雨'
       },

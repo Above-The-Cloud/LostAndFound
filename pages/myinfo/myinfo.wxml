@@ -1,0 +1,11 @@
+ <view class="contain" style="background-image: url('../../images/index/swiper/2.jpg');background-repeat:repeat;opacity:0.9"> 
+<!-- <view class="con1" > -->
+<view class="mask"></view> 
+    <view class='user_ID'> 
+      <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+      <block wx:else>
+        <image animation="{{animationData}}" bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image> 
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </block>
+    </view>
+</view>
