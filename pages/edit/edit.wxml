@@ -31,7 +31,7 @@
      <view class='picture'>
       <view class='choose_pic' bindtap="take_picture" >
         <view>
-          <image src='../../images/edit/相机.png' class='pic' name='pic'></image>
+          <image src='../../images/edit/camera.png' class='pic' name='pic'></image>
         </view>
 
         <view>
@@ -42,7 +42,7 @@
 
       <view class='choose_pic' bindtap='choose_picture'>
         <view>
-            <image src='../../images/edit/图片.png' class='pic' name='pic2'></image>
+            <image src='../../images/edit/album.png' class='pic' name='pic2'></image>
         </view>
 
         <view>
