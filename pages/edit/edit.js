@@ -9,7 +9,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     animationData: [],
-    pulish_id: -1,
+    publish_id: -1,
     image_exist: 0,
     user_id: 10152150127,
     // 单选框
@@ -127,12 +127,16 @@ Page({
         //console.log('-----------------------')
         //console.log(res.data)
         //console.log('sucess-----------------')
-        that.data.publish_id = res.data.max_pid
+        that.setData({
+          publish_id: res.data.max_pid
+
+        })
         console.log('当前数据库返回的publish_id')
         console.log(that.data.publish_id)
       }
     })
     if (that.data.image_exist == 1){
+      //console.log(that.data)
       wx.uploadFile({
         url: 'http://localhost/LostAndFound/php/upload.php',
         filePath: that.data.tempFilePaths[0],
@@ -142,7 +146,7 @@ Page({
         },
         success: function (res) {
           console.log('图片上传完成！')
-          console.log(res)
+          console.log(res.data)
           //var data = res.data
           //do something
         }
