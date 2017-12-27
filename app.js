@@ -45,13 +45,14 @@ App({
         console.log('sucess-----------------')
         console.log(res)
         console.log('-----------------------')
-        console.log(res.data)
+        console.log(res.data.user_id)
         console.log('sucess-----------------')
       }
     })
 
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    serverName: "http://localhost/LostAndFound/php/"
   }
 })

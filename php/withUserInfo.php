@@ -11,20 +11,21 @@ $nick_name=$_GET['name'];
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-echo "连接成功"."<br>";
+//echo "连接成功"."<br>";
 $sql="SELECT * FROM user_info ";
 $res = mysqli_query($conn, $sql);
 if (mysqli_num_rows($res) > 0) {
     // 输出数据
     while($row = mysqli_fetch_assoc($res)) {
-        echo "nick_name: " . $row["nick_name"]. " - user_id: " . $row["user_id"]. " " .  "<br>";
+    echo json_encode($row);
+    //    echo "nick_name: " . $row["nick_name"]. " - user_id: " . $row["user_id"]. " " .  "<br>";
     }
-} else {
-    echo "0 结果";
-}
- 
+} //else {
+//    echo "0 结果";
+//}
+// $res = json_encode($res);
+// echo ($res);
 mysqli_close($conn);
 
-// $res = json_encode($res);
-// exit($res);
+
 ?>

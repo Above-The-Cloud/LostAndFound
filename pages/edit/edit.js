@@ -9,7 +9,9 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     animationData: [],
-
+    pulish_id: -1,
+    image_exist: 0,
+    user_id: 10152150127,
     // 单选框
     items: [
       { name: 'lost', value: 'LOST', checked: 'true' },
@@ -22,6 +24,7 @@ Page({
   //单选框触发函数
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value)
+    
   },
 
   //事件处理函数
@@ -75,7 +78,8 @@ Page({
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
         that.setData({
-          tempFilePaths: res.tempFilePaths
+          tempFilePaths: res.tempFilePaths,
+          image_exist: 1
         })
       }
     })
@@ -91,7 +95,8 @@ Page({
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
         that.setData({
-          tempFilePaths: res.tempFilePaths
+          tempFilePaths: res.tempFilePaths,
+          image_exist: 1
         })
       }
     })
@@ -99,19 +104,49 @@ Page({
 
   formSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    // console.log(e)
+    console.log(e)
     var that = this;
     var formData = e.detail.value;
     wx.request({
-      url: 'http://test.com:8080/test/socket.php?msg=2',
-      data: formData,
+      url: 'http://localhost/LostAndFound/php/edit.php',
+      data: {
+        user_id: that.data.user_id,
+        type_t: e.detail.value.type,
+        title: '',
+        msg: e.detail.value.input,
+        image_exist: that.data.image_exist,
+
+      },
+      method: 'GET',
       header: {
-        'Content-Type': 'application/json'
+        'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        console.log(res.data)
-        that.modalTap();
+        //console.log('sucess-----------------')
+        //console.log(res)
+        //console.log('-----------------------')
+        //console.log(res.data)
+        //console.log('sucess-----------------')
+        that.data.publish_id = res.data.max_pid
+        console.log('当前数据库返回的publish_id')
+        console.log(that.data.publish_id)
       }
     })
+    if (that.data.image_exist == 1){
+      wx.uploadFile({
+        url: 'http://localhost/LostAndFound/php/upload.php',
+        filePath: that.data.tempFilePaths[0],
+        name: "file",
+        formData: {
+          publish_id: that.data.publish_id
+        },
+        success: function (res) {
+          console.log('图片上传完成！')
+          console.log(res)
+          //var data = res.data
+          //do something
+        }
+      })
+    }
   },
 })

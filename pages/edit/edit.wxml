@@ -15,7 +15,7 @@
 
 
     <view class='lost_and_found'> 
-      <radio-group class="radio-group" bindchange="radioChange" name='L&F'>
+      <radio-group class="radio-group" bindchange="radioChange" name='type'>
         <label class="radio" wx:for="{{items}}">
           <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
         </label>
