@@ -1,7 +1,7 @@
 <?php
 include 'conn.php';
-echo json_encode($_FILES);
-echo json_encode($_POST);  
+//echo json_encode($_FILES);
+//echo json_encode($_POST);  
 $newname = " ";
 $publish_id = $_POST['publish_id'];
 $sql = "UPDATE publish SET image_exist=1 WHERE publish_id='$publish_id';";
@@ -25,6 +25,6 @@ $sql = "INSERT INTO image(publish_id, type, image_url, submission_time) ".
       "VALUES ".
       "('$publish_id', '$extension', '$newname', current_date);";
 $res = mysqli_query( $conn, $sql );
-echo json_encode($res);
+//echo json_encode($res);
 mysqli_close($conn);
 ?>
