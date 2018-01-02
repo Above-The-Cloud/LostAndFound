@@ -4,6 +4,7 @@
     "pages/logs/logs",
     "pages/edit/edit",
     "pages/msg/msg",
+    "pages/index/msgdetail/msgdetail",
     "pages/myinfo/myinfo",
     "pages/test/index"
   ],

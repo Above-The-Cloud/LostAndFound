@@ -1,33 +1,35 @@
 <!--index.wxml-->
 <view class="container">
-
-  <swiper indicator-dots="{{indicatorDots}}"
-  autoplay="{{autoplay}}" class="banners" interval="{{interval}}" duration="{{duration}}">
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" class="banners" interval="{{interval}}" duration="{{duration}}">
     <block wx:for="{{swiper_url}}">
-      <swiper-item class="banner" >
-          <image src="{{item}}"   bindtap="bindViewTap" class="banner-image" width="100%" height="100%"/>
-          <text class="banner-title">{{item.title}}</text>
+      <swiper-item class="banner">
+        <image src="{{item}}" bindtap="bindViewTap" class="banner-image" width="100%" height="100%" />
+        <text class="banner-title">{{item.title}}</text>
       </swiper-item>
     </block>
   </swiper>
-
+  <button bindtap='stateswitch' type='primary' class="statechange">Lost/Found</button>
   <view class="news-item-container">
-    <block wx:for="{{list}}" wx:for-index="id">
+    <block wx:for="{{listofitem}}" wx:for-index="id">
       <text wx:if="{{item.header}}" class="sub-title">{{item.header}}</text>
-      <navigator wx:else url=''>
-        <view class="news-item" >
-          <view class="news-item-left">
-            <text class="news-item-title">{{item.text}}</text>
+      <view wx:else class="news-item">
+        <view class='userinfo'>
+          <image src="{{item.usericon}}" class='icon-image'></image>
+          <view class='username'>
+            <text>{{item.username}}</text>
           </view>
-          <view class="news-item-right">
-            <image src="{{item.image}}" class="news-image"/>
-          </view>
+          <navigator class='detail' url="./msgdetail/msgdetail?username={{item.username}}&usericon={{item.usericon}}&text={{item.text}}&image={{item.image}}"hover-class='hover'>查看详情</navigator>
         </view>
-      </navigator>
+        <view class="news-item-left">
+          <text class="news-item-title">{{item.text}}</text>
+        </view>
+        <view class="news-item-right">
+          <image src="{{item.image}}" class="news-image"></image>
+        </view>
+
+      </view>
     </block>
     <button type="primary" class="load-btn" size="mini" loading="{{loading}}" plain="{{plain}}" bindtap="loadMore"> 更多 </button>
   </view>
 
 </view>
-
-

@@ -1,3 +1,4 @@
+/* pages/test/index.wxss */
 /**index.wxss**/
 
 .banners {
@@ -79,24 +80,10 @@
 {
   position: relative;
   top:5px;
-  width: 150px;
   left: 10px;
 }
-.hover
-{
-  color:blue;
-}
-.detail
-{
-  position:relative;
-  top:5px;
-  left:80px;
-  font-size: 14px;
-}
 .news-item-right{
-  display: flex;
-  flex-direction: row;
-  width: 280px;
+  width: 80px;
   height: 180px;
 }
 

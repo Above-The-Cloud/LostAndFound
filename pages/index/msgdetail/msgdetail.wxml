@@ -1,0 +1,15 @@
+<!--index.wxml-->
+<view class="news-item">
+  <view class='userinfo'>
+    <image src="{{usericon}}" class='icon-image'></image>
+    <view catchtap='click' class='username'>
+      <text>{{username}}</text>
+    </view>
+  </view>
+  <view class="news-item-left">
+    <text class="news-item-title">{{text}}</text>
+  </view>
+  <view class="news-item-right">
+    <image src="{{image}}" class="news-image" />
+  </view>
+  </view>
