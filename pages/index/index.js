@@ -4,6 +4,7 @@
 var app = getApp()
 var utils = require('../../utils/util.js')
 var flag = true;
+var image_root_path = "http://localhost/LostAndFound/php/"
 Page({
   data: {
     swiper_url: [
