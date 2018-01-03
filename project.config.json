@@ -4,16 +4,15 @@
 		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
-
 		"minified": true,
 		"newFeature": true
 	},
-  "window": {
-    "enablePullDownRefresh": true
-  },
+	"window": {
+		"enablePullDownRefresh": true
+	},
 	"compileType": "miniprogram",
 	"libVersion": "1.5.4",
-	"appid": "touristappid",
+	"appid": "wxd4a02c9d70b821e8",
 	"projectname": "lostfound",
 	"condition": {
 		"search": {
@@ -25,7 +24,6 @@
 			"list": []
 		},
 		"miniprogram": {
-
 			"current": -1,
 			"list": []
 		}
