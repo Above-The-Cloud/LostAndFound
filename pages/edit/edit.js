@@ -133,24 +133,25 @@ Page({
         })
         console.log('当前数据库返回的publish_id')
         console.log(that.data.publish_id)
+        if (that.data.image_exist == 1) {
+          //console.log(that.data)
+          wx.uploadFile({
+            url: 'http://localhost/LostAndFound/php/upload.php',
+            filePath: that.data.tempFilePaths[0],
+            name: "file",
+            formData: {
+              publish_id: that.data.publish_id
+            },
+            success: function (res) {
+              console.log('图片上传完成！')
+              console.log(res.data)
+              //var data = res.data
+              //do something
+            }
+          })
+        }
       }
     })
-    if (that.data.image_exist == 1){
-      //console.log(that.data)
-      wx.uploadFile({
-        url: 'http://localhost/LostAndFound/php/upload.php',
-        filePath: that.data.tempFilePaths[0],
-        name: "file",
-        formData: {
-          publish_id: that.data.publish_id
-        },
-        success: function (res) {
-          console.log('图片上传完成！')
-          console.log(res.data)
-          //var data = res.data
-          //do something
-        }
-      })
-    }
+    
   },
 })

@@ -93,6 +93,7 @@ Page({
         console.log(that.data.publish_data)
       }
     })
+    
     wx.request({
       url: 'http://localhost/LostAndFound/php/index_image_info.php',
       data: {
@@ -116,6 +117,6 @@ Page({
         console.log(that.data.image_data)
       }
     })
-
+    
   }
 })
