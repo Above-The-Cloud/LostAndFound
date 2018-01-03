@@ -12,7 +12,7 @@
 
       <view class='msgbox' bindtap="toDetail">
       <view>
-        <image src='../../images/pic/pic.png' class='userpic'></image>
+        <image src='image/default.png' class='userpic'></image>
       </view>
       <view>
         <text class='username'decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;&nbsp;1015213000</text>
@@ -24,7 +24,7 @@
 
      <view class='msgbox' bindtap="toDetail">
       <view>
-        <image src='../../images/pic/pic.png' class='userpic'></image>
+        <image src='image/default.png' class='userpic'></image>
       </view>
       <view>
         <text class='username'decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;&nbsp;1015213000</text>
@@ -35,19 +35,7 @@
     </view>
      <view class='msgbox' bindtap="toDetail">
       <view>
-        <image src='../../images/pic/pic.png' class='userpic'></image>
-      </view>
-      <view>
-        <text class='username'decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;&nbsp;1015213000</text>
-        <text class='timetext' decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;TIME：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20：00</text>
-      </view>
-      <view><button class='seebutton' size='mini'>查看</button></view>
-      
-    </view>
-
-     <view class='msgbox' bindtap="toDetail">
-      <view>
-        <image src='../../images/pic/pic.png' class='userpic'></image>
+        <image src='image/default.png' class='userpic'></image>
       </view>
       <view>
         <text class='username'decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;&nbsp;1015213000</text>
@@ -59,7 +47,7 @@
 
      <view class='msgbox' bindtap="toDetail">
       <view>
-        <image src='../../images/pic/pic.png' class='userpic'></image>
+        <image src='image/default.png' class='userpic'></image>
       </view>
       <view>
         <text class='username'decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;&nbsp;1015213000</text>
@@ -71,7 +59,7 @@
 
      <view class='msgbox' bindtap="toDetail">
       <view>
-        <image src='../../images/pic/pic.png' class='userpic'></image>
+        <image src='image/default.png' class='userpic'></image>
       </view>
       <view>
         <text class='username'decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;&nbsp;1015213000</text>
@@ -83,7 +71,19 @@
 
      <view class='msgbox' bindtap="toDetail">
       <view>
-        <image src='../../images/pic/pic.png' class='userpic'></image>
+        <image src='image/default.png' class='userpic'></image>
+      </view>
+      <view>
+        <text class='username'decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;&nbsp;1015213000</text>
+        <text class='timetext' decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;TIME：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20：00</text>
+      </view>
+      <view><button class='seebutton' size='mini'>查看</button></view>
+      
+    </view>
+
+     <view class='msgbox' bindtap="toDetail">
+      <view>
+        <image src='image/default.png' class='userpic'></image>
       </view>
       <view>
         <text class='username'decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;&nbsp;1015213000</text>

@@ -5,7 +5,7 @@ var app = getApp()
 var utils = require('../../utils/util.js')
 var flag = true;
 var serverName = app.globalData.serverName
-var image_root_path = "http://localhost/LostAndFound/php/"
+var image_root_path = "http://101.132.164.188:8088/php/"
 Page({
   data: {
     swiper_url: [
@@ -74,8 +74,23 @@ Page({
       listofitem: this.data.listfound
     })
   },
-  onLoad: function () {
+  /**
+ * 生命周期函数--监听页面显示
+ */
+  onShow: function () {
 
+  },
+  onPullDownRefresh: function () {
+    this.onload;
+  },
+  onLoad: function () {
+    while(this.data.listfound.length!=1)
+      this.data.listfound.pop();
+    console.log('清空');
+    console.log(this.data.listfound);
+    while (this.data.listlost.length!= 1)
+      this.data.listlost.pop();
+    console.log(this.data.listlost);
     var that = this;
 
     this.index = 1

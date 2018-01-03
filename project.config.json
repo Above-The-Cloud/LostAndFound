@@ -8,6 +8,9 @@
 		"minified": true,
 		"newFeature": true
 	},
+  "window": {
+    "enablePullDownRefresh": true
+  },
 	"compileType": "miniprogram",
 	"libVersion": "1.5.4",
 	"appid": "touristappid",

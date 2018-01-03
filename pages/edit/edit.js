@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp()
 var serverName = app.globalData.serverName
+
 Page({
   data: {
 
@@ -152,6 +153,16 @@ Page({
         }
       }
     })
-    
-  },
+    wx.switchTab({
+      url: '../index/index',
+      success: function (e) {
+        var page = getCurrentPages().pop();
+        if (page == undefined || page == null) return;
+        setTimeout(function () {
+          page.onLoad();
+        }, 2000);  
+        
+      }
+    }) 
+  }
 })
