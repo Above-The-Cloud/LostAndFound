@@ -18,7 +18,7 @@ public $submission_time;
 public $image_url = array();
 }
 
-$sql = "SELECT * FROM publish order by publish_id asc;";
+$sql = "SELECT * FROM publish order by publish_id desc;";
 
 $res = mysqli_query( $conn, $sql );
 if (mysqli_num_rows($res) > 0) {

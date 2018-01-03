@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "lostandfound";
+$dbname = "lostfound";
 // 创建连接
 $conn = mysqli_connect($servername, $username, $password,$dbname);
    //传入的数据

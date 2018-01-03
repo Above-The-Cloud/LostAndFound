@@ -4,6 +4,7 @@
 var app = getApp()
 var utils = require('../../utils/util.js')
 var flag = true;
+var serverName = app.globalData.serverName
 var image_root_path = "http://localhost/LostAndFound/php/"
 Page({
   data: {
@@ -14,11 +15,9 @@ Page({
       '../../images/index/swiper/4.jpg'
     ],
     listofitem: [],
-    listfound: [{ header: 'Found信息' }, { username: 'tourist', text: '中山北路校区教书院捡到校园卡一张,学号为10152150127,姓名为图灵。请失主迅速与我联系 我的手机号138058343360', image: '../../images/index/goods/eg.jpg', usericon: '../../images/index/icon/defaulticon.png' }, { username: 'tourist', text: '中山北路校区教书院捡到校园卡一张,学号为10152150127 ,姓名为图灵。请失主迅速与我联系 我的手机号123445672', image: '../../images/index/goods/eg.jpg', usericon: '../../images/index/icon/defaulticon.png' }, { username: 'tourist', text: '中山北路校区教书院捡到校园卡一张,学号为10152150127,姓名为图灵。请失主迅速与我联系 我的手机号123445672', image: '../../images/index/goods/eg.jpg', usericon: '../../images/index/icon/defaulticon.png' }, { username: 'tourist', text: '中山北路校区教书院捡到校园卡一张,学号为10152150127,姓名为图灵。请失主迅速与我联系 我的手机号123445672', image: '../../images/index/goods/eg.jpg', usericon: '../../images/index/icon/defaulticon.png' }, {
-      username: 'tourist',
-      text: '中山北路校区教书院捡到校园卡一张,学号为10152150127,姓名为图灵。请失主迅速与我联系 我的手机号123445672', image: '../../images/index/goods/eg.jpg', usericon: '../../images/index/icon/defaulticon.png'
-    }, { username: 'tourist', text: '中山北路校区教书院捡到校园卡一张,学号为10152150127 ,姓名为图灵。请失主迅速与我联系 我的手机号123445672', image: '../../images/index/goods/eg.jpg', usericon: '../../images/index/icon/defaulticon.png' }],
-    listlost: [{ header: 'Lost信息' }, { username: 'loser', text: '坐标华东师范大学闵行校区丢失校园卡一张,学号为10152150127,姓名为图灵。请看到的人迅速和我联系 我的手机号123445672', image: '../../images/index/goods/eg.jpg', usericon: '../../images/index/icon/defaulticon.png' }, { username: 'loser', text: '坐标华东师范大学闵行校区丢失校园卡一张,学号为10152150127,姓名为图灵。请看到的人迅速和我联系 我的手机号123445672', image: '../../images/index/goods/eg.jpg', usericon: '../../images/index/icon/defaulticon.png' }, { username: 'loser', text: '坐标闵行校区丢失校园卡一张,学号为10152150127,姓名为图灵。请看到的人迅速和我联系 我的手机号123445672', image: '../../images/index/goods/eg.jpg', usericon: '../../images/index/icon/defaulticon.png' }, { username: 'loser', text: '坐标华东师范大学闵行校区丢失校园卡一张,学号为10152150127,姓名为图灵。请看到的人迅速和我联系 我的手机号123445672', image: '../../images/index/goods/eg.jpg', usericon: '../../images/index/icon/defaulticon.png' }, { username: 'loser', text: '坐标华东师范大学闵行校区丢失校园卡一张,学号为10152150127,姓名为图灵。请看到的人迅速和我联系 我的手机号123445672', image: '../../images/index/goods/eg.jpg', usericon: '../../images/index/icon/defaulticon.png' }, { username: 'loser', text: '坐标华东师范大学闵行校区丢失校园卡一张,学号为10152150127,姓名为图灵。请看到的人迅速和我联系 我的手机号123445672', image: '../../images/index/goods/eg.jpg', usericon: '../../images/index/icon/defaulticon.png' }],
+    listfound: [{ header: 'Found信息' }],
+    listlost: [{ header: 'Lost信息' },],
+
     duration: 2000,
     indicatorDots: true,
     autoplay: true,
@@ -30,6 +29,7 @@ Page({
 
   //事件处理函数
   stateswitch: function (e) {
+    var that = this;
     if (flag) {
       this.setData({
         listofitem: this.data.listfound
@@ -42,6 +42,7 @@ Page({
       })
       flag = true;
     }
+    //console.log(that.data.publish_data);
   },
 
   bindViewTap: function (e) {
@@ -55,14 +56,34 @@ Page({
     now.setDate(now.getDate() - this.index++)
     return now
   },
+  Loadmsg: function () {
+    var that = this;
+    var i = 0;
+    for (i = 0; i < that.data.publish_data.length; i++) {
+      var userid = that.data.publish_data[i].user_id;
+      var Msg = that.data.publish_data[i].msg;
+      var imageurl='';
+      if(that.data.publish_data[i].image_exist=="1")
+      imageurl = image_root_path + that.data.publish_data[i].image_url[0];
+      if (that.data.publish_data[i].type == 'found')
+        this.data.listfound.push({ username: userid, text: Msg, image: imageurl, usericon: '../../images/index/icon/defaulticon.png' });
+      else
+        this.data.listlost.push({ username: userid, text: Msg, image: imageurl, usericon: '../../images/index/icon/defaulticon.png' });
+    }
+    that.setData({
+      listofitem: this.data.listfound
+    })
+  },
   onLoad: function () {
 
-    var that = this
+    var that = this;
 
     this.index = 1
+
     this.setData({
       listofitem: this.data.listfound
     })
+
     //调用应用实例的方法获取全局数据
     // app.getUserInfo(function(userInfo){
     //   //更新数据
@@ -71,7 +92,7 @@ Page({
     //   })
     // })
     wx.request({
-      url: 'http://localhost/LostAndFound/php/index_publish_info.php',
+      url: serverName + '/index_publish_info.php',
       data: {
 
       },
@@ -86,16 +107,20 @@ Page({
         //console.log(res.data)
         //console.log('sucess-----------------')
         that.setData({
-        publish_data: res.data  
+          publish_data: res.data
 
         })
+        
         console.log('当前数据库返回的publish记录')
         console.log(that.data.publish_data)
+        that.Loadmsg()
+        }
       }
-    })
-    
+    )
+    var that = this;
     wx.request({
-      url: 'http://localhost/LostAndFound/php/index_image_info.php',
+
+      url: serverName + '/index_image_info.php',
       data: {
 
       },
@@ -117,6 +142,8 @@ Page({
         console.log(that.data.image_data)
       }
     })
-    
-  }
+    console.log(this.data)
+
+  },
+
 })

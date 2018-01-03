@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+var serverName = app.globalData.serverName
 Page({
   data: {
 
@@ -108,7 +108,7 @@ Page({
     var that = this;
     var formData = e.detail.value;
     wx.request({
-      url: 'http://localhost/LostAndFound/php/edit.php',
+      url: serverName + '/edit.php',
       data: {
         user_id: that.data.user_id,
         type_t: e.detail.value.type,
@@ -136,7 +136,7 @@ Page({
         if (that.data.image_exist == 1) {
           //console.log(that.data)
           wx.uploadFile({
-            url: 'http://localhost/LostAndFound/php/upload.php',
+            url: serverName + '/upload.php',
             filePath: that.data.tempFilePaths[0],
             name: "file",
             formData: {

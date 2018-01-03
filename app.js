@@ -53,6 +53,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    serverName: "http://localhost/LostAndFound/php/"
+    serverName: "http://localhost/LostAndFound/php"
   }
 })

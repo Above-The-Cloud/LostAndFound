@@ -18,7 +18,7 @@ Page({
     this.setData({
       username:options.username,
       text:options.text,
-      image:"../"+options.image,
+      image:options.image,
       usericon:"../"+options.usericon
 
     })
