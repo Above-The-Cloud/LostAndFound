@@ -114,7 +114,7 @@ Page({
         type_t: e.detail.value.type,
         title: '',
         msg: e.detail.value.input,
-        image_exist: that.data.image_exist,
+        image_exist: 0,
 
       },
       method: 'GET',
@@ -144,7 +144,7 @@ Page({
             },
             success: function (res) {
               console.log('图片上传完成！')
-              console.log(res.data)
+              console.log(res)
               //var data = res.data
               //do something
             }
