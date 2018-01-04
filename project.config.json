@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.5.4",
 	"appid": "wxd4a02c9d70b821e8",
-	"projectname": "lostfound",
+	"projectname": "lostandfound(id)",
 	"condition": {
 		"search": {
 			"current": -1,

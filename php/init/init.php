@@ -10,9 +10,9 @@
 
 
 
-$dbhost = 'localhost:3306';  // mysql服务器主机地址
-$dbuser = 'root';            // mysql用户名
-$dbpass = '';          // mysql用户名密码
+$dbhost = 'w.rdc.sae.sina.com.cn:3306';  // mysql服务器主机地址
+$dbuser = 'kj10kwxnlm';            // mysql用户名
+$dbpass = '4wlli1y5zmw3my354l0mxhiikj5z04310ki02j14';          // mysql用户名密码
 $conn = mysqli_connect($dbhost, $dbuser, $dbpass);
 
 //连接数据库；
@@ -23,10 +23,10 @@ if(! $conn )
 echo '连接成功<br />';
 mysqli_query($conn , "set names utf8");
 
-$retval = mysqli_select_db($conn, 'lostfound' );
+$retval = mysqli_select_db($conn, 'app_lostfound' );
 if($retval) 
 {
-	$sql = 'DROP DATABASE lostfound';
+	$sql = 'DROP DATABASE app_lostfound';
 	$res = mysqli_query( $conn, $sql );
 	if(! $res )
 	{
@@ -35,7 +35,7 @@ if($retval)
 	echo "原始数据库删除成功\n","<br>";
 }
 
-$sql = 'CREATE DATABASE lostfound';
+$sql = 'CREATE DATABASE app_lostfound';
 $retval = mysqli_query($conn,$sql );
 if(! $retval )
 {
@@ -43,7 +43,7 @@ if(! $retval )
 }
 echo "数据库 lostfound 创建成功\n","<br>";
 
-mysqli_select_db($conn, 'lostfound' );
+mysqli_select_db($conn, 'app_lostfound' );
 
 //创建表user_info
 $sql = "CREATE TABLE user_info( ".

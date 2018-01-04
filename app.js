@@ -33,7 +33,7 @@ App({
       }
     })
     wx.request({
-      url: 'http://101.132.164.188:8088/php/withUserInfo.php',
+      url: 'https://lostfound.sc2yun.com/php/withUserInfo.php',
       data:{
         name: '壹汪春雨'
       },
@@ -53,6 +53,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    serverName: "http://101.132.164.188:8088/php"
+    serverName: "https://lostfound.sc2yun.com/php"
   }
 })

@@ -5,7 +5,7 @@ var app = getApp()
 var utils = require('../../utils/util.js')
 var flag = true;
 var serverName = app.globalData.serverName
-var image_root_path = "http://101.132.164.188:8088/php/"
+var image_root_path = serverName +"/"
 Page({
   data: {
     swiper_url: [

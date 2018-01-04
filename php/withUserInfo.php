@@ -1,10 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "lostfound";
-// 创建连接
-$conn = mysqli_connect($servername, $username, $password,$dbname);
+include 'conn.php';
    //传入的数据
 $nick_name=$_GET['name'];
 // 检测连接
