@@ -23,8 +23,8 @@
     </view>
 
 
-    <view class='text'>
-      <input placeholder="来输入一些文字吧~" focus="{{focus}}" name="input" />
+    <view class='text' style="white-space: pre-line">
+     <textarea placeholder="来输入一些文字吧~" focus="{{focus}}" name="input" style="width:100%"/>
     </view>
 
 
@@ -52,7 +52,7 @@
     </view> 
     
 
-    <image wx:if='{{tempFilePaths}}' src='{{tempFilePaths}}' name='picc'></image>
+    <image wx:if='{{tempFilePaths}}' src='{{tempFilePaths}}' name='picc' mode="aspectFit"></image>
 
     <view><button type="primary" size='mini' formType="submit">发布</button></view>
   

@@ -8,6 +8,7 @@
       </swiper-item>
     </block>
   </swiper>
+  <button bindtap='refresh' type='primary' class="refresh">刷新</button>
   <button bindtap='stateswitch' type='primary' class="statechange">Lost/Found</button>
   <view class="news-item-container">
     <block wx:for="{{listofitem}}" wx:for-index="id">

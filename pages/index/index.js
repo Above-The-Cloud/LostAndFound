@@ -23,11 +23,62 @@ Page({
     autoplay: true,
     interval: 3000,
     loading: false,
+    refresh:0,
     plain: false
 
   },
 
   //事件处理函数
+  refresh: function (e){
+    while (this.data.listfound.length != 1)
+      this.data.listfound.pop();
+    console.log('清空');
+    console.log(this.data.listfound);
+    while (this.data.listlost.length != 1)
+      this.data.listlost.pop();
+    console.log(this.data.listlost);
+    var that = this;
+
+    this.index = 1
+
+    this.setData({
+      listofitem: this.data.listfound
+    })
+
+    //调用应用实例的方法获取全局数据
+    // app.getUserInfo(function(userInfo){
+    //   //更新数据
+    //   that.setData({
+    //     userInfo:userInfo
+    //   })
+    // })
+    wx.request({
+      url: serverName + '/index_publish_info.php',
+      data: {
+
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        //console.log('sucess-index-publish---------------')
+        //console.log(res)
+        //console.log('-----------------------')
+        //console.log(res.data)
+        //console.log('sucess-----------------')
+        that.setData({
+          publish_data: res.data
+
+        })
+        //console.log('当前数据库返回的publish记录')
+        //console.log(that.data.publish_data)
+        that.Loadmsg()
+      }
+    }
+    )
+  } ,
+
   stateswitch: function (e) {
     var that = this;
     if (flag) {
@@ -78,7 +129,7 @@ Page({
  * 生命周期函数--监听页面显示
  */
   onShow: function () {
-
+   // this.onLoad
   },
   onPullDownRefresh: function () {
     this.onload;
