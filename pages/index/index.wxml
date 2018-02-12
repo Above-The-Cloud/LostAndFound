@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container">
+
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" class="banners" interval="{{interval}}" duration="{{duration}}">
     <block wx:for="{{swiper_url}}">
       <swiper-item class="banner">
@@ -8,14 +8,24 @@
       </swiper-item>
     </block>
   </swiper>
-  <button bindtap='refresh' type='primary' class="refresh">刷新</button>
-  <button bindtap='stateswitch' type='primary' class="statechange">Lost/Found</button>
+  <view class="swiper-tab">
+    <button class ="category" bindtap="actionSheetTap">{{cur_type}}</button>
+    <action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetChange">
+    <block wx:for-items="{{actionSheetItems}}">
+        <action-sheet-item class="item" bindtap="bind{{item}}">{{item}}</action-sheet-item>
+    </block>
+    <action-sheet-cancel class="cancel">取消</action-sheet-cancel>
+</action-sheet>
+  <view class ="swiper-tab-item {{activeIndex==0?'active':''}}" bindtap="stateswitch" data-index="0">LOST</view>
+    <view class ="swiper-tab-item {{activeIndex==1?'active':''}}" bindtap="stateswitch" data-index="1">FOUND</view>
+    </view>
+      <icon type='search' bindtap='search' class="refresh"></icon>
   <view class="news-item-container">
     <block wx:for="{{listofitem}}" wx:for-index="id">
       <text wx:if="{{item.header}}" class="sub-title">{{item.header}}</text>
-      <view wx:else class="news-item">
+<view wx:else class="news-item">
         <view class='userinfo'>
-          <image src="{{item.usericon}}" class='icon-image'></image>
+<image src="{{item.usericon}}" class='icon-image'></image>
           <view class='username'>
             <text>{{item.username}}</text>
           </view>
@@ -24,13 +34,11 @@
         <view class="news-item-left">
           <text class="news-item-title">{{item.text}}</text>
         </view>
-        <view class="news-item-right">
+        <view wx:if="{{item.image != ''}}" class="news-item-right">
           <image src="{{item.image}}" class="news-image"></image>
         </view>
 
       </view>
     </block>
-    <button type="primary" class="load-btn" size="mini" loading="{{loading}}" plain="{{plain}}" bindtap="loadMore"> 更多 </button>
   </view>
 
-</view>

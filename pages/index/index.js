@@ -6,6 +6,7 @@ var utils = require('../../utils/util.js')
 var flag = true;
 var serverName = app.globalData.serverName
 var image_root_path = serverName +"/"
+var Category = ['所有', '校园卡', '雨伞', '钱包']
 Page({
   data: {
     swiper_url: [
@@ -15,19 +16,56 @@ Page({
       '../../images/index/swiper/4.jpg'
     ],
     listofitem: [],
-    listfound: [{ header: 'Found信息' }],
-    listlost: [{ header: 'Lost信息' },],
-
+    listfound: [{ header: ' ' }],
+    listlost: [{ header: ' ' },],
+    cur_type:'所有▼',
+    activeIndex:1,
     duration: 2000,
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
     loading: false,
     refresh:0,
-    plain: false
+    plain: false,
+    actionSheetHidden: true,
+    actionSheetItems: Category
+
 
   },
-
+  bind所有: function (e) {
+    this.setData({
+      actionSheetHidden: !this.data.actionSheetHidden,
+      cur_type: '所有▼'
+    })
+  },
+  bind校园卡: function (e) {
+    this.setData({
+      actionSheetHidden: !this.data.actionSheetHidden,
+      cur_type: '校园卡▼'
+    })
+  },
+  bind钱包: function (e) {
+    this.setData({
+      actionSheetHidden: !this.data.actionSheetHidden,
+      cur_type: '钱包▼'
+    })
+  },
+  bind雨伞: function (e) {
+    this.setData({
+      actionSheetHidden: !this.data.actionSheetHidden,
+      cur_type: '雨伞▼'
+    })
+  },
+  actionSheetTap: function (e) {
+    this.setData({
+      actionSheetHidden: !this.data.actionSheetHidden
+    })
+  },
+  actionSheetChange: function (e) {
+    this.setData({
+      actionSheetHidden: !this.data.actionSheetHidden
+    })
+  },
   //事件处理函数
   refresh: function (e){
     while (this.data.listfound.length != 1)
@@ -38,12 +76,16 @@ Page({
       this.data.listlost.pop();
     console.log(this.data.listlost);
     var that = this;
-
+    console.log(this.data.activeIndex);
     this.index = 1
-
+    if(this.data.activeIndex==1)
     this.setData({
       listofitem: this.data.listfound
     })
+    else
+      this.setData({
+        listofitem: this.data.listlost
+      })
 
     //调用应用实例的方法获取全局数据
     // app.getUserInfo(function(userInfo){
@@ -81,15 +123,18 @@ Page({
 
   stateswitch: function (e) {
     var that = this;
-    if (flag) {
+    var type = e.target.dataset.index;
+    if (type == 0) {
       this.setData({
-        listofitem: this.data.listfound
+        listofitem: this.data.listlost,
+        activeIndex:type
       })
       flag = false;
     }
     else {
       this.setData({
-        listofitem: this.data.listlost
+        listofitem: this.data.listfound,
+        activeIndex: type
       })
       flag = true;
     }
@@ -121,8 +166,12 @@ Page({
       else
         this.data.listlost.push({ username: userid, text: Msg, image: imageurl, usericon: '../../images/index/icon/defaulticon.png' });
     }
-    that.setData({
-      listofitem: this.data.listfound
+    if (this.data.activeIndex == 1)
+      this.setData({
+        listofitem: this.data.listfound
+      })
+    else this.setData({
+      listofitem: this.data.listlost
     })
   },
   /**
@@ -133,6 +182,7 @@ Page({
   },
   onPullDownRefresh: function () {
     this.onload;
+    this.refresh();
   },
   onLoad: function () {
     while(this.data.listfound.length!=1)
@@ -145,11 +195,13 @@ Page({
     var that = this;
 
     this.index = 1
-
+    if (this.data.activeIndex == 1)
     this.setData({
       listofitem: this.data.listfound
     })
-
+    else this.setData({
+      listofitem: this.data.listlost
+    })
     //调用应用实例的方法获取全局数据
     // app.getUserInfo(function(userInfo){
     //   //更新数据
