@@ -1,0 +1,54 @@
+<!--pages/initinfo/initinfo.wxml-->
+<template name="head">
+  <view class="page-head">
+    <view class="page-head-title">{{title}}</view>
+    <view class="page-head-line"></view>
+    <view wx:if="{{desc}}" class="page-head-desc">{{desc}}</view>
+  </view>
+</template>
+
+  <view class="container">
+    <template is="head" data="{{title: '个人信息'}}"/>
+
+  
+ <view class="page-body">
+ 
+<form catchsubmit="formSubmit" catchreset="formReset">
+    <view class="page-section">
+      <view class="cells__title">选择联系方式</view>
+      <view class="cells cells_after-title">
+        <view class="cell cell_input">
+
+          <view class="cell__hd">
+            <view class="label">当前选择：</view>
+          </view>
+
+          <view class="cell__bd">
+            <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+              <view class="input">{{array[index]}}</view>
+            </picker>
+          </view>
+
+        </view>
+      </view>
+   </view>
+
+    <view class="page-section">
+        <view class="page-section-title">联系方式：</view>
+        <view class="cells cells_after-title">
+          <view class="cell cell_input">
+            <view class="cell__bd">
+              <input class="input" name="input" placeholder="输入联系方式" />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="btn-area">
+        <button type="primary" formType="submit">Submit</button>
+        <button formType="reset">Reset</button>
+      </view>
+
+ </form>
+    </view>
+   </view>

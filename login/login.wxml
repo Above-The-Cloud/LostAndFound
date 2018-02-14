@@ -1,0 +1,43 @@
+<!--pages/login/login.wxml-->
+<template name="head">
+  <view class="page-head">
+    <view class="page-head-title">{{title}}</view>
+    <view class="page-head-line"></view>
+    <view wx:if="{{desc}}" class="page-head-desc">{{desc}}</view>
+  </view>
+</template>
+
+  <view class="container">
+    <template is="head" data="{{title: '初次登录'}}"/>
+
+  
+ <view class="page-body">
+<form catchsubmit="formSubmit" catchreset="formReset">  
+<view class="page-section">
+      <view class="cells__title">学号：{{inputValue}}</view>
+      <view class="cells cells_after-title">
+        <view class="cell cell_input">
+          <input class="input"  maxlength="10" bindinput="bindKeyInput" placeholder="请输入学工号"/>
+        </view>
+      </view>
+    </view>
+
+    <view class="page-section">
+        <view class="page-section-title">我的密码</view>
+        <view class="cells cells_after-title">
+          <view class="cell cell_input">
+            <view class="cell__bd">
+              <input class="input" name="input" placeholder="输入公共数据库密码" />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="btn-area">
+        <button type="primary" formType="submit">Submit</button>
+        <button formType="reset">Reset</button>
+      </view>
+      
+ </form>
+    </view>
+   </view>
