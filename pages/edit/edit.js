@@ -5,7 +5,10 @@ var serverName = app.globalData.serverName
 
 Page({
   data: {
-
+    listofitem: [],
+    listfound: [{ header: ' ' }],
+    listlost: [{ header: ' ' },],
+     activeIndex: 1,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -19,13 +22,42 @@ Page({
       { name: 'found', value: 'FOUND' },
     ],
     //图片路径
-    tempFilePaths:null
+    tempFilePaths:null,
+    //分类按钮
+    showModalStatus: false,
+    //导航栏
+    navbar: ['LOST', 'FOUND'],
+    currentTab: 0 
   },
-
+  powerDrawer: function (e) {
+    var currentStatu = e.currentTarget.dataset.statu;
+    this.util(currentStatu)
+  },
+  navbarTap: function (e) {
+    this.setData({
+      currentTab: e.currentTarget.dataset.idx
+    })
+  },  
   //单选框触发函数
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value)
     
+  },
+   //
+  stateswitch: function (e) {
+    console.log('LLL')
+    if (this.data.currentTab == 0) {
+      this.setData({
+        listofitem: "lost"
+      })
+    } else {
+      this.setData({
+        listofitem: "found"
+      })
+    }
+    console.log(this.data.currentTab)
+    console.log(this.data.listofitem)
+    console.log('FFF')
   },
 
   //事件处理函数
@@ -69,22 +101,22 @@ Page({
     })
   },
 
-// 拍摄照片
-  take_picture: function () {
-    var that = this;
-    wx.chooseImage({
-      count: 1, // 默认9  
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
-      sourceType: 'album', // 可以指定来源是相机 
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
-        that.setData({
-          tempFilePaths: res.tempFilePaths,
-          image_exist: 1
-        })
-      }
-    })
-  },
+// // 拍摄照片
+//   take_picture: function () {
+//     var that = this;
+//     wx.chooseImage({
+//       count: 1, // 默认9  
+//       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
+//       sourceType: 'album', // 可以指定来源是相机 
+//       success: function (res) {
+//         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
+//         that.setData({
+//           tempFilePaths: res.tempFilePaths,
+//           image_exist: 1
+//         })
+//       }
+//     })
+//   },
 
 // 选择照片
   choose_picture: function(){
@@ -164,5 +196,54 @@ Page({
         
       }
     }) 
-  }
+  },
+  //分类按钮
+  util: function (currentStatu) {
+    /* 动画部分 */
+    // 第1步：创建动画实例   
+    var animation = wx.createAnimation({
+      duration: 200,  //动画时长  
+      timingFunction: "linear", //线性  
+      delay: 0  //0则不延迟  
+    });
+
+    // 第2步：这个动画实例赋给当前的动画实例  
+    this.animation = animation;
+
+    // 第3步：执行第一组动画：Y轴偏移240px后(盒子高度是240px)，停  
+    animation.translateY(240).step();
+
+    // 第4步：导出动画对象赋给数据对象储存  
+    this.setData({
+      animationData: animation.export()
+    })
+
+    // 第5步：设置定时器到指定时候后，执行第二组动画  
+    setTimeout(function () {
+      // 执行第二组动画：Y轴不偏移，停  
+      animation.translateY(0).step()
+      // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象  
+      this.setData({
+        animationData: animation
+      })
+
+      //关闭抽屉  
+      if (currentStatu == "close") {
+        this.setData(
+          {
+            showModalStatus: false
+          }
+        );
+      }
+    }.bind(this), 200)
+
+    // 显示抽屉  
+    if (currentStatu == "open") {
+      this.setData(
+        {
+          showModalStatus: true
+        }
+      );
+    }
+  }  
 })
