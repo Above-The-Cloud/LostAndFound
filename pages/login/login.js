@@ -6,6 +6,7 @@ Page({
   data: {
     focus: false,
     inputValue: '',
+    userInfo: null,
     openid: ''
   },
   bindKeyInput: function (e) {
@@ -22,9 +23,12 @@ Page({
   onLoad: function () {
     console.log("login onLoad...")
     var that = this
+    that.setData({
+      userInfo: app.globalData.userInfo
+    })
     //获得用户的openid
-    var openId = (wx.getStorageSync('openId'))
-    if (openId) {
+    var openid = (wx.getStorageSync('openid'))
+    if (openid) {
       wx.getUserInfo({
         success: function (res) {
           that.setData({
@@ -38,14 +42,17 @@ Page({
         },
         complete: function () {
           // complete
+          that.setData({
+            openid: openid
+          })
           console.log("获取用户信息完成！")
-          console.log("openid: " + openId)
+          console.log("openid: " + openid)
         }
       })
     } else {
       wx.login({
         success: function (res) {
-          //console.log(res.code)
+          console.log('code: ' + res.code)
           if (res.code) {
             wx.getUserInfo({
               withCredentials: true,
@@ -55,8 +62,8 @@ Page({
                   url: serverName + '/getopenid.php',
                   data: {
                     code: res.code,
-                    encryptedData: res_user.encryptedData,
-                    iv: res_user.iv
+                    //encryptedData: res_user.encryptedData,
+                    //iv: res_user.iv
                   },
                   method: 'GET',
                   header: {
@@ -68,10 +75,10 @@ Page({
                       nickName: res.data.nickName,
                       avatarUrl: res.data.avatarUrl,
                     })
-                    wx.setStorageSync('openId', res.data.openId);
-                    console.log(res.data)
+                    wx.setStorageSync('openid', res.data.openid);
+                    console.log('getopenid: ' + res.data)
                     console.log("获取用户openid成功！")
-                    console.log("openid: " + res.data.openId)
+                    console.log("openid: " + res.data.openid)
                   }
                 })
               }, 
@@ -108,7 +115,7 @@ Page({
                                             avatarUrl: res.data.avatarUrl,
 
                                           })
-                                          wx.setStorageSync('openId', res.data.openId);
+                                          wx.setStorageSync('openid', res.data.openid);
                                         }
                                       })
                                     }
@@ -136,8 +143,9 @@ Page({
       })
 
     }
-
-
+    console.log(this.data)
+    console.log(app.globalData)
+    console.log("...login onLoad")
 
   }
     

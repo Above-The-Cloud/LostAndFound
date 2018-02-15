@@ -1,8 +1,9 @@
 //app.js
 App({
   globalData: {
-    userInfo: null,
-    serverName: "https://yiwangchunyu.wang"
+    //userInfo: null,
+    serverName: "https://yiwangchunyu.wang",
+    openid: null
   },
 
   onLaunch: function () {
