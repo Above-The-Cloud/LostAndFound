@@ -1,6 +1,12 @@
 //app.js
 App({
+  globalData: {
+    userInfo: null,
+    serverName: "https://yiwangchunyu.wang"
+  },
+
   onLaunch: function () {
+    var that = this
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -10,7 +16,9 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
+        
+      }  
+      
     })
     // 获取用户信息
     wx.getSetting({
@@ -32,27 +40,27 @@ App({
         }
       }
     })
-    wx.request({
-      url: 'https://yiwangchunyu.wang/withUserInfo.php',
-      data:{
-        name: '壹汪春雨'
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log('sucess-----------------')
-        console.log(res)
-        console.log('-----------------------')
-        console.log(res.data.user_id)
-        console.log('sucess-----------------')
-      }
-    })
+    // wx.request({
+    //   url: 'https://yiwangchunyu.wang/withUserInfo.php',
+    //   data:{
+    //     name: '壹汪春雨'
+    //   },
+    //   method: 'GET',
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   success: function (res) {
+    //     console.log('sucess-----------------')
+    //     console.log(res)
+    //     console.log('-----------------------')
+    //     console.log(res.data.user_id)
+    //     console.log('sucess-----------------')
+    //   }
+    // })
+
 
   },
-  globalData: {
-    userInfo: null,
-    serverName: "https://yiwangchunyu.wang"
-  }
+
+
+  
 })

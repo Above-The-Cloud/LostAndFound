@@ -34,7 +34,7 @@
       </view>
 
       <view class="btn-area">
-        <button type="primary" formType="submit">Submit</button>
+        <button type="primary" bindtap="formSubmit" formType="submit">Submit</button>
         <button formType="reset">Reset</button>
       </view>
       
