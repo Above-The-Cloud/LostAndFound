@@ -24,7 +24,7 @@
           </view>
 
           <view class="cell__bd">
-            <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+            <picker bindchange="bindPickerChange" name='contact_type' value="{{index}}" range="{{array}}">
               <view class="input">{{array[index]}}</view>
             </picker>
           </view>
@@ -38,15 +38,15 @@
         <view class="cells cells_after-title">
           <view class="cell cell_input">
             <view class="cell__bd">
-              <input class="input" name="input" placeholder="输入联系方式" />
+              <input class="input" name="contact_value" placeholder="输入联系方式" />
             </view>
           </view>
         </view>
       </view>
 
       <view class="btn-area">
-        <button type="primary" formType="submit">Submit</button>
-        <button formType="reset">Reset</button>
+        <button type="primary" formType="submit">提交</button>
+        <button formType="reset">重置</button>
       </view>
 
  </form>
