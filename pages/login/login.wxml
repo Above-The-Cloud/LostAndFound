@@ -17,7 +17,7 @@
       <view class="cells__title">学号：{{inputValue}}</view>
       <view class="cells cells_after-title">
         <view class="cell cell_input">
-          <input class="input"  maxlength="10" bindinput="bindKeyInput" placeholder="请输入学工号"/>
+          <input class="input"  name='user_id' maxlength="11" bindinput="bindKeyInput" placeholder="请输入学工号"/>
         </view>
       </view>
     </view>
@@ -27,15 +27,15 @@
         <view class="cells cells_after-title">
           <view class="cell cell_input">
             <view class="cell__bd">
-              <input class="input" name="input" placeholder="输入公共数据库密码" />
+              <input class="input" name="user_password" placeholder="输入公共数据库密码" />
             </view>
           </view>
         </view>
       </view>
 
       <view class="btn-area">
-        <button type="primary" bindtap="formSubmit" formType="submit">Submit</button>
-        <button formType="reset">Reset</button>
+        <button type="primary" bindtap="formSubmit" formType="submit">提交</button>
+        <button formType="reset">重置</button>
       </view>
       
  </form>

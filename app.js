@@ -1,7 +1,7 @@
 //app.js
 App({
   globalData: {
-    //userInfo: null,
+    userInfo: null,
     serverName: "https://yiwangchunyu.wang",
     openid: null
   },

@@ -15,9 +15,40 @@ Page({
     })
   },
   formSubmit: function(e){
-    wx.redirectTo({
-      url: '../initinfo/initinfo'
+    //TODO:表单检查
+
+
+    //DONE:表单检查
+    console.log('register...')
+    console.log(e.detail.value)
+    var user_id = e.detail.value.user_id;
+    var user_password = e.detail.value.user_password;
+    var openid = this.data.openid;
+    wx.request({
+      url: serverName + '/login/register.php',
+      data: {
+        user_id: user_id,
+        user_password: user_password,
+        openid: openid,
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log('register.php: success')
+        console.log(res.data)
+        if(res.data=='true'){
+          wx.setStorageSync('user_id', user_id);
+          wx.redirectTo({
+            url: '../initinfo/initinfo'
+          })
+        }
+      }
     })
+    console.log('...register')
+
+    
   },
 
   onLoad: function () {
@@ -75,6 +106,7 @@ Page({
                       nickName: res.data.nickName,
                       avatarUrl: res.data.avatarUrl,
                     })
+                    app.globalData.openid = openid;
                     wx.setStorageSync('openid', res.data.openid);
                     console.log('getopenid: ' + res.data)
                     console.log("获取用户openid成功！")
@@ -141,6 +173,39 @@ Page({
           }
         }
       })
+
+    }
+
+
+    //用户身份验证
+    if(openid){
+      console.log('getopenid.php... ')
+      wx.request({
+        url: serverName + '/login/login.php',
+        data: {
+          openid: openid,
+
+        },
+        method: 'GET',
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success: function (res) {
+          console.log('...getopenid.php: ')
+          console.log(res.data)
+          if(res.data.user_id){
+            wx.setStorageSync('user_id', res.data.user_id);
+            console.log("switch to index")
+            wx.switchTab({
+              url: '../index/index'
+            })
+          }
+         
+        }
+      })
+
+    }else{
+
 
     }
     console.log(this.data)
