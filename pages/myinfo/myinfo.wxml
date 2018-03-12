@@ -1,11 +1,36 @@
- <view class="contain" style="background-image: url('../../images/index/swiper/2.jpg');background-repeat:repeat;opacity:0.9"> 
-<!-- <view class="con1" > -->
+ <view class="contain" style="background-image:url(https://images.pexels.com/photos/267514/pexels-photo-267514.jpeg?w=940&h=650&auto=compress&cs=tinysrgb);background-repeat:repeat;opacity:0.9">
+ 
 <view class="mask"></view> 
     <view class='user_ID'> 
       <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
       <block wx:else>
         <image animation="{{animationData}}" bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image> 
+         <view class='user_infomation'>  
         <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        <text class="userinfo-wxnumber">微信号:xxxxxxxxx</text>
+        <text class="userinfo-idnumber">学工号:xxxxxxxxx</text>
+        </view> 
       </block>
     </view>
 </view>
+<view class="article">
+ <view class="article-title">发表信息</view>
+   <view class="con">
+   <view class="news-item-container">
+     <block wx:for="{{list}}" wx:for-index="id">
+      <text wx:if="{{item.header}}" class="sub-title"></text>
+      <navigator wx:else url=''>
+        <view class="news-item" >
+                <view class="news-item-left">
+                    <view><text class="news-item-title">{{item.text}}</text></view>
+                    <view bindtap="messageDelete"><text>删除</text></view>
+                </view>
+          <view class="news-item-right">
+            <image src="{{item.image}}" class="news-image"/>
+          </view>
+        </view>
+      </navigator>
+    </block>
+  </view>
+  </view>
+ </view>
