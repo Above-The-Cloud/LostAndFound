@@ -1,7 +1,7 @@
   <view class="background">
 <!-- 导航条   -->
 <view class="navbar">  
-  <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>  
+  <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text> 
 </view>  
 
 <!--lost-->  
@@ -91,7 +91,7 @@
 
     <image wx:if='{{tempFilePaths}}' src='{{tempFilePaths}}' name='picc' mode="aspectFit"></image>
    <!--classify button-->  
-<view class="btn" bindtap="powerDrawer" data-statu="open">button</view>  
+<view class="btn" bindtap="powerDrawer" data-statu="open">分类</view>  
 <!--mask-->  
 <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>  
 <!--content-->  

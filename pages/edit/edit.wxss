@@ -69,7 +69,7 @@ page{
   line-height: 80rpx;  
 }  
 .navbar .item.active{  
-  color: #FFCC00;  
+  color: green;  
 }  
 .navbar .item.active:after{  
   content: "";  
@@ -79,7 +79,7 @@ page{
   left: 0;  
   right: 0;  
   height: 4rpx;  
-  background: #FFCC00;  
+  background: green;  
 } 
 
 /*classify button*/  
