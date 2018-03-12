@@ -11,6 +11,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     animationData: [],
+    list: [{ text: '物品描述', image: '../../images/index/goods/eg.jpg' },      { text: '物品描述', image: '../../images/index/goods/eg.jpg' }, { text:     '物品描述', image: '../../images/index/goods/eg.jpg' }, { text: '物品描述', image: '../../images/index/goods/eg.jpg' }, { text: '物品描述', image: '../../images/index/goods/eg.jpg' }, { text: '物品描述', image: '../../images/index/goods/eg.jpg' }],
 
   },
 //获取用户信息
@@ -42,9 +43,6 @@ Page({
       })
     }
   },
-  onPullDownRefresh: function () {
-    this.onload;
-  },
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -52,5 +50,10 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+
+//删除函数
+messageDelete: function () {
+
   }
 })
