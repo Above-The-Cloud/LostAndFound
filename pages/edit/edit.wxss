@@ -1,3 +1,5 @@
+/* pages/wyq/wyq.wxss */
+/* flex布局：http://www.jianshu.com/p/f82262002f8a*/
 .background{
   background-color: 	#dbdbca;
 }
@@ -10,28 +12,15 @@
 }
 
 
- /* .lost_and_found{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 150rpx;
-  width: 100%
-}
- */
-
 .text{
- /* border: 1px inset #aaa;*/
-  height: 300rpx;
+  height: 420rpx;
   width: 100%;
-  /*margin: 30rpx*/
+  margin-top: 10px;
 }
 
 .picture{
   display: flex;
   flex-direction: row;/*主轴方向*/
-  /*justify-content: center; 主轴上的对齐方式*/
-  /* border: 1px solid; */
   margin-left: 0px;
   margin-top: 0px;
   height: 200rpx;
@@ -43,13 +32,12 @@
   flex-direction: column;/*主轴方向*/
   justify-content: center; /*主轴上的对齐方式*/
   align-items: center;  /*交叉轴对齐方式*/
-  /* border: 1px solid #f00; */
   width: 50%
 }
 
 .pic{
-  height: 120rpx;
-  width: 120rpx;
+  height: 260rpx;    
+  width: 260rpx;
   align-self: center;
 }
 page{  
@@ -69,7 +57,7 @@ page{
   line-height: 80rpx;  
 }  
 .navbar .item.active{  
-  color: green;  
+  color: #1aad19;
 }  
 .navbar .item.active:after{  
   content: "";  
@@ -79,17 +67,18 @@ page{
   left: 0;  
   right: 0;  
   height: 4rpx;  
-  background: green;  
+  background: #1aad19;  
 } 
 
 /*classify button*/  
 .btn {  
   width: 20%;  
+  height: 100%;
   padding: 20rpx 0;  
-  border-radius: 20rpx; 
+  border-radius: 10rpx; 
   text-align: center;  
   margin: 40rpx 10%;  
-  background: #dbdbca;  
+  background: #1aad19;  
   color: #fff;  
 }  
 /*mask*/  
