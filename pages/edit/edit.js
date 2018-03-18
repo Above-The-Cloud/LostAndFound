@@ -140,51 +140,18 @@ Page({
     console.log(e)
     var that = this;
     var formData = e.detail.value;
-    wx.request({
-      url: serverName + '/edit.php',
-      data: {
-        user_id: that.data.user_id,
-        type_t: e.detail.value.type,
-        title: '',
-        msg: e.detail.value.input,
-        image_exist: 0,
 
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        //console.log('sucess-----------------')
-        //console.log(res)
-        //console.log('-----------------------')
-        //console.log(res.data)
-        //console.log('sucess-----------------')
-        that.setData({
-          publish_id: res.data.max_pid
+    var user_id = wx.getStorageSync('user_id')
+    var type_t = this.data.listofitem
+    var category = '所有'
+    var title = ''
+    var msg = e.detail.value.input
+    var imagesPaths = this.data.tempFilePaths
 
-        })
-        console.log('当前数据库返回的publish_id')
-        console.log(that.data.publish_id)
-        if (that.data.image_exist == 1) {
-          //console.log(that.data)
-          wx.uploadFile({
-            url: serverName + '/upload.php',
-            filePath: that.data.tempFilePaths[0],
-            name: "file",
-            formData: {
-              publish_id: that.data.publish_id
-            },
-            success: function (res) {
-              console.log('图片上传完成！')
-              console.log(res)
-              //var data = res.data
-              //do something
-            }
-          })
-        }
-      }
-    })
+    //在此调用uploadAll接口
+    this.uploadAll(user_id, type_t, category, title, msg, imagesPaths)
+
+    //跳转到主页
     wx.switchTab({
       url: '../index/index',
       success: function (e) {
@@ -195,7 +162,7 @@ Page({
         }, 2000);  
         
       }
-    }) 
+    })  
   },
   //分类按钮
   util: function (currentStatu) {
@@ -245,5 +212,47 @@ Page({
         }
       );
     }
-  }  
+  }, 
+
+  //imagesPaths图片路径数组
+  uploadAll: function (user_id, type_t, category, title, msg, imagesPaths) {
+    var publish_id=null;
+    wx.request({
+      url: serverName + '/edit/edit.php',
+      data: {
+        user_id: user_id,
+        type_t: type_t,
+        category: category,
+        title: title,
+        msg: msg,
+        image_exist: 0,
+
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+          publish_id=res.data
+        console.log('当前数据库返回的publish_id')
+        console.log(publish_id)
+        for (path in imagesPaths){
+          wx.uploadFile({
+            url: serverName + '/edit/upload.php',
+            filePath: path,
+            name: "file",
+            formData: {
+              publish_id: publish_id
+            },
+            success: function (res) {
+              console.log('图片上传完成！')
+
+            }
+          })
+        }
+        
+      }
+    })
+  }
+
 })

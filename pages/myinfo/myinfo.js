@@ -55,6 +55,7 @@ Page({
 //删除函数
   messageDelete: function () {
     //TODO:调用函数deleteSingleMassageById(publish_id)
+    
   },
 
   deleteSingleMassageById: function(publish_id){
