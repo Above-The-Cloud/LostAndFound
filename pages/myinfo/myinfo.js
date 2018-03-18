@@ -29,6 +29,7 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
+
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
