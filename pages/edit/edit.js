@@ -8,7 +8,7 @@ Page({
     listofitem: [],
     listfound: [{ header: ' ' }],
     listlost: [{ header: ' ' },],
-     activeIndex: 1,
+    activeIndex: 1,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -22,12 +22,13 @@ Page({
       { name: 'found', value: 'FOUND' },
     ],
     //图片路径
-    tempFilePaths:null,
+    tempFilePaths: [],
     //分类按钮
     showModalStatus: false,
     //导航栏
     navbar: ['LOST', 'FOUND'],
-    currentTab: 0 
+    currentTab: 0, 
+    pics: []
   },
   powerDrawer: function (e) {
     var currentStatu = e.currentTarget.dataset.statu;
@@ -101,57 +102,147 @@ Page({
     })
   },
 
-// // 拍摄照片
-//   take_picture: function () {
-//     var that = this;
-//     wx.chooseImage({
-//       count: 1, // 默认9  
-//       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
-//       sourceType: 'album', // 可以指定来源是相机 
-//       success: function (res) {
-//         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
-//         that.setData({
-//           tempFilePaths: res.tempFilePaths,
-//           image_exist: 1
-//         })
-//       }
-//     })
-//   },
+  //选择多张图片
+  uploadimg: function (data) {
+    var that = this,
+      i = data.i ? data.i : 0,//当前上传的哪张图片
+      success = data.success ? data.success : 0,//上传成功的个数
+      fail = data.fail ? data.fail : 0;//上传失败的个数
+    wx.uploadFile({
+      url: data.url,
+      filePath: data.path[i],
+      name: 'file',//这里根据自己的实际情况改
+      formData: null,
+      success: (resp) => {
+        success++;//图片上传成功，图片上传成功的变量+1
+        console.log(resp)
+        console.log(i);
+        //这里可能有BUG，失败也会执行这里,所以这里应该是后台返回过来的状态码为成功时，这里的success才+1
+      },
+      fail: (res) => {
+        fail++;//图片上传失败，图片上传失败的变量+1
+        console.log('fail:' + i + "fail:" + fail);
+      },
+      complete: () => {
+        console.log(i);
+        i++;//这个图片执行完上传后，开始上传下一张
+        if (i == data.path.length) {   //当图片传完时，停止调用          
+          console.log('执行完毕');
+          console.log('成功：' + success + " 失败：" + fail);
+        } else {//若图片还没有传完，则继续调用函数
+          console.log(i);
+          data.i = i;
+          data.success = success;
+          data.fail = fail;
+          that.uploadimg(data);
+        }
 
+      }
+    });
+  },
 // 选择照片
   choose_picture: function(){
-    var that = this;
-    wx.chooseImage({
-      count: 1, // 默认9  
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
-      sourceType: 'album', // 可以指定来源是相机 
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
-        that.setData({
-          tempFilePaths: res.tempFilePaths,
-          image_exist: 1
-        })
-      }
-    })
+    // var that = this;
+    // wx.chooseImage({
+    //   count: 3, // 默认9  
+    //   sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
+    //   sourceType: 'album', // 可以指定来源是相机 
+    //   success: function (res) {
+    //     // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
+    //     that.setData({
+    //       tempFilePaths: res.tempFilePaths,
+    //       image_exist: 3
+    //     })
+    //   }
+    // })
+  //这里是选取图片的方法
+      var that = this,
+        　　　　　　pics = this.data.pics;
+
+      wx.chooseImage({
+        count: 9 - pics.length, // 最多可以选择的图片张数，默认9
+        sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
+        sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
+        success: function (res) {
+          var imgsrc = res.tempFilePaths;
+          　　　　　　　　　pics = pics.concat(imgsrc);
+          that.setData({
+            pics: pics,
+       tempFilePaths: res.tempFilePaths,
+       image_exist: 3
+          });
+        },
+        fail: function () {
+          // fail
+        },
+        complete: function () {
+          // complete
+        }
+      })
+
+    },
+  uploadimg: function () {//这里触发图片上传的方法
+    var pics = this.data.pics;
+    app.uploadimg({
+      url: 'https://........',//这里是你图片上传的接口
+      path: pics//这里是选取的图片的地址数组
+    });
   },
+  onLoad: function (options) {
+
+  },
+
 
   formSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     console.log(e)
     var that = this;
     var formData = e.detail.value;
+    wx.request({
+      url: serverName + '/edit.php',
+      data: {
+        user_id: that.data.user_id,
+        type_t: e.detail.value.type,
+        title: '',
+        msg: e.detail.value.input,
+        image_exist: 0,
 
-    var user_id = wx.getStorageSync('user_id')
-    var type_t = this.data.listofitem
-    var category = '所有'
-    var title = ''
-    var msg = e.detail.value.input
-    var imagesPaths = this.data.tempFilePaths
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        //console.log('sucess-----------------')
+        //console.log(res)
+        //console.log('-----------------------')
+        //console.log(res.data)
+        //console.log('sucess-----------------')
+        that.setData({
+          publish_id: res.data.max_pid
 
-    //在此调用uploadAll接口
-    this.uploadAll(user_id, type_t, category, title, msg, imagesPaths)
-
-    //跳转到主页
+        })
+        console.log('当前数据库返回的publish_id')
+        console.log(that.data.publish_id)
+        if (that.data.image_exist == 1) {
+          //console.log(that.data)
+          wx.uploadFile({
+            url: serverName + '/upload.php',
+            filePath: that.data.tempFilePaths[0],
+            name: "file",
+            formData: {
+              publish_id: that.data.publish_id
+            },
+            success: function (res) {
+              console.log('图片上传完成！')
+              console.log(res)
+              //var data = res.data
+              //do something
+            }
+          })
+        }
+      }
+    })
     wx.switchTab({
       url: '../index/index',
       success: function (e) {
@@ -162,7 +253,7 @@ Page({
         }, 2000);  
         
       }
-    })  
+    }) 
   },
   //分类按钮
   util: function (currentStatu) {
@@ -212,47 +303,5 @@ Page({
         }
       );
     }
-  }, 
-
-  //imagesPaths图片路径数组
-  uploadAll: function (user_id, type_t, category, title, msg, imagesPaths) {
-    var publish_id=null;
-    wx.request({
-      url: serverName + '/edit/edit.php',
-      data: {
-        user_id: user_id,
-        type_t: type_t,
-        category: category,
-        title: title,
-        msg: msg,
-        image_exist: 0,
-
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-          publish_id=res.data
-        console.log('当前数据库返回的publish_id')
-        console.log(publish_id)
-        for (path in imagesPaths){
-          wx.uploadFile({
-            url: serverName + '/edit/upload.php',
-            filePath: path,
-            name: "file",
-            formData: {
-              publish_id: publish_id
-            },
-            success: function (res) {
-              console.log('图片上传完成！')
-
-            }
-          })
-        }
-        
-      }
-    })
-  }
-
+  }  
 })
