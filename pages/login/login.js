@@ -19,8 +19,9 @@ Page({
 
 
     //DONE:表单检查
+    console.log("........")
     console.log(e.detail.value)
-    var user_id = e.detail.value.user_id;
+    var user_id = e.detail.value.userid;
     var user_password = e.detail.value.user_password;
     var openid = this.data.openid;
     var nickName = this.data.nickName;
@@ -170,11 +171,8 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: function (res) {
-          console.log('...getopenid.php: ')
-          console.log(res.data)
           if(res.data.user_id){
             wx.setStorageSync('user_id', res.data.user_id);
-            console.log("switch to index")
             wx.switchTab({
               url: '../index/index'
             })
