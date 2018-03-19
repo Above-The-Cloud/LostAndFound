@@ -6,38 +6,32 @@
 
 <!--lost-->  
 <view hidden="{{currentTab!==0}}">  
-<!-- <view class ="swiper-tab-item {{activeIndex==0?'active':''}}"  data-index="0"></view> -->
+<view class="back">
   <form bindsubmit="formSubmit" bindreset="formReset">
   <view class="contain">
-
-    
-     <!-- <radio-group class="radio-group" bindchange="radioChange" name='type'>
-        <label class="radio" wx:for="{{items}}">
-          <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
-        </label>
-      </radio-group>-->
-  
 
     <view class='text' style="white-space: pre-line">
      <textarea placeholder="请输入信息..." focus="{{focus}}" name="input" style="width:100%"/>
     </view>
 
      <view class='picture'>
-      <view class='choose_pic' bindtap="take_picture" >
+      <view class='choose_pic' bindtap="choose_picture" >
         <view>
-          <image src='../../images/edit/album.png' class='pic' name='pic'></image>
+          <image src='../../images/edit/chosepic.png' class='pic' name='pic'></image>
         </view>
 
-        <view>
-          <text>添加/拍摄图片</text>
-        </view>
       </view>
       </view>
-    
+<view class="chosepic">
+    <view wx:for="{{pics}}" wx:for-index="index" wx:for-item="item">
+         <!-- <text>{{pics}}</text>  -->
+         <image src='{{item}}' name='pic' mode="aspectFit"></image> 
+    </view>
+</view>
 
-    <image wx:if='{{tempFilePaths}}' src='{{tempFilePaths}}' name='picc' mode="aspectFit"></image>
   <!--classify button-->  
-<view class="btn" bindtap="powerDrawer" size='mini' data-statu="open">分类</view>  
+  <view class="line-css" ></view>
+<view class="btn" bindtap="powerDrawer"  data-statu="open">点击选择添加分类</view>  
 <!--mask-->  
 <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>  
 <!--content-->  
@@ -50,11 +44,11 @@
     <view class="drawer_title line">钱包</view>  
   </view>  
 </view> 
-    <view><button type="primary" size='mini' formType="submit" bindtap="stateswitch">发布</button></view>
+    <view><button type="primary" size='mini' formType="submit" bindtap="stateswitch">发布</button></view> 
   </view>
 
 </form>
-
+</view>
 </view>  
   
 <!--found-->  
@@ -63,35 +57,28 @@
   <form bindsubmit="formSubmit" bindreset="formReset">
   <view class="contain">
 
-   <!-- <view class='lost_and_found'> 
-      <radio-group class="radio-group" bindchange="radioChange" name='type'>
-        <label class="radio" wx:for="{{items}}">
-          <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
-        </label>
-      </radio-group>
-    </view>style="width:100%"-->
-
     <view class='text' style="white-space: pre-line">
      <textarea placeholder="请输入信息..." focus="{{focus}}" name="input" />
     </view>
 
-     <view class='picture'>
-      <view class='choose_pic' bindtap="take_picture" >
+     <view class='picture'> 
+      <view class='choose_pic' bindtap="choose_picture" >
         <view>
-          <image src='../../images/edit/album.png' class='pic' name='pic'></image>
+           <image src='../../images/edit/chosepic.png' class='pic' name='pic'></image> 
         </view>
 
-        <view>
-          <text>添加/拍摄图片</text>
-        </view>
       </view>
-      </view>
-
-    
-
-    <image wx:if='{{tempFilePaths}}' src='{{tempFilePaths}}' name='picc' mode="aspectFit"></image>
-   <!--classify button-->  
-<view class="btn" bindtap="powerDrawer" data-statu="open">button</view>  
+   </view> 
+<view class="chosepic">
+   
+    <view wx:for="{{pics}}" wx:for-index="index" wx:for-item="item">
+         <!-- <text>{{pics}}</text>  -->
+         <image src='{{item}}' name='pic' mode="aspectFit"></image> 
+    </view>
+    </view>
+   <!--classify button--> 
+    <view class="line-css" ></view> 
+<view class="btn" bindtap="powerDrawer" data-statu="open">点击选择添加分类</view>  
 <!--mask-->  
 <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>  
 <!--content-->  
@@ -110,6 +97,7 @@
 </form> 
 </view> 
 
-</view>  
+</view> 
+
 
 

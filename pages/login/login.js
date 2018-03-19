@@ -19,35 +19,14 @@ Page({
 
 
     //DONE:表单检查
-    console.log('register...')
     console.log(e.detail.value)
     var user_id = e.detail.value.user_id;
     var user_password = e.detail.value.user_password;
     var openid = this.data.openid;
-    wx.request({
-      url: serverName + '/login/register.php',
-      data: {
-        user_id: user_id,
-        user_password: user_password,
-        openid: openid,
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log('register.php: success')
-        console.log(res.data)
-        if(res.data=='true'){
-          wx.setStorageSync('user_id', user_id);
-          wx.redirectTo({
-            url: '../initinfo/initinfo'
-          })
-        }
-      }
-    })
-    console.log('...register')
+    var nickName = this.data.nickName;
+    var avatarUrl = this.data.avatarUrl;
 
+    this.register(user_id, user_password, openid, nickName, avatarUrl)
     
   },
 
@@ -212,6 +191,31 @@ Page({
     console.log(app.globalData)
     console.log("...login onLoad")
 
+  },
+
+
+  register: function (user_id, user_password, openid, nickName, avatarUrl){
+    wx.request({
+      url: serverName + '/login/register.php',
+      data: {
+        user_id: user_id,
+        user_password: user_password,
+        openid: openid,
+        nickName: nickName,
+        avatarUrl: avatarUrl,
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        if (res.data == 'true') {
+          wx.setStorageSync('user_id', user_id);
+          wx.redirectTo({
+            url: '../initinfo/initinfo'
+          })
+        }
+      }
+    })
   }
-    
 })

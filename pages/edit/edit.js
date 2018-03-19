@@ -1,5 +1,3 @@
-//index.js
-//获取应用实例
 const app = getApp()
 var serverName = app.globalData.serverName
 
@@ -8,7 +6,7 @@ Page({
     listofitem: [],
     listfound: [{ header: ' ' }],
     listlost: [{ header: ' ' },],
-     activeIndex: 1,
+    activeIndex: 1,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -22,12 +20,13 @@ Page({
       { name: 'found', value: 'FOUND' },
     ],
     //图片路径
-    tempFilePaths:null,
+    tempFilePaths: [],
     //分类按钮
     showModalStatus: false,
     //导航栏
     navbar: ['LOST', 'FOUND'],
-    currentTab: 0 
+    currentTab: 0, 
+    pics: []
   },
   powerDrawer: function (e) {
     var currentStatu = e.currentTarget.dataset.statu;
@@ -64,76 +63,85 @@ Page({
   bindViewTap: function () {
 
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
+
+  //选择多张图片
+  uploadimg: function (data) {
+    var that = this,
+      i = data.i ? data.i : 0,//当前上传的哪张图片
+      success = data.success ? data.success : 0,//上传成功的个数
+      fail = data.fail ? data.fail : 0;//上传失败的个数
+    wx.uploadFile({
+      url: data.url,
+      filePath: data.path[i],
+      name: 'file',//这里根据自己的实际情况改
+      formData: null,
+      success: (resp) => {
+        success++;//图片上传成功，图片上传成功的变量+1
+        console.log(resp)
+        console.log(i);
+        //这里可能有BUG，失败也会执行这里,所以这里应该是后台返回过来的状态码为成功时，这里的success才+1
+      },
+      fail: (res) => {
+        fail++;//图片上传失败，图片上传失败的变量+1
+        console.log('fail:' + i + "fail:" + fail);
+      },
+      complete: () => {
+        console.log(i);
+        i++;//这个图片执行完上传后，开始上传下一张
+        if (i == data.path.length) {   //当图片传完时，停止调用          
+          console.log('执行完毕');
+          console.log('成功：' + success + " 失败：" + fail);
+        } else {//若图片还没有传完，则继续调用函数
+          console.log(i);
+          data.i = i;
+          data.success = success;
+          data.fail = fail;
+          that.uploadimg(data);
         }
-      })
-    }
-  },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
 
-// // 拍摄照片
-//   take_picture: function () {
-//     var that = this;
-//     wx.chooseImage({
-//       count: 1, // 默认9  
-//       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
-//       sourceType: 'album', // 可以指定来源是相机 
-//       success: function (res) {
-//         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
-//         that.setData({
-//           tempFilePaths: res.tempFilePaths,
-//           image_exist: 1
-//         })
-//       }
-//     })
-//   },
-
+      }
+    });
+  },
 // 选择照片
   choose_picture: function(){
-    var that = this;
-    wx.chooseImage({
-      count: 1, // 默认9  
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
-      sourceType: 'album', // 可以指定来源是相机 
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
-        that.setData({
-          tempFilePaths: res.tempFilePaths,
-          image_exist: 1
-        })
-      }
-    })
+
+  //这里是选取图片的方法
+      var that = this,
+        　　　　　　pics = this.data.pics;
+
+      wx.chooseImage({
+        count: 9 - pics.length, // 最多可以选择的图片张数，默认9
+        sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
+        sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
+        success: function (res) {
+          var imgsrc = res.tempFilePaths;
+          　　　　　　　　　pics = pics.concat(imgsrc);
+          that.setData({
+            pics: pics,
+       tempFilePaths: res.tempFilePaths,
+       image_exist: 3
+          });
+        },
+        fail: function () {
+          // fail
+        },
+        complete: function () {
+          // complete
+        }
+      })
+
+    },
+  uploadimg: function () {//这里触发图片上传的方法
+    var pics = this.data.pics;
+    app.uploadimg({
+      url: 'https://........',//这里是你图片上传的接口
+      path: pics//这里是选取的图片的地址数组
+    });
   },
+  onLoad: function (options) {
+
+  },
+
 
   formSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)

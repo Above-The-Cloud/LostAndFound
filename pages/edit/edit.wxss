@@ -10,46 +10,33 @@
 }
 
 
- /* .lost_and_found{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 150rpx;
-  width: 100%
-}
- */
-
 .text{
- /* border: 1px inset #aaa;*/
-  height: 300rpx;
+  height: 240rpx;
   width: 100%;
-  /*margin: 30rpx*/
+  margin-top: 10px;
 }
 
 .picture{
   display: flex;
-  flex-direction: row;/*主轴方向*/
-  /*justify-content: center; 主轴上的对齐方式*/
-  /* border: 1px solid; */
+  flex-direction: row;/*主轴方向 */
   margin-left: 0px;
   margin-top: 0px;
   height: 200rpx;
   width: 100%
-}
+} 
 
 .choose_pic{
   display: flex;
-  flex-direction: column;/*主轴方向*/
-  justify-content: center; /*主轴上的对齐方式*/
-  align-items: center;  /*交叉轴对齐方式*/
-  /* border: 1px solid #f00; */
+  /* flex-direction: column;主轴方向 */
+  margin-top: 0px;
+  /*justify-content: center; /*主轴上的对齐方式*/
+  /*align-items: center;  /*交叉轴对齐方式*/
   width: 50%
 }
 
 .pic{
-  height: 120rpx;
-  width: 120rpx;
+  height: 260rpx;    
+  width: 260rpx;
   align-self: center;
 }
 page{  
@@ -69,7 +56,7 @@ page{
   line-height: 80rpx;  
 }  
 .navbar .item.active{  
-  color: #FFCC00;  
+  color: #1aad19;
 }  
 .navbar .item.active:after{  
   content: "";  
@@ -79,18 +66,20 @@ page{
   left: 0;  
   right: 0;  
   height: 4rpx;  
-  background: #FFCC00;  
+  background: #1aad19;  
 } 
 
 /*classify button*/  
 .btn {  
-  width: 20%;  
+  width: 100%;  
+  height: 100%;
   padding: 20rpx 0;  
-  border-radius: 20rpx; 
-  text-align: center;  
-  margin: 40rpx 10%;  
-  background: #dbdbca;  
-  color: #fff;  
+  /* border-radius: 10rpx;  */
+  text-align: left;  
+  margin-left: 6%;  
+  /* background: #e8e9e9;   */
+  background: #fff;  
+  color: #1aad19;  
 }  
 /*mask*/  
 .drawer_screen {  
@@ -127,3 +116,14 @@ page{
 .line{  
   border-bottom: 1px solid #f8f8f8;  
 } 
+
+.back{
+  background-color: #e8e9e9; 
+}
+.line-css{
+  width:95%;
+  height:1px;
+  background: #aaa;
+  margin: 40rpx 0 0 0;
+}
+

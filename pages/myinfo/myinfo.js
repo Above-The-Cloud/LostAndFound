@@ -29,6 +29,7 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
+
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
@@ -53,7 +54,28 @@ Page({
   },
 
 //删除函数
-messageDelete: function () {
+  messageDelete: function () {
+    //TODO:调用函数deleteSingleMassageById(publish_id)
+    
+  },
 
+  deleteSingleMassageById: function(publish_id){
+    wx.request({
+      url: serverName + '/myinfo/delete_publish.php',
+      data: {
+        publish_id: publish_id
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log('deleteSingleMassageById: success')
+        console.log(res.data)
+        if (res.data == 'true') {
+          this.onLoad();
+        }
+      }
+    })
   }
 })

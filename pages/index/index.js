@@ -99,31 +99,7 @@ Page({
     //     userInfo:userInfo
     //   })
     // })
-    wx.request({
-      url: serverName + '/index_publish_info.php',
-      data: {
-
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        //console.log('sucess-index-publish---------------')
-        //console.log(res)
-        //console.log('-----------------------')
-        //console.log(res.data)
-        //console.log('sucess-----------------')
-        that.setData({
-          publish_data: res.data
-
-        })
-        //console.log('当前数据库返回的publish记录')
-        //console.log(that.data.publish_data)
-        that.Loadmsg()
-      }
-    }
-    )
+    this.show_publish_infos('lost', '所有', this)
   } ,
 
   stateswitch: function (e) {
@@ -165,6 +141,8 @@ Page({
       var Msg = that.data.publish_data[i].msg;
       var Submission_time = that.data.publish_data[i].submission_time.substring(5, that.data.publish_data[i].submission_time.length-3);
       var imageurl='';
+      // var nick_name = that.data.publish_data[i].nickName,
+      // var avatarUrl = that.data.publish_data[i].avatarUrl,
       if(that.data.publish_data[i].image_exist=="1")
       imageurl = image_root_path + that.data.publish_data[i].image_url[0];
       if (that.data.publish_data[i].type == 'found')
@@ -192,6 +170,7 @@ Page({
     this.onload;
     this.refresh();
   },
+
   onLoad: function () {
     while(this.data.listfound.length!=1)
       this.data.listfound.pop();
@@ -219,59 +198,33 @@ Page({
     //     userInfo:userInfo
     //   })
     // })
-    wx.request({
-      url: serverName + '/index_publish_info.php',
-      data: {
-
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log('sucess-index-publish---------------')
-        //console.log(res)
-        //console.log('-----------------------')
-        //console.log(res.data)
-        //console.log('sucess-----------------')
-        that.setData({
-          publish_data: res.data
-
-        })
-        
-        console.log('当前数据库返回的publish记录')
-        console.log(that.data.publish_data)
-        that.Loadmsg()
-        }
-      }
-    )
-    var that = this;
-    wx.request({
-
-      url: serverName + '/index_image_info.php',
-      data: {
-
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log('sucess-index-image---------------')
-        //console.log(res)
-        //console.log('-----------------------')
-        //console.log(res.data)
-        //console.log('sucess-----------------')
-        that.setData({
-          image_data: res.data
-
-        })
-        console.log('当前数据库返回的image记录')
-        console.log(that.data.image_data)
-      }
-    })
+    this.show_publish_infos('lost', '所有', this)
     console.log(this.data)
 
   },
+  
+  //获取发布信息的接口，传入分类数据
+  show_publish_infos: function(type_t, category,obj){
+    wx.request({
+      url: serverName + '/index/index_publish_info.php',
+      data: {
+        type_t: type_t,
+        category: category,
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        obj.setData({
+          publish_data: res.data
 
+        })
+        console.log('当前数据库返回的publish记录')
+        console.log(obj.data.publish_data)
+        obj.Loadmsg()
+      }
+    })
+
+  },
 })
