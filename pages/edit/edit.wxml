@@ -1,4 +1,3 @@
-<!--pages/wyq/wyq.wxml-->
   <view class="background">
 <!-- 导航条   -->
 <view class="navbar">  
@@ -7,6 +6,7 @@
 
 <!--lost-->  
 <view hidden="{{currentTab!==0}}">  
+<view class="back">
   <form bindsubmit="formSubmit" bindreset="formReset">
   <view class="contain">
 
@@ -28,9 +28,10 @@
          <image src='{{item}}' name='pic' mode="aspectFit"></image> 
     </view>
 </view>
-    <!-- <image wx:if='{{tempFilePaths}}' src='{{tempFilePaths}}' name='picc' mode="aspectFit"></image> -->
+
   <!--classify button-->  
-<view class="btn" bindtap="powerDrawer" size='mini' data-statu="open">分类</view>  
+  <view class="line-css" ></view>
+<view class="btn" bindtap="powerDrawer"  data-statu="open">点击选择添加分类</view>  
 <!--mask-->  
 <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>  
 <!--content-->  
@@ -43,11 +44,11 @@
     <view class="drawer_title line">钱包</view>  
   </view>  
 </view> 
-    <view><button type="primary" size='mini' formType="submit" bindtap="stateswitch">发布</button></view>
+    <view><button type="primary" size='mini' formType="submit" bindtap="stateswitch">发布</button></view> 
   </view>
 
 </form>
-
+</view>
 </view>  
   
 <!--found-->  
@@ -60,14 +61,14 @@
      <textarea placeholder="请输入信息..." focus="{{focus}}" name="input" />
     </view>
 
-     <view class='picture'>
+     <view class='picture'> 
       <view class='choose_pic' bindtap="choose_picture" >
         <view>
            <image src='../../images/edit/chosepic.png' class='pic' name='pic'></image> 
         </view>
 
       </view>
-      </view>
+   </view> 
 <view class="chosepic">
    
     <view wx:for="{{pics}}" wx:for-index="index" wx:for-item="item">
@@ -75,8 +76,9 @@
          <image src='{{item}}' name='pic' mode="aspectFit"></image> 
     </view>
     </view>
-   <!--classify button-->  
-<view class="btn" bindtap="powerDrawer" data-statu="open">分类</view>  
+   <!--classify button--> 
+    <view class="line-css" ></view> 
+<view class="btn" bindtap="powerDrawer" data-statu="open">点击选择添加分类</view>  
 <!--mask-->  
 <view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>  
 <!--content-->  
