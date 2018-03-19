@@ -19,6 +19,7 @@ Page({
 
 
     //DONE:表单检查
+    console.log("form data....")
     console.log(e.detail.value)
     var user_id = e.detail.value.user_id;
     var user_password = e.detail.value.user_password;
