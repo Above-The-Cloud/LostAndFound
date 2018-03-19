@@ -8,7 +8,8 @@
     "pages/msg/msg",
     "pages/index/msgdetail/msgdetail",
     "pages/myinfo/myinfo",
-    "pages/test/index"
+    "pages/test/index",
+    "pages/search/search"
   ],
   "window": {
     "backgroundTextStyle": "light",

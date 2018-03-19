@@ -1,5 +1,4 @@
 <!--index.wxml-->
-
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" class="banners" interval="{{interval}}" duration="{{duration}}">
     <block wx:for="{{swiper_url}}">
       <swiper-item class="banner">
@@ -29,7 +28,7 @@
           <view class='username'>
             <text>{{item.username}}</text>
           </view>
-          <navigator class='detail' url="./msgdetail/msgdetail?username={{item.username}}&usericon={{item.usericon}}&text={{item.text}}&image={{item.image}}"hover-class='hover'>查看详情</navigator>
+          <navigator class='detail' url="./msgdetail/msgdetail?username={{item.username}}&usericon={{item.usericon}}&text={{item.text}}&image={{item.image}}&time={{item.sub_time}}"hover-class='hover'>查看详情</navigator>
         </view>
         <view class="news-item-left">
           <text class="news-item-title">{{item.text}}</text>
@@ -37,6 +36,7 @@
         <view wx:if="{{item.image != ''}}" class="news-item-right">
           <image src="{{item.image}}" class="news-image"></image>
         </view>
+        <view><text class = 'time'>{{item.sub_time}}</text></view>
 
       </view>
     </block>

@@ -7,7 +7,13 @@
   position:absolute;
   top: 0;
 }
-
+.time
+{
+  position: relative;
+  width:250px;
+  font-size: 12px;
+  color:grey;
+}
 .statechange{
   position: absolute;
   left:280px; 

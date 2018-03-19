@@ -32,6 +32,11 @@ Page({
 
 
   },
+  search: function (event) {
+    wx.navigateTo({
+      url: "../search/search"
+    })
+  },
   bind所有: function (e) {
     this.setData({
       actionSheetHidden: !this.data.actionSheetHidden,
@@ -158,13 +163,16 @@ Page({
     for (i = 0; i < that.data.publish_data.length; i++) {
       var userid = that.data.publish_data[i].user_id;
       var Msg = that.data.publish_data[i].msg;
+      var Submission_time = that.data.publish_data[i].submission_time.substring(5, that.data.publish_data[i].submission_time.length-3);
       var imageurl='';
       if(that.data.publish_data[i].image_exist=="1")
       imageurl = image_root_path + that.data.publish_data[i].image_url[0];
       if (that.data.publish_data[i].type == 'found')
-        this.data.listfound.push({ username: userid, text: Msg, image: imageurl, usericon: '../../images/index/icon/defaulticon.png' });
+        this.data.listfound.push({
+          username: userid, text: Msg, image: imageurl, usericon: '../../images/index/icon/defaulticon.png', sub_time: submission_time
+});
       else
-        this.data.listlost.push({ username: userid, text: Msg, image: imageurl, usericon: '../../images/index/icon/defaulticon.png' });
+        this.data.listlost.push({ username: userid, text: Msg, image: imageurl, usericon: '../../images/index/icon/defaulticon.png', sub_time: Submission_time});
     }
     if (this.data.activeIndex == 1)
       this.setData({

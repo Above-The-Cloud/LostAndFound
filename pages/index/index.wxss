@@ -130,6 +130,13 @@
   width: 150px;
   left: 10px;
 }
+.time
+{
+  position: relative;
+  width:250px;
+  font-size: 12px;
+  color:grey;
+}
 .hover
 {
   color:blue;

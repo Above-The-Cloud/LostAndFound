@@ -8,7 +8,8 @@ Page({
     username:'',
     usericon:'',
     text:'',
-    image:''
+    image:'',
+    time:''
   },
 
   /**
@@ -19,7 +20,8 @@ Page({
       username:options.username,
       text:options.text,
       image:options.image,
-      usericon:"../"+options.usericon
+      usericon:"../"+options.usericon,
+      time:options.time
 
     })
   },
