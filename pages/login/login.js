@@ -159,7 +159,7 @@ Page({
 
     //用户身份验证
     if(openid){
-      console.log('getopenid.php... ')
+      console.log('login.php... ')
       wx.request({
         url: serverName + '/login/login.php',
         data: {
@@ -171,6 +171,7 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: function (res) {
+          console.log(res)
           if(res.data.user_id){
             wx.setStorageSync('user_id', res.data.user_id);
             wx.switchTab({
