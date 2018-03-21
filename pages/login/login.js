@@ -170,6 +170,7 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: function (res) {
+          console.log(res)
           if(res.data.user_id){
             wx.setStorageSync('user_id', res.data.user_id);
             wx.switchTab({

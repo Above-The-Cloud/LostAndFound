@@ -9,7 +9,8 @@
   <view class="news-item-left">
     <text class="news-item-title">{{text}}</text>
   </view>
-  <view class="news-item-right">
-    <image src="{{image}}" class="news-image" />
-  </view>
+   <view wx:if="{{image != ''}}" class="news-item-right">
+          <image src="{{image}}" class="news-image"></image>
+        </view>
+         <view><text class = 'time'>{{time}}</text></view>
   </view>
