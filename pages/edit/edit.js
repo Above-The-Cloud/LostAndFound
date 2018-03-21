@@ -143,7 +143,7 @@ Page({
 
     var user_id = wx.getStorageSync('user_id')
     var type_t = this.data.listofitem
-    var category = '所有'
+    var category = '雨伞'
     var title = ''
     var msg = e.detail.value.input
     var imagesPaths = this.data.tempFilePaths

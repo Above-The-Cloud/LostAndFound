@@ -77,5 +77,22 @@ Page({
         }
       }
     })
+  },
+  get_current_user_info: function(){
+    var user_data=null;
+    wx.request({
+      url: serverName + '/myinfo/get_info_by_id.php',
+      data: {
+        user_id: wx.getStorageSync('user_id'),
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        
+        
+      }
+    })
   }
 })

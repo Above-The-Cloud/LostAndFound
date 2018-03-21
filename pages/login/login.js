@@ -19,7 +19,6 @@ Page({
 
 
     //DONE:表单检查
-    console.log("........")
     console.log(e.detail.value)
     var user_id = e.detail.value.userid;
     var user_password = e.detail.value.user_password;
@@ -159,7 +158,7 @@ Page({
 
     //用户身份验证
     if(openid){
-      console.log('getopenid.php... ')
+      console.log('login.php... ')
       wx.request({
         url: serverName + '/login/login.php',
         data: {
@@ -182,7 +181,7 @@ Page({
       })
 
     }else{
-
+      console.log('else... ')
 
     }
     console.log(this.data)
