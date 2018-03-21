@@ -14,4 +14,3 @@
         </view>
          <view><text class = 'time'>{{time}}</text></view>
   </view>
-  

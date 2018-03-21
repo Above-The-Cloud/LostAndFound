@@ -8,7 +8,7 @@
     </block>
   </swiper>
   <view class="swiper-tab">
-    <button class ="category" bindtap="actionSheetTap">{{cur_type}}</button>
+    <button class ="category" bindtap="actionSheetTap">{{cur_type}}▼</button>
     <action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetChange">
     <block wx:for-items="{{actionSheetItems}}">
         <action-sheet-item class="item" bindtap="bind{{item}}">{{item}}</action-sheet-item>
@@ -28,7 +28,7 @@
           <view class='username'>
             <text>{{item.username}}</text>
           </view>
-          <navigator class='detail' url="./msgdetail/msgdetail?username={{item.username}}&usericon={{item.usericon}}&text={{item.text}}&image={{item.image}}&time={{item.sub_time}}"hover-class='hover'>查看详情</navigator>
+          <navigator class='detail' url="./msgdetail/msgdetail?username={{item.username}}&usericon={{item.usericon}}&text={{item.text}}&image={{item.image}}&time={{item.sub_time}}"hover-class='hover'>...</navigator>
         </view>
         <view class="news-item-left">
           <text class="news-item-title">{{item.text}}</text>
@@ -41,4 +41,3 @@
       </view>
     </block>
   </view>
-
