@@ -130,7 +130,7 @@ Page({
   onLoad: function () {
     var user_id = wx.getStorageSync('user_id')
 
-    //请获取下列函数返回值 ，eg. var temp = this.get_current_user_info(user_id);
+    
     this.get_current_user_info(user_id);
     this.get_publish_of_mine(user_id);
 
@@ -193,7 +193,6 @@ Page({
 
     //传入的user_id如果是当前登录者， 请用user_id: wx.getStorageSync('user_id') 传入
 
-    var user_data=null;
     wx.request({
       url: serverName + '/myinfo/get_user_info.php',
       data: {
@@ -206,11 +205,9 @@ Page({
       success: function (res) {
         console.log('get_current_user_info....')
         console.log(res)
-        user_data=res.data.User
 
       }
     })
-    return user_data
   },
 
   get_publish_of_mine: function(user_id){
