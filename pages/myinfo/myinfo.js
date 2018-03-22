@@ -1,5 +1,6 @@
 // pages/myinfo/myinfo.js
 const app = getApp()
+var serverName = app.globalData.serverName
 Page({
 
   /**
@@ -16,6 +17,13 @@ Page({
   },
 //获取用户信息
   onLoad: function () {
+
+    var user_id= wx.getStorageSync('user_id')
+
+    //请获取下列函数返回值 ，eg. var temp = this.get_current_user_info(user_id);
+    this.get_current_user_info(user_id);
+    this.get_publish_of_mine(user_id);
+    
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -78,21 +86,52 @@ Page({
       }
     })
   },
-  get_current_user_info: function(){
+
+  get_current_user_info: function(user_id){
+
+    //传入的user_id如果是当前登录者， 请用user_id: wx.getStorageSync('user_id') 传入
+
     var user_data=null;
     wx.request({
-      url: serverName + '/myinfo/get_info_by_id.php',
+      url: serverName + '/myinfo/get_user_info.php',
       data: {
-        user_id: wx.getStorageSync('user_id'),
+        user_id: user_id
       },
       method: 'GET',
       header: {
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        
-        
+        console.log('get_current_user_info....')
+        console.log(res)
+        user_data=res.data.User
+
       }
     })
+    return user_data
+  },
+
+  get_publish_of_mine: function(user_id){
+
+    //传入的user_id如果是当前登录者， 请用user_id: wx.getStorageSync('user_id') 传入
+
+    var data = null;
+    wx.request({
+      url: serverName + '/myinfo/show_user_publishing.php',
+      data: {
+        user_id: user_id
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(' get_publish_of_mine......')
+        console.log(res)
+        data = res.data
+
+      }
+    })
+    return data
   }
 })
