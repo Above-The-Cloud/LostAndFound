@@ -5,6 +5,7 @@ var serverName = app.globalData.serverName
 var utils = require('../../utils/util.js')
 var flag = true;
 var type_t = 'lost'
+//var publish_data
 Page({
 
   /**
@@ -64,33 +65,33 @@ Page({
   },
   getUserInfo: function (e) {
     console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+    app.globalData.userInfo = e.detail
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
   },
 
-  Loadmsg: function () {
+  Loadmsg: function (Data) {
     var that = this;
     //   while (this.data.listfound.length != 1)
     //       this.data.listfound.pop();
     //   while (this.data.listlost.length != 1)
     //       this.data.listlost.pop();
     var i = 0;
-    console.log('that.data.publish_data')
-    console.log(that.data.publish_data)
-    for (i = 0; i < that.data.publish_data.length; i++) {
-      var userid = that.data.publish_data[i].nickName;
-      var Msg = that.data.publish_data[i].msg;
-      var Submission_time = that.data.publish_data[i].submission_time.substring(5, that.data.publish_data[i].submission_time.length - 3);
+    console.log('Data!!!')
+    console.log(Data)
+    for (i = 0; i < Data.length; i++) {
+      var userid = Data[i].nickName;
+      var Msg = Data[i].msg;
+      var Submission_time = Data[i].submission_time.substring(5, Data[i].submission_time.length - 3);
       var imageurl = '';
-      var user_icon = that.data.publish_data[i].avatarUrl;
-      // var nick_name = that.data.publish_data[i].nickName,
-      // var avatarUrl = that.data.publish_data[i].avatarUrl,
-      if (that.data.publish_data[i].image_exist == "1")
-        imageurl =that.data.publish_data[i].image_url[0];
-      //   if (that.data.publish_data[i].type == 'lost')
+      var user_icon = Data[i].avatarUrl;
+      // var nick_name = that.Data[i].nickName,
+      // var avatarUrl = that.Data[i].avatarUrl,
+      if (Data[i].image_exist == "1")
+        imageurl =Data[i].image_url[0];
+      //   if (that.Data[i].type == 'lost')
       this.data.listfound.push({
         username: userid, text: Msg, image: imageurl, usericon: user_icon, sub_time: Submission_time
       });
@@ -133,10 +134,9 @@ Page({
     
     this.get_current_user_info(user_id);
     this.get_publish_of_mine(user_id);
-
-    
-    this.Loadmsg()
-
+    console.log('llllllalala')
+    console.log(this.data)
+   // console.log(publish_data)
     while (this.data.listfound.length != 1)
       this.data.listfound.pop();
     console.log('清空');
@@ -230,6 +230,9 @@ Page({
           publish_data: res.data
 
         })
+        var publish_data=res.data
+        that.Loadmsg(publish_data)
+
 
       }
     })
