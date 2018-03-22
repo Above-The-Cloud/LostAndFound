@@ -1,21 +1,38 @@
 // pages/myinfo/myinfo.js
-const app = getApp()
+
+var app = getApp()
+var utils = require('../../utils/util.js')
+var flag = true;
+var type_t = 'lost'
+var serverName = app.globalData.serverName
+var image_root_path = serverName + "/"
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     animationData: [],
-    list: [{ text: '物品描述', image: '../../images/index/goods/eg.jpg' },      { text: '物品描述', image: '../../images/index/goods/eg.jpg' }, { text:     '物品描述', image: '../../images/index/goods/eg.jpg' }, { text: '物品描述', image: '../../images/index/goods/eg.jpg' }, { text: '物品描述', image: '../../images/index/goods/eg.jpg' }, { text: '物品描述', image: '../../images/index/goods/eg.jpg' }],
+    // list: [],
+    listofitem: [],
+    listfound: [{ header: ' ' }],
+    listlost: [{ header: ' ' },],
+    activeIndex: 1,
+    duration: 2000,
+    indicatorDots: true,
+    autoplay: true,
+    interval: 3000,
+    loading: false,
+    refresh: 0,
+    plain: false,
+    actionSheetHidden: true,
 
   },
-//获取用户信息
-  onLoad: function () {
+  //获取用户信息
+  onLoad1: function () {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -53,13 +70,120 @@ Page({
     })
   },
 
-//删除函数
-  messageDelete: function () {
-    //TODO:调用函数deleteSingleMassageById(publish_id)
-    
+  Loadmsg: function () {
+    var that = this;
+    //   while (this.data.listfound.length != 1)
+    //       this.data.listfound.pop();
+    //   while (this.data.listlost.length != 1)
+    //       this.data.listlost.pop();
+    var i = 0;
+    for (i = 0; i < that.data.publish_data.length; i++) {
+      var userid = that.data.publish_data[i].nickName;
+      var Msg = that.data.publish_data[i].msg;
+      var Submission_time = that.data.publish_data[i].submission_time.substring(5, that.data.publish_data[i].submission_time.length - 3);
+      var imageurl = '';
+      var user_icon = that.data.publish_data[i].avatarUrl;
+      // var nick_name = that.data.publish_data[i].nickName,
+      // var avatarUrl = that.data.publish_data[i].avatarUrl,
+      if (that.data.publish_data[i].image_exist == "1")
+        imageurl = image_root_path + that.data.publish_data[i].image_url[0];
+      //   if (that.data.publish_data[i].type == 'lost')
+      this.data.listfound.push({
+        username: userid, text: Msg, image: imageurl, usericon: user_icon, sub_time: Submission_time
+      });
+      //   else
+      //   this.data.listlost.push({ username: userid, text: Msg, image: imageurl, usericon: user_icon, sub_time: Submission_time });
+    }
+    if (this.data.activeIndex == 1)
+      this.setData({
+        listofitem: this.data.listfound
+      })
+    else this.setData({
+      listofitem: this.data.listlost
+    })
   },
 
-  deleteSingleMassageById: function(publish_id){
+  // onLoad: function () {
+  //   while (this.data.listfound.length != 1)
+  //     this.data.listfound.pop();
+  //   console.log('清空');
+  //   console.log(this.data.listfound);
+  //   while (this.data.listlost.length != 1)
+  //     this.data.listlost.pop();
+  //   console.log(this.data.listlost);
+  //   var that = this;
+
+  //   this.index = 1
+  //   if (this.data.activeIndex == 1)
+  //     this.setData({
+  //       listofitem: this.data.listfound
+  //     })
+  //   else this.setData({
+  //     listofitem: this.data.listlost
+  //   })
+  //   this.show_publish_infos('found', '所有', this)
+  //   console.log(this.data)
+  // },
+  onLoad: function () {
+    while (this.data.listfound.length != 1)
+      this.data.listfound.pop();
+    console.log('清空');
+    console.log(this.data.listfound);
+    console.log('上面是found信息')
+    while (this.data.listlost.length != 1)
+      this.data.listlost.pop();
+    console.log(this.data.listlost);
+    // console.log('上面是lost信息')
+    var that = this;
+
+    this.index = 1
+    if (this.data.activeIndex == 1)
+      this.setData({
+        listofitem: this.data.listlost + this.data.listlost,
+      })
+    else this.setData({
+      listofitem: this.data.listlost + this.data.listlost,
+    })
+
+    this.show_publish_infos('found', '所有', this)
+    this.show_publish_infos('lost', '所有', this)
+
+    // console.log(this.data)
+  },
+
+  //获取发布信息的接口，传入分类数据
+  show_publish_infos: function (type_t, category, obj) {
+    wx.request({
+      url: serverName + '/index/index_publish_info.php',
+      data: {
+        type_t: type_t,
+        category: category,
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        obj.setData({
+          publish_data: res.data
+
+        })
+        console.log('当前数据库返回的publish记录')
+        console.log(obj.data.publish_data)
+        obj.Loadmsg()
+      }
+    })
+
+  },
+
+
+  //删除函数
+  messageDelete: function () {
+    //TODO:调用函数deleteSingleMassageById(publish_id)
+
+  },
+
+  deleteSingleMassageById: function (publish_id) {
     wx.request({
       url: serverName + '/myinfo/delete_publish.php',
       data: {

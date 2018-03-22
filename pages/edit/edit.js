@@ -8,7 +8,7 @@ Page({
     listofitem: [],
     listfound: [{ header: ' ' }],
     listlost: [{ header: ' ' },],
-     activeIndex: 1,
+    activeIndex: 1,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -27,7 +27,10 @@ Page({
     showModalStatus: false,
     //导航栏
     navbar: ['LOST', 'FOUND'],
-    currentTab: 0 
+    currentTab: 0,
+    array: ['所有', '校园卡', '雨伞', '钱包'],
+    index: 0,
+    imageList: [], 
   },
   powerDrawer: function (e) {
     var currentStatu = e.currentTarget.dataset.statu;
@@ -64,76 +67,49 @@ Page({
   bindViewTap: function () {
 
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
 
-// // 拍摄照片
-//   take_picture: function () {
-//     var that = this;
-//     wx.chooseImage({
-//       count: 1, // 默认9  
-//       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
-//       sourceType: 'album', // 可以指定来源是相机 
-//       success: function (res) {
-//         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
-//         that.setData({
-//           tempFilePaths: res.tempFilePaths,
-//           image_exist: 1
-//         })
-//       }
-//     })
-//   },
-
-// 选择照片
-  choose_picture: function(){
-    var that = this;
+  chooseImage: function () {
+    var that = this
     wx.chooseImage({
-      count: 1, // 默认9  
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
-      sourceType: 'album', // 可以指定来源是相机 
+      // sourceType: sourceType[this.data.sourceTypeIndex],
+      // sizeType: sizeType[this.data.sizeTypeIndex],
+      // count: this.data.count[this.data.countIndex],
+      count: 3,
       success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
+        console.log('chooseimage.......')
+        console.log(res)
         that.setData({
-          tempFilePaths: res.tempFilePaths,
-          image_exist: 1
+          imageList: res.tempFilePaths
         })
       }
     })
   },
+  previewImage: function (e) {
+    var current = e.target.dataset.src
+
+    wx.previewImage({
+      current: current,
+      urls: this.data.imageList
+    })
+  },
+
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index: e.detail.value
+    })
+  },
+  bindDateChange: function (e) {
+    this.setData({
+      date: e.detail.value
+    })
+  },
+  bindTimeChange: function (e) {
+    this.setData({
+      time: e.detail.value
+    })
+  },
+
 
   formSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
@@ -146,8 +122,10 @@ Page({
     var category = '所有'
     var title = ''
     var msg = e.detail.value.input
-    var imagesPaths = this.data.tempFilePaths
-
+    var imagesPaths = this.data.imageList
+    console.log("imagelist..........")
+    console.log(this.data.imageList)
+    console.log(imagesPaths)
     //在此调用uploadAll接口
     this.uploadAll(user_id, type_t, category, title, msg, imagesPaths)
 
@@ -164,55 +142,6 @@ Page({
       }
     })  
   },
-  //分类按钮
-  util: function (currentStatu) {
-    /* 动画部分 */
-    // 第1步：创建动画实例   
-    var animation = wx.createAnimation({
-      duration: 200,  //动画时长  
-      timingFunction: "linear", //线性  
-      delay: 0  //0则不延迟  
-    });
-
-    // 第2步：这个动画实例赋给当前的动画实例  
-    this.animation = animation;
-
-    // 第3步：执行第一组动画：Y轴偏移240px后(盒子高度是240px)，停  
-    animation.translateY(240).step();
-
-    // 第4步：导出动画对象赋给数据对象储存  
-    this.setData({
-      animationData: animation.export()
-    })
-
-    // 第5步：设置定时器到指定时候后，执行第二组动画  
-    setTimeout(function () {
-      // 执行第二组动画：Y轴不偏移，停  
-      animation.translateY(0).step()
-      // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象  
-      this.setData({
-        animationData: animation
-      })
-
-      //关闭抽屉  
-      if (currentStatu == "close") {
-        this.setData(
-          {
-            showModalStatus: false
-          }
-        );
-      }
-    }.bind(this), 200)
-
-    // 显示抽屉  
-    if (currentStatu == "open") {
-      this.setData(
-        {
-          showModalStatus: true
-        }
-      );
-    }
-  }, 
 
   //imagesPaths图片路径数组
   uploadAll: function (user_id, type_t, category, title, msg, imagesPaths) {
@@ -236,16 +165,17 @@ Page({
           publish_id=res.data
         console.log('当前数据库返回的publish_id')
         console.log(publish_id)
-        for (path in imagesPaths){
+        for (var path in imagesPaths){
           wx.uploadFile({
             url: serverName + '/edit/upload.php',
-            filePath: path,
+            filePath: imagesPaths[path],
             name: "file",
             formData: {
               publish_id: publish_id
             },
             success: function (res) {
               console.log('图片上传完成！')
+              
 
             }
           })
