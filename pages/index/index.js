@@ -158,8 +158,9 @@ Page({
       this.data.listlost.pop();
     var i = 0;
     for (i = 0; i < that.data.publish_data.length; i++) {
-      var userid = that.data.publish_data[i].nickName;
+      var nickName = that.data.publish_data[i].nickName;
       var Msg = that.data.publish_data[i].msg;
+      var user_id = that.data.publish_data[i].user_id;
       var Submission_time = that.data.publish_data[i].submission_time.substring(5, that.data.publish_data[i].submission_time.length - 3);
       var imageurl = '';
       var user_icon = that.data.publish_data[i].avatarUrl;
@@ -169,11 +170,10 @@ Page({
         imageurl = image_root_path + that.data.publish_data[i].image_url[0];
       if (that.data.publish_data[i].type == 'found')
         this.data.listfound.push({
-
-          username: userid, text: Msg, image: imageurl, usericon: user_icon, sub_time: Submission_time
+          userid:user_id,username: nickName, text: Msg, image: imageurl, usericon: user_icon, sub_time: Submission_time
         })
       else
-        this.data.listlost.push({ username: userid, text: Msg, image: imageurl, usericon: user_icon, sub_time: Submission_time });
+        this.data.listlost.push({ username: nickName, text: Msg, image: imageurl, usericon: user_icon, sub_time: Submission_time });
     }
     if (this.data.activeIndex == 1)
       this.setData({
