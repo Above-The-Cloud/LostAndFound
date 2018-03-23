@@ -7,8 +7,8 @@
         <image animation="{{animationData}}" bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image> 
          <view class='user_infomation'>  
         <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-        <text class="userinfo-wxnumber">微信号:xxxxxxxxx</text>
-        <text class="userinfo-idnumber">学工号:xxxxxxxxx</text>
+        <!-- <text class="userinfo-wxnumber">微信号:xxxxxxxxx</text>
+        <text class="userinfo-idnumber">学工号:xxxxxxxxx</text>  -->
         </view> 
       </block>
     </view>
@@ -16,7 +16,7 @@
 <view class="article">
  <view class="article-title">发表信息</view>
    <view class="con">
-   <view class="news-item-container">
+   <!-- <view class="news-item-container">
      <block wx:for="{{list}}" wx:for-index="id">
       <text wx:if="{{item.header}}" class="sub-title"></text>
       <navigator wx:else url=''>
@@ -30,6 +30,27 @@
           </view>
         </view>
       </navigator>
+    </block>
+  </view> -->
+  <view class="news-item-container">
+    <block wx:for="{{listofitem}}" wx:for-index="id">
+      <text wx:if="{{item.header}}" class="sub-title">{{item.header}}</text>
+<view wx:else class="news-item">
+        <view class='userinfo'>
+<image src="{{item.usericon}}" class='icon-image'></image>
+          <view class='username'>
+            <text>{{item.username}}</text>
+          </view>
+        </view>
+        <view class="news-item-left">
+          <text class="news-item-title">{{item.text}}</text>
+        </view>
+        <view wx:if="{{item.image != ''}}" class="news-item-right">
+          <image src="{{item.image}}" class="news-image"></image>
+        </view>
+        <view><text class = 'time'>{{item.sub_time}}</text></view>
+<image src='../../images/myinfo/trash.png' class='delpic' bindtap="deleteSingleMassageById"></image>
+      </view>
     </block>
   </view>
   </view>

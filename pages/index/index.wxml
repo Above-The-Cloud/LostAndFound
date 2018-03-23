@@ -26,12 +26,20 @@
         <view class='userinfo'>
 <image src="{{item.usericon}}" class='icon-image'></image>
           <view class='username'>
+<<<<<<< HEAD
             <text selectable='true' >{{item.username}}</text>
+=======
+            <text selectable='true'>{{item.username}}</text>
+>>>>>>> 453a3d296e078653772c51efe9914cc8a2d591d6
           </view>
           <navigator class='detail' url="./msgdetail/msgdetail?username={{item.username}}&usericon={{item.usericon}}&text={{item.text}}&image={{item.image}}&time={{item.sub_time}}"hover-class='hover'>...</navigator>
         </view>
         <view class="news-item-left">
+<<<<<<< HEAD
           <text selectable='true' class="news-item-title" >{{item.text}}</text>
+=======
+          <text selectable='true' class="news-item-title">{{item.text}}</text>
+>>>>>>> 453a3d296e078653772c51efe9914cc8a2d591d6
         </view>
         <view wx:if="{{item.image != ''}}" class="news-item-right">
           <image src="{{item.image}}" class="news-image"></image>

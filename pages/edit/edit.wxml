@@ -1,3 +1,4 @@
+<!--pages/wyq/wyq.wxml-->
   <view class="background">
 <!-- 导航条   -->
 <view class="navbar">  
@@ -14,37 +15,54 @@
      <textarea placeholder="请输入信息..." focus="{{focus}}" name="input" style="width:100%"/>
     </view>
 
-     <view class='picture'>
-      <view class='choose_pic' bindtap="choose_picture" >
-        <view>
-          <image src='../../images/edit/chosepic.png' class='pic' name='pic'></image>
+      
+<view class="weui-cells">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">
+              <view class="weui-uploader">
+                <view class="weui-uploader__hd">
+                  <view class="weui-uploader__title"></view>
+                  <view class="weui-uploader__info">{{imageList.length}}/3</view>
+                </view>
+                <view class="weui-uploader__bd">
+                  <view class="weui-uploader__files">
+                    <block wx:for="{{imageList}}" wx:for-item="image">
+                      <view class="weui-uploader__file">
+                        <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                      </view>
+                    </block>
+                  </view>
+
+                  <view class="weui-uploader__input-box">
+                    <image src='../../images/edit/plus.png' class='pic' name='pic'></image> 
+                    <view class="weui-uploader__input" bindtap="chooseImage">                       
+                    </view>
+                  </view>
+                </view>
+
+              </view>
+            </view>
+          </view>
         </view>
 
-      </view>
-      </view>
-<view class="chosepic">
-    <view wx:for="{{pics}}" wx:for-index="index" wx:for-item="item">
-         <!-- <text>{{pics}}</text>  -->
-         <image src='{{item}}' name='pic' mode="aspectFit"></image> 
-    </view>
-</view>
 
-  <!--classify button-->  
-  <view class="line-css" ></view>
-<view class="btn" bindtap="powerDrawer"  data-statu="open">点击选择添加分类</view>  
-<!--mask-->  
-<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>  
-<!--content-->  
-<!--使用animation属性指定需要执行的动画-->  
-<view animation="{{animationData}}" class="drawer_attr_box" wx:if="{{showModalStatus}}">  
-  <!--drawer content-->  
-  <view class="drawer_content">  
-    <view class="drawer_title line">校园卡</view>  
-    <view class="drawer_title line">雨伞</view>  
-    <view class="drawer_title line">钱包</view>  
-  </view>  
-</view> 
-    <view><button type="primary" size='mini' formType="submit" bindtap="stateswitch">发布</button></view> 
+ <view class="cells cells_after-title">
+        <view class="cell cell_input">
+          <view class="cell__hd">
+            <view class="label">选择分类</view>
+          </view>
+          <view class="cell__bd">
+            <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+              <view class="input">{{array[index]}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+
+<view class="button-sp-area">
+        <button type="primary" plain="true"  formType="submit"
+ bindtap="stateswitch" >发布</button></view>
+    
   </view>
 
 </form>
@@ -61,43 +79,56 @@
      <textarea placeholder="请输入信息..." focus="{{focus}}" name="input" />
     </view>
 
-     <view class='picture'> 
-      <view class='choose_pic' bindtap="choose_picture" >
-        <view>
-           <image src='../../images/edit/chosepic.png' class='pic' name='pic'></image> 
+    <view class="cells">
+          <view class="cell">
+            <view class="weui-cell__bd">
+              <view class="weui-uploader">
+                <view class="weui-uploader__hd">
+                  <view class="weui-uploader__title"></view>
+                  <view class="weui-uploader__info">{{imageList.length}}/3</view>
+                </view>
+                <view class="weui-uploader__bd">
+                  <view class="weui-uploader__files">
+                    <block wx:for="{{imageList}}" wx:for-item="image">
+                      <view class="weui-uploader__file">
+                        <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                      </view>
+                    </block>
+                  </view>
+
+                  <view class="weui-uploader__input-box">
+                   <image src='../../images/edit/plus.png' class='pic' name='pic'></image> 
+                    <view class="weui-uploader__input" bindtap="chooseImage">
+                    </view>
+                  </view>
+                </view>
+
+              </view>
+            </view>
+          </view>
         </view>
 
+
+ <view class="cells cells_after-title">
+        <view class="cell cell_input">
+          <view class="cell__hd">
+            <view class="label">选择分类</view>
+          </view>
+          <view class="cell__bd">
+            <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+              <view class="input">{{array[index]}}</view>
+            </picker>
+          </view>
+        </view>
       </view>
-   </view> 
-<view class="chosepic">
-   
-    <view wx:for="{{pics}}" wx:for-index="index" wx:for-item="item">
-         <!-- <text>{{pics}}</text>  -->
-         <image src='{{item}}' name='pic' mode="aspectFit"></image> 
-    </view>
-    </view>
-   <!--classify button--> 
-    <view class="line-css" ></view> 
-<view class="btn" bindtap="powerDrawer" data-statu="open">点击选择添加分类</view>  
-<!--mask-->  
-<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>  
-<!--content-->  
-<!--使用animation属性指定需要执行的动画-->  
-<view animation="{{animationData}}" class="drawer_attr_box" wx:if="{{showModalStatus}}">  
-  <!--drawer content-->  
-  <view class="drawer_content">  
-    <view class="drawer_title line">校园卡</view>  
-    <view class="drawer_title line">雨伞</view>  
-    <view class="drawer_title line">钱包</view>  
-  </view>  
-</view> 
- <view><button type="primary" size='mini' formType="submit" bindtap="stateswitch">发布</button></view>
+
+<view class="button-sp-area">
+        <button type="primary" plain="true"  formType="submit"
+ bindtap="stateswitch" >发布</button></view>
+    
   </view>
 
 </form> 
 </view> 
 
 </view> 
-
-
-

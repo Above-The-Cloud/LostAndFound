@@ -6,7 +6,6 @@ var utils = require('../../utils/util.js')
 var flag = true;
 var type_t = 'found'
 var serverName = app.globalData.serverName
-var image_root_path = serverName +"/"
 var Category = ['所有', '校园卡', '雨伞', '钱包']
 Page({
   data: {
@@ -167,7 +166,7 @@ Page({
       // var nick_name = that.data.publish_data[i].nickName,
       // var avatarUrl = that.data.publish_data[i].avatarUrl,
       if (that.data.publish_data[i].image_exist == "1")
-        imageurl = image_root_path + that.data.publish_data[i].image_url[0];
+        imageurl =that.data.publish_data[i].image_url[0];
       if (that.data.publish_data[i].type == 'found')
         this.data.listfound.push({
           userid:user_id,username: nickName, text: Msg, image: imageurl, usericon: user_icon, sub_time: Submission_time
