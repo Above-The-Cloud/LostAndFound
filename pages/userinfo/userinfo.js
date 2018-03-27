@@ -1,17 +1,11 @@
-// pages/test/index.js
+// pages/userinfo/userinfo.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    username:'',
-    userid:'',
-    usericon:'',
-    text:'',
-    image:'',
-    time:'',
-    imagelist:[]
+    userid: '',
   },
 
   /**
@@ -19,15 +13,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      username:options.username,
-      userid:options.userid,
-      text:options.text,
-      image:options.image,
-      usericon:options.usericon,
-      time:options.time,
-      imagelist: options.imagelist.split(','),
+      userid:options.userid
     })
-    console.log(this.data.imagelist)
   },
 
   /**
@@ -64,16 +51,7 @@ Page({
   onPullDownRefresh: function () {
   
   },
-  photopreview: function (event) {//图片点击浏览
-    var src = event.currentTarget.dataset.src;//获取data-src
-    var imgList = event.currentTarget.dataset.list;//获取data-list
-    //console.log(imgList);
-    //图片预览
-    wx.previewImage({
-      current: src, // 当前显示图片的http链接
-      urls: imgList // 需要预览的图片http链接列表
-    })
-  },
+
   /**
    * 页面上拉触底事件的处理函数
    */

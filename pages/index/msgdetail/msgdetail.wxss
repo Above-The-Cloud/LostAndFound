@@ -95,11 +95,15 @@
   width: 80px;
   height: 180px;
 }
-
+.image-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
 .news-image{
-  width: 140px;
-  height: 140px;
-
+  width: 100px;
+  height: 100px;
 }
 .icon-image
 {

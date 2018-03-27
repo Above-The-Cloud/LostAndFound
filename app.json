@@ -9,14 +9,15 @@
     "pages/index/msgdetail/msgdetail",
     "pages/myinfo/myinfo",
     "pages/test/index",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/userinfo/userinfo"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "LOST&FOUND",
     "navigationBarTextStyle": "black",
-    "enablePullDownRefresh" : true
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "list": [

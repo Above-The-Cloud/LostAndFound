@@ -1,16 +1,20 @@
 <!--index.wxml-->
 <view class="news-item">
   <view class='userinfo'>
-    <image src="{{usericon}}" class='icon-image'></image>
+        <navigator url="../../userinfo/userinfo?userid={{userid}}">
+<image src="{{usericon}}"class='icon-image'></image></navigator>
     <view catchtap='click' class='username'>
-      <text>{{username}}</text>
+      <navigator url="../../userinfo/userinfo?userid={{userid}}"><text>{{username}}</text>
+      </navigator>
     </view>
   </view>
   <view class="news-item-left">
     <text class="news-item-title">{{text}}</text>
   </view>
-   <view wx:if="{{image != ''}}" class="news-item-right">
-          <image src="{{image}}" class="news-image"></image>
+   <view wx:if="{{image != ''}}"class="image-container">
+<block wx:for="{{imagelist}}" wx:for-item="specific_url">
+          <image bindtap="photopreview" data-list="{{imagelist}}"src="{{specific_url}}" data-src="{{specific_url}}" class="news-image"></image>
+          </block>
         </view>
          <view><text class = 'time'>{{time}}</text></view>
   </view>

@@ -32,7 +32,7 @@ Page({
 
 
   },
-  search: function (event) {
+  search: function (event,userid) {
     wx.navigateTo({
       url: "../search/search"
     })
@@ -162,6 +162,7 @@ Page({
       var user_id = that.data.publish_data[i].user_id;
       var Submission_time = that.data.publish_data[i].submission_time.substring(5, that.data.publish_data[i].submission_time.length - 3);
       var imageurl = '';
+      var imageList = that.data.publish_data[i].image_url;
       var user_icon = that.data.publish_data[i].avatarUrl;
       // var nick_name = that.data.publish_data[i].nickName,
       // var avatarUrl = that.data.publish_data[i].avatarUrl,
@@ -169,10 +170,10 @@ Page({
         imageurl =that.data.publish_data[i].image_url[0];
       if (that.data.publish_data[i].type == 'found')
         this.data.listfound.push({
-          userid:user_id,username: nickName, text: Msg, image: imageurl, usericon: user_icon, sub_time: Submission_time
+          userid:user_id,username: nickName, text: Msg, imagelist:imageList,image: imageurl, usericon: user_icon, sub_time: Submission_time
         })
       else
-        this.data.listlost.push({ username: nickName, text: Msg, image: imageurl, usericon: user_icon, sub_time: Submission_time });
+        this.data.listlost.push({ userid: user_id, username: nickName, text: Msg, imagelist: imageList, image: imageurl, usericon: user_icon, sub_time: Submission_time });
     }
     if (this.data.activeIndex == 1)
       this.setData({
@@ -192,7 +193,16 @@ Page({
     this.onload;
     this.refresh();
   },
-
+  photopreview: function (event){//图片点击浏览
+    var src = event.currentTarget.dataset.src;//获取data-src
+    var imgList = event.currentTarget.dataset.list;//获取data-list
+    //console.log(imgList);
+    //图片预览
+    wx.previewImage({
+      current: src, // 当前显示图片的http链接
+      urls: imgList // 需要预览的图片http链接列表
+    })
+  },
   onLoad: function () {
     while(this.data.listfound.length!=1)
       this.data.listfound.pop();
