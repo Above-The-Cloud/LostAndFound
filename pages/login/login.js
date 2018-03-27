@@ -90,6 +90,9 @@ Page({
                     console.log('getopenid: ' + res.data)
                     console.log("获取用户openid成功！")
                     console.log("openid: " + res.data.openid)
+                  },
+                  fail: function (err) {
+                    console.log(err)
                   }
                 })
               }, 
@@ -158,6 +161,7 @@ Page({
 
     //用户身份验证
     if(openid){
+
       console.log('login.php... ')
       wx.request({
         url: serverName + '/login/login.php',
@@ -183,6 +187,7 @@ Page({
 
     }else{
       console.log('else... ')
+      console.log(openid)
 
     }
     console.log(this.data)

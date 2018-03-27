@@ -86,7 +86,8 @@ Page({
   },
   previewImage: function (e) {
     var current = e.target.dataset.src
-
+    console.log('current')
+    console.log(current)
     wx.previewImage({
       current: current,
       urls: this.data.imageList
@@ -166,6 +167,7 @@ Page({
         console.log('当前数据库返回的publish_id')
         console.log(publish_id)
         for (var path in imagesPaths){
+          console.log(imagesPaths[path])
           wx.uploadFile({
             url: serverName + '/edit/upload.php',
             filePath: imagesPaths[path],
@@ -175,8 +177,11 @@ Page({
             },
             success: function (res) {
               console.log('图片上传完成！')
-              
-
+              console.log(res)
+            
+            },
+            fail: function (err) {
+              console.log(err)
             }
           })
         }
