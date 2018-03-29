@@ -170,6 +170,7 @@ Page({
   },
 
   deleteSingleMassageById: function (publish_id) {
+    var that = this;
     wx.request({
       url: serverName + '/myinfo/delete_publish.php',
       data: {
@@ -183,7 +184,7 @@ Page({
         console.log('deleteSingleMassageById: success')
         console.log(res.data)
         if (res.data == 'true') {
-          this.onLoad();
+          that.onLoad();
         }
       }
     })
