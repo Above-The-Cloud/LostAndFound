@@ -123,7 +123,7 @@ Page({
 
     var user_id = wx.getStorageSync('user_id')
     var type_t = this.data.listofitem
-    var category = this.data.pflag
+    var category = this.data.array[pflag]
     var title = ''
     var msg = e.detail.value.input
     var imagesPaths = this.data.imageList
