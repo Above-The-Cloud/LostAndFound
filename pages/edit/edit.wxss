@@ -1,14 +1,14 @@
 /* pages/wyq/wyq.wxss */
 /* flex布局：http://www.jianshu.com/p/f82262002f8a*/
 .background{
-  background-color:   #dbdbca;
+  background-color: 	#dbdbca;
 }
 .contain{
   display: flex;
   flex-direction: column;/*主轴方向*/
   justify-content: space-between; /*主轴上的对齐方式*/
   align-items: center;  /*交叉轴对齐方式*/
-  background-color:   #fff;
+  background-color: 	#fff;
 }
 .text{
   height: 200rpx;
@@ -313,7 +313,7 @@
 }
 .button-sp-area{
   margin: 0 auto;
-  width: 30%;
+  width: 40%;
 }
 
 .pic{
