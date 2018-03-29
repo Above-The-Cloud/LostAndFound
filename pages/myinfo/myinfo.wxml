@@ -5,11 +5,10 @@
       <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
       <block wx:else>
         <image animation="{{animationData}}" bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image> 
-         <view class='user_infomation'>  
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-        <!-- <text class="userinfo-wxnumber">微信号:xxxxxxxxx</text>
-        <text class="userinfo-idnumber">学工号:xxxxxxxxx</text>  -->
-        </view> 
+  <view class='user_infomation'>
+                <view><text class="userinfo-nickname">{{userInfo.nickName}}</text></view>
+                <view><text class="userinfo-wxnumber">{{contact_type}}:{{contact_value}}</text></view>
+            </view>
       </block>
     </view>
 </view>
@@ -45,11 +44,13 @@
         <view class="news-item-left">
           <text class="news-item-title">{{item.text}}</text>
         </view>
-        <view wx:if="{{item.image != ''}}" class="news-item-right">
-          <image src="{{item.image}}" class="news-image"></image>
+        <view wx:if="{{item.image != ''}}" class="image-container">
+         <block wx:for="{{item.imagelist}}" wx:for-item="specific_url">
+          <image bindtap="photopreview" data-list="{{item.imagelist}}"src="{{specific_url}}" data-src="{{specific_url}}" class="news-image"></image>
+          </block>
         </view>
         <view><text class = 'time'>{{item.sub_time}}</text></view>
-<image src='../../images/myinfo/trash.png' class='delpic' bindtap="deleteSingleMassageById"></image>
+<image src='../../images/myinfo/trash.png' class='delpic' data-publish-id="{{item.publish_id}}"bindtap="messageDelete"></image>
       </view>
     </block>
   </view>
