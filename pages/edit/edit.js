@@ -60,6 +60,7 @@ Page({
       })
     }
     console.log(this.data.currentTab)
+    console.log("-------------test------------------")
     console.log(this.data.listofitem)
     console.log('FFF')
     this.setData({
@@ -123,7 +124,7 @@ Page({
 
     var user_id = wx.getStorageSync('user_id')
     var type_t = this.data.listofitem
-    var category = this.data.pflag
+    var category = array[pflag]
     var title = ''
     var msg = e.detail.value.input
     var imagesPaths = this.data.imageList
