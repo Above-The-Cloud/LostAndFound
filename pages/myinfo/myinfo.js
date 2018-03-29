@@ -193,7 +193,7 @@ Page({
   get_current_user_info: function(user_id){
 
     //传入的user_id如果是当前登录者， 请用user_id: wx.getStorageSync('user_id') 传入
-
+    var that = this
     wx.request({
       url: serverName + '/myinfo/get_user_info.php',
       data: {
@@ -206,7 +206,10 @@ Page({
       success: function (res) {
         console.log('get_current_user_info....')
         console.log(res)
-
+        that.setData({
+          contact_type: res.data['contact_type'],
+          contact_value: res.data['contact_value']
+        })
       }
     })
   },
