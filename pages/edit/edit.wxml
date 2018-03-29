@@ -12,7 +12,7 @@
   <view class="contain">
 
     <view class='text' style="white-space: pre-line">
-      <textarea placeholder="请输入信息..." focus="{{focus}}" name="input" style="width:100%" value="{{tvalue}}"/>
+     <textarea placeholder="请输入信息..." focus="{{focus}}" name="input" style="width:100%" value="{{tvalue}}"/>
     </view>
 
       
@@ -76,7 +76,7 @@
   <view class="contain">
 
     <view class='text' style="white-space: pre-line">
-     <textarea placeholder="请输入信息..." focus="{{focus}}" name="input" />
+     <textarea placeholder="请输入信息..." focus="{{focus}}" name="input" value="{{tvalue}}" />
     </view>
 
    <view class="weui-cells">
