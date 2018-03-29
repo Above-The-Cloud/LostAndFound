@@ -49,7 +49,7 @@
           <image src="{{item.image}}" class="news-image"></image>
         </view>
         <view><text class = 'time'>{{item.sub_time}}</text></view>
-<image src='../../images/myinfo/trash.png' class='delpic' bindtap="deleteSingleMassageById"></image>
+<image src='../../images/myinfo/trash.png' class='delpic' bindtap="messageDelete"></image>
       </view>
     </block>
   </view>

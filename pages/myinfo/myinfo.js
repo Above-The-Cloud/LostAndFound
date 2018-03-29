@@ -164,9 +164,10 @@ Page({
 
 
   //删除函数
-  messageDelete: function () {
+  messageDelete: function (e) {
     //TODO:调用函数deleteSingleMassageById(publish_id)
-
+    console.log(e);
+    //this.deleteSingleMassageById();
   },
 
   deleteSingleMassageById: function (publish_id) {
