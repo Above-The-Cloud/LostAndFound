@@ -1,11 +1,11 @@
 // pages/myinfo/myinfo.js
 
-var app = getApp()
+const app = getApp()
+var serverName = app.globalData.serverName
 var utils = require('../../utils/util.js')
 var flag = true;
 var type_t = 'lost'
-var serverName = app.globalData.serverName
-var image_root_path = serverName + "/"
+//var publish_data
 Page({
 
   /**
@@ -31,7 +31,9 @@ Page({
     actionSheetHidden: true,
 
   },
-  //获取用户信息
+
+
+    
   onLoad1: function () {
     if (app.globalData.userInfo) {
       this.setData({
@@ -63,31 +65,33 @@ Page({
   },
   getUserInfo: function (e) {
     console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
+    app.globalData.userInfo = e.detail
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
   },
 
-  Loadmsg: function () {
+  Loadmsg: function (Data) {
     var that = this;
     //   while (this.data.listfound.length != 1)
     //       this.data.listfound.pop();
     //   while (this.data.listlost.length != 1)
     //       this.data.listlost.pop();
     var i = 0;
-    for (i = 0; i < that.data.publish_data.length; i++) {
-      var userid = that.data.publish_data[i].nickName;
-      var Msg = that.data.publish_data[i].msg;
-      var Submission_time = that.data.publish_data[i].submission_time.substring(5, that.data.publish_data[i].submission_time.length - 3);
+    console.log('Data!!!')
+    console.log(Data)
+    for (i = 0; i < Data.length; i++) {
+      var userid = Data[i].nickName;
+      var Msg = Data[i].msg;
+      var Submission_time = Data[i].submission_time.substring(5, Data[i].submission_time.length - 3);
       var imageurl = '';
-      var user_icon = that.data.publish_data[i].avatarUrl;
-      // var nick_name = that.data.publish_data[i].nickName,
-      // var avatarUrl = that.data.publish_data[i].avatarUrl,
-      if (that.data.publish_data[i].image_exist == "1")
-        imageurl = image_root_path + that.data.publish_data[i].image_url[0];
-      //   if (that.data.publish_data[i].type == 'lost')
+      var user_icon = Data[i].avatarUrl;
+      // var nick_name = that.Data[i].nickName,
+      // var avatarUrl = that.Data[i].avatarUrl,
+      if (Data[i].image_exist == "1")
+        imageurl =Data[i].image_url[0];
+      //   if (that.Data[i].type == 'lost')
       this.data.listfound.push({
         username: userid, text: Msg, image: imageurl, usericon: user_icon, sub_time: Submission_time
       });
@@ -126,9 +130,13 @@ Page({
   // },
   onLoad: function () {
     var user_id = wx.getStorageSync('user_id')
+
+    
     this.get_current_user_info(user_id);
     this.get_publish_of_mine(user_id);
-
+    console.log('llllllalala')
+    console.log(this.data)
+   // console.log(publish_data)
     while (this.data.listfound.length != 1)
       this.data.listfound.pop();
     console.log('清空');
@@ -149,36 +157,10 @@ Page({
       listofitem: this.data.listlost + this.data.listlost,
     })
 
-    this.show_publish_infos('found', '所有', this)
-    this.show_publish_infos('lost', '所有', this)
 
     // console.log(this.data)
   },
 
-  //获取发布信息的接口，传入分类数据
-  show_publish_infos: function (type_t, category, obj) {
-    wx.request({
-      url: serverName + '/index/index_publish_info.php',
-      data: {
-        type_t: type_t,
-        category: category,
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        obj.setData({
-          publish_data: res.data
-
-        })
-        console.log('当前数据库返回的publish记录')
-        console.log(obj.data.publish_data)
-        obj.Loadmsg()
-      }
-    })
-
-  },
 
 
   //删除函数
@@ -207,13 +189,11 @@ Page({
     })
   },
 
-
-  get_current_user_info: function (user_id) {
+  get_current_user_info: function(user_id){
 
     //传入的user_id如果是当前登录者， 请用user_id: wx.getStorageSync('user_id') 传入
     var that = this
     wx.request({
-
       url: serverName + '/myinfo/get_user_info.php',
       data: {
         user_id: user_id
@@ -223,22 +203,17 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-
         console.log('get_current_user_info....')
-        console.log(res.data)
-
+        console.log(res)
         that.setData({
           contact_type: res.data['contact_type'],
           contact_value: res.data['contact_value']
         })
-        console.log('--------------------检查是否设定成功-------------')
-        console.log(that.data.contact_type)
-        console.log(that.data.contact_value)
       }
     })
   },
 
-  get_publish_of_mine: function (user_id) {
+  get_publish_of_mine: function(user_id){
 
     //传入的user_id如果是当前登录者， 请用user_id: wx.getStorageSync('user_id') 传入
     var that = this
@@ -258,7 +233,7 @@ Page({
           publish_data: res.data
 
         })
-        var publish_data = res.data
+        var publish_data=res.data
         that.Loadmsg(publish_data)
 
 
@@ -266,5 +241,4 @@ Page({
     })
 
   }
-
 })

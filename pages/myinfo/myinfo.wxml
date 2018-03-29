@@ -1,4 +1,4 @@
-  <view class="contain" style="background-image:url(https://images.pexels.com/photos/267514/pexels-photo-267514.jpeg?w=940&h=650&auto=compress&cs=tinysrgb);background-repeat:repeat;opacity:0.9">
+ <view class="contain" style="background-image:url(https://images.pexels.com/photos/267514/pexels-photo-267514.jpeg?w=940&h=650&auto=compress&cs=tinysrgb);background-repeat:repeat;opacity:0.9">
  
 <view class="mask"></view> 
     <view class='user_ID'> 
@@ -8,7 +8,7 @@
   <view class='user_infomation'>
                 <view><text class="userinfo-nickname">{{userInfo.nickName}}</text></view>
                 <view><text class="userinfo-wxnumber">{{contact_type}}:{{contact_value}}</text></view>
-            </view> 
+            </view>
       </block>
     </view>
 </view>
@@ -40,7 +40,6 @@
           <view class='username'>
             <text>{{item.username}}</text>
           </view>
-          <navigator class='detail' url="./msgdetail/msgdetail?username={{item.username}}&usericon={{item.usericon}}&text={{item.text}}&image={{item.image}}&time={{item.sub_time}}"hover-class='hover'>...</navigator>
         </view>
         <view class="news-item-left">
           <text class="news-item-title">{{item.text}}</text>
