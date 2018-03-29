@@ -87,13 +87,15 @@ Page({
       var Submission_time = Data[i].submission_time.substring(5, Data[i].submission_time.length - 3);
       var imageurl = '';
       var user_icon = Data[i].avatarUrl;
+      var publish_id = Data[i].publish_id;
+      var imageList = that.data.publish_data[i].image_url;
       // var nick_name = that.Data[i].nickName,
       // var avatarUrl = that.Data[i].avatarUrl,
       if (Data[i].image_exist == "1")
         imageurl =Data[i].image_url[0];
       //   if (that.Data[i].type == 'lost')
       this.data.listfound.push({
-        username: userid, text: Msg, image: imageurl, usericon: user_icon, sub_time: Submission_time
+        username: userid, text: Msg, image: imageurl, imagelist: imageList, usericon: user_icon, sub_time: Submission_time, publish_id: publish_id
       });
       //   else
       //   this.data.listlost.push({ username: userid, text: Msg, image: imageurl, usericon: user_icon, sub_time: Submission_time });
@@ -106,7 +108,16 @@ Page({
       listofitem: this.data.listlost
     })
   },
-
+  photopreview: function (event) {//图片点击浏览
+    var src = event.currentTarget.dataset.src;//获取data-src
+    var imgList = event.currentTarget.dataset.list;//获取data-list
+    //console.log(imgList);
+    //图片预览
+    wx.previewImage({
+      current: src, // 当前显示图片的http链接
+      urls: imgList // 需要预览的图片http链接列表
+    })
+  },
   // onLoad: function () {
   //   while (this.data.listfound.length != 1)
   //     this.data.listfound.pop();
@@ -130,7 +141,7 @@ Page({
   // },
   onLoad: function () {
     var user_id = wx.getStorageSync('user_id')
-
+    //console.log(user_id);
     
     this.get_current_user_info(user_id);
     this.get_publish_of_mine(user_id);
@@ -164,12 +175,16 @@ Page({
 
 
   //删除函数
-  messageDelete: function () {
+  messageDelete: function (e) {
     //TODO:调用函数deleteSingleMassageById(publish_id)
-
+    console.log(e);
+    console.log(e.target.dataset.publishId);
+    var pubid = e.target.dataset.publishId;
+    this.deleteSingleMassageById(pubid);
   },
 
   deleteSingleMassageById: function (publish_id) {
+    var that = this;
     wx.request({
       url: serverName + '/myinfo/delete_publish.php',
       data: {
@@ -183,7 +198,7 @@ Page({
         console.log('deleteSingleMassageById: success')
         console.log(res.data)
         if (res.data == 'true') {
-          this.onLoad();
+          that.onLoad();
         }
       }
     })
