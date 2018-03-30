@@ -5,8 +5,8 @@ var serverName = app.globalData.serverName
 
 Page({
   data: {
-    listofitem: [],
-    arrayp:[],
+    listofitem:' ',
+    arrayp:' ',
     listfound: [{ header: ' ' }],
     listlost: [{ header: ' ' },],
     activeIndex: 1,
