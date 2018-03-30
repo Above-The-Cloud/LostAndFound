@@ -2,8 +2,9 @@
  
 <view class="mask"></view> 
     <view class='user_ID'> 
-       <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> 
-      <block wx:else>
+       <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> 
+      <block wx:else> -->
+      <block>
          <image animation="{{animationData}}" bindtap="bindViewTap" class="userinfo-avatar" src="{{avatarUrl}}" background-size="cover"></image>  
   <view class='user_infomation'>
                 <view><text class="userinfo-nickname">{{nickName}}</text></view>
@@ -15,22 +16,7 @@
 <view class="article">
  <view class="article-title">发表信息</view>
    <view class="con">
-   <!-- <view class="news-item-container">
-     <block wx:for="{{list}}" wx:for-index="id">
-      <text wx:if="{{item.header}}" class="sub-title"></text>
-      <navigator wx:else url=''>
-        <view class="news-item" >
-                <view class="news-item-left">
-                    <view><text class="news-item-title">{{item.text}}</text></view>
-                    <view bindtap="messageDelete"><text>删除</text></view>
-                </view>
-          <view class="news-item-right">
-            <image src="{{item.image}}" class="news-image"/>
-          </view>
-        </view>
-      </navigator>
-    </block>
-  </view> -->
+
   <view class="news-item-container">
     <block wx:for="{{listofitem}}" wx:for-index="id">
       <text wx:if="{{item.header}}" class="sub-title">{{item.header}}</text>
@@ -49,8 +35,8 @@
           <image bindtap="photopreview" data-list="{{item.imagelist}}"src="{{specific_url}}" data-src="{{specific_url}}" class="news-image"></image>
           </block>
         </view>
-        <view><text class = 'time'>{{item.sub_time}}</text></view>
-<image src='../../images/myinfo/trash.png' class='delpic' data-publish-id="{{item.publish_id}}"bindtap="messageDelete"></image>
+        <!-- <view><text class = 'time'>{{item.sub_time}}</text></view>
+<image src='../../images/myinfo/trash.png' class='delpic' data-publish-id="{{item.publish_id}}"bindtap="messageDelete"></image> -->
       </view>
     </block>
   </view>
