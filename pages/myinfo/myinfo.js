@@ -118,27 +118,7 @@ Page({
       urls: imgList // 需要预览的图片http链接列表
     })
   },
-  // onLoad: function () {
-  //   while (this.data.listfound.length != 1)
-  //     this.data.listfound.pop();
-  //   console.log('清空');
-  //   console.log(this.data.listfound);
-  //   while (this.data.listlost.length != 1)
-  //     this.data.listlost.pop();
-  //   console.log(this.data.listlost);
-  //   var that = this;
 
-  //   this.index = 1
-  //   if (this.data.activeIndex == 1)
-  //     this.setData({
-  //       listofitem: this.data.listfound
-  //     })
-  //   else this.setData({
-  //     listofitem: this.data.listlost
-  //   })
-  //   this.show_publish_infos('found', '所有', this)
-  //   console.log(this.data)
-  // },
   onLoad: function () {
     var user_id = wx.getStorageSync('user_id')
     //console.log(user_id);
@@ -208,6 +188,8 @@ Page({
 
     //传入的user_id如果是当前登录者， 请用user_id: wx.getStorageSync('user_id') 传入
     var that = this
+    // console.log('get_current_user_id....')
+    // console.log(user_id)
     wx.request({
       url: serverName + '/myinfo/get_user_info.php',
       data: {
@@ -217,15 +199,20 @@ Page({
       header: {
         'content-type': 'application/json' // 默认值
       },
+      
       success: function (res) {
         console.log('get_current_user_info....')
         console.log(res)
         that.setData({
+          nickName: res.data['nickName'],
+          avatarUrl: res.data['avatarUrl'],
           contact_type: res.data['contact_type'],
           contact_value: res.data['contact_value']
         })
       }
     })
+    console.log('get_current_user_id....')
+    console.log(user_id)
   },
 
   get_publish_of_mine: function(user_id){
