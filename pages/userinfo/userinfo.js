@@ -1,68 +1,250 @@
-// pages/userinfo/userinfo.js
+// pages/myinfo/myinfo.js
+
+const app = getApp()
+var serverName = app.globalData.serverName
+var utils = require('../../utils/util.js')
+var flag = true;
+var type_t = 'lost'
+//var publish_data
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userid: '',
+    userInfo: {},
+    userid:'',
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    animationData: [],
+    // list: [],
+    listofitem: [],
+    listfound: [{ header: ' ' }],
+    listlost: [{ header: ' ' },],
+    activeIndex: 1,
+    duration: 2000,
+    indicatorDots: true,
+    autoplay: true,
+    interval: 3000,
+    loading: false,
+    refresh: 0,
+    plain: false,
+    actionSheetHidden: true,
+
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+
+
+  onLoad1: function () {
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
+  },
+  getUserInfo: function (e) {
+    console.log(e)
+    app.globalData.userInfo = e.detail
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
+  },
+
+  Loadmsg: function (Data) {
+    var that = this;
+    //   while (this.data.listfound.length != 1)
+    //       this.data.listfound.pop();
+    //   while (this.data.listlost.length != 1)
+    //       this.data.listlost.pop();
+    var i = 0;
+    console.log('Data!!!')
+    console.log(Data)
+    for (i = 0; i < Data.length; i++) {
+      var userid = Data[i].nickName;
+      var Msg = Data[i].msg;
+      var Submission_time = Data[i].submission_time.substring(5, Data[i].submission_time.length - 3);
+      var imageurl = '';
+      var user_icon = Data[i].avatarUrl;
+      var publish_id = Data[i].publish_id;
+      var imageList = that.data.publish_data[i].image_url;
+      // var nick_name = that.Data[i].nickName,
+      // var avatarUrl = that.Data[i].avatarUrl,
+      if (Data[i].image_exist == "1")
+        imageurl = Data[i].image_url[0];
+      //   if (that.Data[i].type == 'lost')
+      this.data.listfound.push({
+        username: userid, text: Msg, image: imageurl, imagelist: imageList, usericon: user_icon, sub_time: Submission_time, publish_id: publish_id
+      });
+      //   else
+      //   this.data.listlost.push({ username: userid, text: Msg, image: imageurl, usericon: user_icon, sub_time: Submission_time });
+    }
+    if (this.data.activeIndex == 1)
+      this.setData({
+        listofitem: this.data.listfound
+      })
+    else this.setData({
+      listofitem: this.data.listlost
+    })
+  },
+  photopreview: function (event) {//图片点击浏览
+    var src = event.currentTarget.dataset.src;//获取data-src
+    var imgList = event.currentTarget.dataset.list;//获取data-list
+    //console.log(imgList);
+    //图片预览
+    wx.previewImage({
+      current: src, // 当前显示图片的http链接
+      urls: imgList // 需要预览的图片http链接列表
+    })
+  },
+
   onLoad: function (options) {
     this.setData({
       userid:options.userid
     })
+   // var user_id = wx.getStorageSync('user_id')
+    console.log(this.data.userid);
+    var user_id = this.data.userid;
+    this.get_current_user_info(user_id);
+    this.get_publish_of_mine(user_id);
+    console.log('llllllalala')
+    console.log(this.data)
+    // console.log(publish_data)
+    while (this.data.listfound.length != 1)
+      this.data.listfound.pop();
+    console.log('清空');
+    console.log(this.data.listfound);
+    console.log('上面是found信息')
+    while (this.data.listlost.length != 1)
+      this.data.listlost.pop();
+    console.log(this.data.listlost);
+    // console.log('上面是lost信息')
+    var that = this;
+
+    this.index = 1
+    if (this.data.activeIndex == 1)
+      this.setData({
+        listofitem: this.data.listlost + this.data.listlost,
+      })
+    else this.setData({
+      listofitem: this.data.listlost + this.data.listlost,
+    })
+
+
+    // console.log(this.data)
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+
+
+  //删除函数
+  messageDelete: function (e) {
+    //TODO:调用函数deleteSingleMassageById(publish_id)
+    console.log(e);
+    console.log(e.target.dataset.publishId);
+    var pubid = e.target.dataset.publishId;
+    this.deleteSingleMassageById(pubid);
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  deleteSingleMassageById: function (publish_id) {
+    var that = this;
+    wx.request({
+      url: serverName + '/myinfo/delete_publish.php',
+      data: {
+        publish_id: publish_id
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log('deleteSingleMassageById: success')
+        console.log(res.data)
+        if (res.data == 'true') {
+          that.onLoad();
+        }
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  get_current_user_info: function (user_id) {
+
+    //传入的user_id如果是当前登录者， 请用user_id: wx.getStorageSync('user_id') 传入
+    var that = this
+    // console.log('get_current_user_id....')
+    // console.log(user_id)
+    wx.request({
+      url: serverName + '/myinfo/get_user_info.php',
+      data: {
+        user_id: user_id
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+
+      success: function (res) {
+        console.log('get_current_user_info....')
+        console.log(res)
+        that.setData({
+          nickName: res.data['nickName'],
+          avatarUrl: res.data['avatarUrl'],
+          contact_type: res.data['contact_type'],
+          contact_value: res.data['contact_value']
+        })
+      }
+    })
+    console.log('get_current_user_id....')
+    console.log(user_id)
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
+  get_publish_of_mine: function (user_id) {
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
+    //传入的user_id如果是当前登录者， 请用user_id: wx.getStorageSync('user_id') 传入
+    var that = this
+    wx.request({
+      url: serverName + '/myinfo/show_user_publishing.php',
+      data: {
+        user_id: user_id
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(' get_publish_of_mine......')
+        console.log(res)
+        that.setData({
+          publish_data: res.data
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
+        })
+        var publish_data = res.data
+        that.Loadmsg(publish_data)
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+
+      }
+    })
+
   }
 })
