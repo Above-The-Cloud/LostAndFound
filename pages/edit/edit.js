@@ -6,6 +6,7 @@ var serverName = app.globalData.serverName
 Page({
   data: {
     listofitem: [],
+    arrayp:[],
     listfound: [{ header: ' ' }],
     listlost: [{ header: ' ' },],
     activeIndex: 1,
@@ -59,7 +60,26 @@ Page({
         listofitem: "found"
       })
     }
+
+    if(this.data.pflag==0){
+      this.setData({
+        arrayp:"所有"
+      })
+    }else if(this.data.pflag==1){
+      this.setData({
+        arrayp: "校园卡"
+      })
+    } else if (this.data.pflag == 2) {
+      this.setData({
+        arrayp: "雨伞"
+      })
+    } else  {
+      this.setData({
+        arrayp: "钱包"
+      })
+    }
     console.log(this.data.currentTab)
+    console.log("-------------test------------------")
     console.log(this.data.listofitem)
     console.log('FFF')
     this.setData({
@@ -123,11 +143,13 @@ Page({
 
     var user_id = wx.getStorageSync('user_id')
     var type_t = this.data.listofitem
-    var category = this.data.array[pflag]
+  //  var category = this.data.array[pflag]
+    var category = this.data.arrayp
     var title = ''
     var msg = e.detail.value.input
     var imagesPaths = this.data.imageList
     console.log("imagelist..........")
+    console.log(this.data.arrayp)
     console.log(this.data.imageList)
     console.log(imagesPaths)
     //在此调用uploadAll接口
