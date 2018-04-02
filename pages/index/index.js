@@ -216,10 +216,12 @@ Page({
     this.index = 1
     if (this.data.activeIndex == 1)
     this.setData({
-      listofitem: this.data.listfound
+      listofitem: this.data.listfound,
+      cur_type: '所有'
     })
     else this.setData({
-      listofitem: this.data.listlost
+      listofitem: this.data.listlost,
+      cur_type: '所有'
     })
 
     
