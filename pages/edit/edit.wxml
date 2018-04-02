@@ -52,8 +52,8 @@
             <view class="label">选择分类</view>
           </view>
           <view class="cell__bd">
-            <picker bindchange="bindPickerChange" value="{{pflag}}" range="{{array}}">
-              <view class="input">{{array[pflag]}}</view>
+            <picker bindchange="bindPickerChange" value="{{category_index}}" range="{{array}}">
+              <view class="input">{{array[category_index]}}</view>
             </picker>
           </view>
         </view>
@@ -115,8 +115,8 @@
             <view class="label">选择分类</view>
           </view>
           <view class="cell__bd">
-            <picker bindchange="bindPickerChange" value="{{pflag}}" range="{{array}}">
-              <view class="input">{{array[pflag]}}</view>
+            <picker bindchange="bindPickerChange" value="{{category_index}}" range="{{array}}">
+              <view class="input">{{array[category_index]}}</view>
             </picker>
           </view>
         </view>
