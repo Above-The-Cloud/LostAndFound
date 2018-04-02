@@ -35,6 +35,7 @@
           <image bindtap="photopreview" data-list="{{item.imagelist}}"src="{{specific_url}}" data-src="{{specific_url}}" class="news-image"></image>
           </block>
         </view>
+        <view><text class = 'time'>{{item.sub_time}}</text></view>
         <!-- <view><text class = 'time'>{{item.sub_time}}</text></view>
 <image src='../../images/myinfo/trash.png' class='delpic' data-publish-id="{{item.publish_id}}"bindtap="messageDelete"></image> -->
       </view>
