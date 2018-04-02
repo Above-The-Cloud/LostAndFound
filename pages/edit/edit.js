@@ -2,11 +2,14 @@
 //获取应用实例
 const app = getApp()
 var serverName = app.globalData.serverName
+var categories = app.globalData.categories
 
 Page({
   data: {
-    listofitem:' ',
-    arrayp:' ',
+    array: categories,
+    category_index: 0,
+    category:'所有',
+    type_array:['lost','found'],
     listfound: [{ header: ' ' }],
     listlost: [{ header: ' ' },],
     activeIndex: 1,
@@ -16,12 +19,6 @@ Page({
     animationData: [],
     publish_id: -1,
     image_exist: 0,
-    user_id: 10152150127,
-    // 单选框
-    items: [
-      { name: 'lost', value: 'LOST', checked: 'true' },
-      { name: 'found', value: 'FOUND' },
-    ],
     //图片路径
     tempFilePaths:null,
     //分类按钮
@@ -29,8 +26,6 @@ Page({
     //导航栏
     navbar: ['LOST', 'FOUND'],
     currentTab: 0,
-    array: ['所有', '校园卡', '雨伞', '钱包'],
-    pflag: 0,
     imageList: [], 
     tvalue:'',
   },
@@ -41,6 +36,7 @@ Page({
   navbarTap: function (e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx
+      
     })
   },  
   //单选框触发函数
@@ -50,42 +46,11 @@ Page({
   },
    //
   stateswitch: function (e) {
-    console.log('LLL')
-    if (this.data.currentTab == 0) {
-      this.setData({
-        listofitem: "lost"
-      })
-    } else {
-      this.setData({
-        listofitem: "found"
-      })
-    }
 
-    if(this.data.pflag==0){
-      this.setData({
-        arrayp:"所有"
-      })
-    }else if(this.data.pflag==1){
-      this.setData({
-        arrayp: "校园卡"
-      })
-    } else if (this.data.pflag == 2) {
-      this.setData({
-        arrayp: "雨伞"
-      })
-    } else  {
-      this.setData({
-        arrayp: "钱包"
-      })
-    }
-    console.log(this.data.currentTab)
-    console.log("-------------test------------------")
-    console.log(this.data.listofitem)
-    console.log('FFF')
     this.setData({
       tvalue:'',
       imageList:[],
-      pflag:0,
+      category_index:0,
     })
   },
 
@@ -119,9 +84,14 @@ Page({
 
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
+    var index_val = this.data.array[e.detail.value]
     this.setData({
-      pflag: e.detail.value
+      category_index: e.detail.value,
+      category: index_val
     })
+    console.log('category_index:')
+    console.log(this.data.category_index)
+    console.log(this.data.category)
   },
   bindDateChange: function (e) {
     this.setData({
@@ -142,8 +112,8 @@ Page({
     var formData = e.detail.value;
 
     var user_id = wx.getStorageSync('user_id')
-    var type_t = this.data.listofitem
-    var category = this.data.arrayp
+    var type_t = this.data.type_array[this.data.currentTab]
+    var category = this.data.category
     var title = ''
     var msg = e.detail.value.input
     var imagesPaths = this.data.imageList
@@ -212,6 +182,8 @@ Page({
         
       }
     })
-  }
-
+  },
+  onShow: function () {
+    
+  },
 })
