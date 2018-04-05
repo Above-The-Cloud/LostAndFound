@@ -11,8 +11,8 @@ Page({
   data: {
     swiper_url: [
       '../../images/index/swiper/1.jpg',
-      '../../images/index/swiper/2.jpg',
-      '../../images/index/swiper/3.jpg',
+      '../../images/index/swiper/2.png',
+      '../../images/index/swiper/3.jpeg',
       '../../images/index/swiper/4.jpg'
     ],
     listofitem: [],
