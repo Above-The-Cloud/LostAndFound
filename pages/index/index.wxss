@@ -26,7 +26,8 @@
   top:200px;
   text-align: center;
   align-items: center;
-  font-size: 28rpx;
+  font-size: 26rpx;
+  font-style: italic;
   color:grey;
   line-height: 80rpx;
   left:40%;
@@ -103,8 +104,6 @@
 .news-item-container {
   background-color: #f2f2f2;
   width: 100%;
-  padding-left: 8px;
-  padding-right: 8px;
   position: absolute;
   top:200px;
 }
@@ -117,13 +116,11 @@
   padding-top: 8px;
   padding-right: 8px;
   padding-bottom: 8px;
-  margin-left: 0px;
-  margin-right: 14px;
   margin-top: 3px;
   background-color: #fff;
   border: 1px solid #eaeaea;
   border-bottom: 1px solid #d0d0d0;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .userinfo{
   display: flex;

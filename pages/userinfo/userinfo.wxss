@@ -64,9 +64,6 @@
 
 }
 
-.article{
-  padding:10px;
-}  
 
 .con{
   height: 100%;
@@ -81,6 +78,7 @@
 .article-title{
   margin-bottom: 10rpx;
   font-size: 30rpx;
+  padding:10px;
 }
 /* 
 .sub-title{
@@ -98,8 +96,6 @@
 .news-item-container {
   background-color: #f2f2f2;
   width: 100%;
-  padding-left: 8px;
-  padding-right: 8px;
   position: absolute;
   top:200px;
 }
@@ -112,14 +108,13 @@
   padding-top: 8px;
   padding-right: 8px;
   padding-bottom: 8px;
-  margin-left: 3px;
-  margin-right: 3px;
   margin-top: 3px;
   background-color: #fff;
   border: 1px solid #eaeaea;
   border-bottom: 1px solid #d0d0d0;
-  border-radius: 10px;
+  border-radius: 5px;
 }
+
 .userinfo{
   display: flex;
   flex-direction: row;

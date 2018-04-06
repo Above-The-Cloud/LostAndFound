@@ -13,7 +13,6 @@
       </block>
     </view>
 </view>
-<view class="article">
  <view class="article-title">发表信息</view>
    <view class="con">
    <!-- <view class="news-item-container">
@@ -56,4 +55,3 @@
     </block>
   </view>
   </view>
- </view>
