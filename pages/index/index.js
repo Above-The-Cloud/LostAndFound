@@ -82,7 +82,7 @@ Page({
   refresh: function (e){
     while (this.data.listfound.length != 1)
       this.data.listfound.pop();
-    console.log('清空');
+    console.log('refresh');
     console.log(this.data.listfound);
     while (this.data.listlost.length != 1)
       this.data.listlost.pop();
@@ -99,7 +99,7 @@ Page({
     else
       this.setData({
         listofitem: this.data.listlost,
-              cur_type: '所有'
+        cur_type: '所有'
       })
 
     //调用应用实例的方法获取全局数据
@@ -109,7 +109,7 @@ Page({
     //     userInfo:userInfo
     //   })
     // })
-    this.show_publish_infos(this.type_t, '所有', this)
+    this.show_publish_infos(this.data.type_t, '所有', this)
   } ,
 
   stateswitch: function (e) {
