@@ -15,8 +15,8 @@
     </block>
     <action-sheet-cancel class="cancel">取消</action-sheet-cancel>
 </action-sheet>
-  <view class ="swiper-tab-item {{activeIndex==0?'active':''}}" bindtap="stateswitch" data-index="0">LOST ▾</view>
-    <view class ="swiper-tab-item {{activeIndex==1?'active':''}}" bindtap="stateswitch" data-index="1">FOUND ▾</view>
+  <view class ="swiper-tab-item {{activeIndex==0?'active':''}}" bindtap="stateswitch" data-index="0">LOST</view>
+    <view class ="swiper-tab-item {{activeIndex==1?'active':''}}" bindtap="stateswitch" data-index="1">FOUND</view>
     </view>
       <icon type='search' bindtap='search' class="refresh"></icon>
   <view class="news-item-container">

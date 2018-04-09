@@ -27,7 +27,6 @@
   text-align: center;
   align-items: center;
   font-size: 26rpx;
-  font-style: italic;
   color:grey;
   line-height: 80rpx;
   left:40%;
@@ -53,6 +52,7 @@
 {
   color: green;
   border-bottom: 1px solid green;
+  font-weight: bold;
 }
 .statechange{
   position: absolute;
