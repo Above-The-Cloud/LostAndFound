@@ -84,6 +84,7 @@ Page({
                     that.setData({
                       nickName: res.data.nickName,
                       avatarUrl: res.data.avatarUrl,
+                      openid: res.data.openid,
                     })
                     app.globalData.openid = openid;
                     wx.setStorageSync('openid', res.data.openid);
