@@ -2,7 +2,7 @@
 App({
   globalData: {
     userInfo: null,
-    serverName: "https://yiwangchunyu.wang",
+    serverName: "https://lostandfound.yiwangchunyu.wang",
     categories: ['所有', '校园卡', '雨伞', '钱包'],
     openid: null
   },

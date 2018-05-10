@@ -165,7 +165,7 @@ Page({
 
       console.log('login.php... ')
       wx.request({
-        url: serverName + '/login/login.php',
+        url: serverName + '/login/auto_login.php',
         data: {
           openid: openid,
 
@@ -213,10 +213,17 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        if (res.data == 'true') {
+        if (res.data == 'unregistered') {
           wx.setStorageSync('user_id', user_id);
           wx.redirectTo({
             url: '../initinfo/initinfo'
+          })
+        }
+        else if (res.data == 'registered'){
+          wx.setStorageSync('user_id', user_id);
+          wx.setStorageSync('user_id', res.data.user_id);
+          wx.switchTab({
+            url: '../index/index'
           })
         }
       }
