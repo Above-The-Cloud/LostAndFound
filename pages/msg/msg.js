@@ -1,79 +1,114 @@
-// pages/msg/msg.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    src: '../../pic/pic.png',
+    list: [
+      {
+        id: 'location1',
+        name: '教学楼',
+        open: false,
+        pages: [
+          {
+            zh: '理科大楼',
+            url: ''
+          }, {
+            zh: '文科大楼',
+            url: ''
+          }, {
+            zh: '教书院',
+            url: ''
+          }, {
+            zh: '文史楼',
+            url: ''
+          }, {
+            zh: '中北三馆',
+            url: ''
+          }, {
+            zh: '俊秀楼',
+            url: ''
+          }
+        ]
+      }, {
+        id: 'location2',
+        name: '食堂',
+        open: false,
+        pages: [
+          {
+            zh: '河西食堂',
+            url: ''
+          }, {
+            zh: '河东食堂',
+            url: ''
+          }, {
+            zh: '丽娃食堂',
+            url: ''
+          }, {
+            zh: '华闵食堂',
+            url: ''
+          }
+        ]
+      }, {
+        id: 'location3',
+        name: '宿舍',
+        open: false,
+        pages: [
+          {
+            zh: '第三宿舍',
+            url: ''
+          }, {
+            zh: '第四宿舍',
+            url: ''
+          }, {
+            zh: '第五宿舍',
+            url: ''
+          }, {
+            zh: '闵行7号宿舍',
+            url: ''
+          }, {
+            zh: '闵行8号宿舍',
+            url: ''
+          }, {
+            zh: '闵行9号宿舍',
+            url: ''
+          }
+        ]
+      }, {
+        id: 'location',
+        name: '学院',
+        open: false,
+        pages: [
+          {
+            zh: '计算机科学与技术学院',
+            url: ''
+          }, {
+            zh: '设计学院',
+            url: ''
+          }, {
+            zh: '教育学部',
+            url: ''
+          }, {
+            zh: '心理与认知学院',
+            url: ''
+          }
+        ]
+      }
+    ]
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-  toDetail: function () {
-    console.log('点击了查看');
-    wx.navigateTo({
-      url: '../*/*',
-    })
-  },
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  
-  moremsg: function () {
-    console.log('更多消息');
-   
+  kindToggle: function (e) {
+    var id = e.currentTarget.id, list = this.data.list;
+    for (var i = 0, len = list.length; i < len; ++i) {
+      if (list[i].id == id) {
+        if(list[i].url){
+          wx.navigateTo({
+            url: 'pages/' + list[i].url
+          })
+          return
+        }
+        list[i].open = !list[i].open
+      } else {
+        list[i].open = false
+      }
+    }
+    this.setData({
+      list: list
+    });
   }
 })

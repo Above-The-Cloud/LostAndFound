@@ -1,106 +1,25 @@
-<!--pages/msg/msg.wxml-->
-<view class="con">
-<swiper indicator-dots="{{indicatorDots}}"
-  autoplay="{{autoplay}}" class="banners" interval="{{interval}}" duration="{{duration}}">
-  </swiper>
-
-<view class='left'>
-    <text style="color:semi " font-size="small">我的消息</text>
-  </view>
+<view class="index">
   
-  <scroll-view class='newmsg' scroll-y  >
-
-      <view class='msgbox' bindtap="toDetail">
-      <view>
-        <image src='image/default.png' class='userpic'></image>
-      </view>
-      <view>
-        <text class='username'decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;&nbsp;1015213000</text>
-        <text class='timetext' decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;TIME：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20：00</text>
-      </view>
-      <view><button class='seebutton' size='mini'>查看</button></view>
-      
+  <view class="index-bd">
+    <view class="kind-list">
+      <block wx:for-items="{{list}}" wx:key="{{item.id}}">
+        <view class="kind-list-item">
+          <view id="{{item.id}}" class="kind-list-item-hd {{item.open ? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle">
+            <view class="kind-list-text">{{item.name}}</view>
+            <image class="kind-list-img" src="resources/kind/{{item.id}}.png"></image>
+          </view>
+          <view class="kind-list-item-bd {{item.open ? 'kind-list-item-bd-show' : ''}}">
+            <view class="navigator-box {{item.open ? 'navigator-box-show' : ''}}">
+              <block wx:for-items="{{item.pages}}" wx:for-item="page" wx:key="*item">
+                <navigator url="pages/{{page.url}}" class="navigator">
+                  <view class="navigator-text">{{page.zh}}</view>
+                  <view class="navigator-arrow"></view>
+                </navigator>
+              </block>
+            </view>
+          </view>
+        </view>
+      </block>
     </view>
-
-     <view class='msgbox' bindtap="toDetail">
-      <view>
-        <image src='image/default.png' class='userpic'></image>
-      </view>
-      <view>
-        <text class='username'decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;&nbsp;1015213000</text>
-        <text class='timetext' decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;TIME：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20：00</text>
-      </view>
-      <view><button class='seebutton' size='mini'>查看</button></view>
-      
-    </view>
-     <view class='msgbox' bindtap="toDetail">
-      <view>
-        <image src='image/default.png' class='userpic'></image>
-      </view>
-      <view>
-        <text class='username'decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;&nbsp;1015213000</text>
-        <text class='timetext' decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;TIME：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20：00</text>
-      </view>
-      <view><button class='seebutton' size='mini'>查看</button></view>
-      
-    </view>
-
-     <view class='msgbox' bindtap="toDetail">
-      <view>
-        <image src='image/default.png' class='userpic'></image>
-      </view>
-      <view>
-        <text class='username'decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;&nbsp;1015213000</text>
-        <text class='timetext' decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;TIME：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20：00</text>
-      </view>
-      <view><button class='seebutton' size='mini'>查看</button></view>
-      
-    </view>
-
-     <view class='msgbox' bindtap="toDetail">
-      <view>
-        <image src='image/default.png' class='userpic'></image>
-      </view>
-      <view>
-        <text class='username'decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;&nbsp;1015213000</text>
-        <text class='timetext' decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;TIME：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20：00</text>
-      </view>
-      <view><button class='seebutton' size='mini'>查看</button></view>
-      
-    </view>
-
-     <view class='msgbox' bindtap="toDetail">
-      <view>
-        <image src='image/default.png' class='userpic'></image>
-      </view>
-      <view>
-        <text class='username'decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;&nbsp;1015213000</text>
-        <text class='timetext' decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;TIME：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20：00</text>
-      </view>
-      <view><button class='seebutton' size='mini'>查看</button></view>
-      
-    </view>
-
-     <view class='msgbox' bindtap="toDetail">
-      <view>
-        <image src='image/default.png' class='userpic'></image>
-      </view>
-      <view>
-        <text class='username'decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;&nbsp;1015213000</text>
-        <text class='timetext' decode='{{true}}' space='{{true}}'>&nbsp;&nbsp;TIME：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20：00</text>
-      </view>
-      <view><button class='seebutton' size='mini'>查看</button></view>
-      
-    </view>
-
-    
-    
-  </scroll-view>
-
-  <text bindtap="moremsg" style="color:green">
-  更多历史通知 > 
-  </text>
   </view>
-
-  
-
+</view>
