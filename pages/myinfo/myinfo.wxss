@@ -180,3 +180,11 @@
   width: 20px;
   height: 20px;
 }
+._logout{
+  position:absolute;
+  right:5%;
+  top: 5%;
+  width: 20px;
+  height: 20px;
+  z-index: 2;
+}

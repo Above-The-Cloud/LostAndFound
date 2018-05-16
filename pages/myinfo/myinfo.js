@@ -118,7 +118,10 @@ Page({
       urls: imgList // 需要预览的图片http链接列表
     })
   },
+  logOut:function()//logout注销函数，待写
+  {
 
+  },
   onLoad: function () {
     var user_id = wx.getStorageSync('user_id')
     //console.log(user_id);

@@ -1,6 +1,7 @@
  <view class="contain" style="background-image:url(https://images.pexels.com/photos/267514/pexels-photo-267514.jpeg?w=940&h=650&auto=compress&cs=tinysrgb);background-repeat:repeat;opacity:0.9">
- 
+
 <view class="mask"></view> 
+  <image src='../../images/myinfo/logout.png' bindtap="logOut" class='_logout' data-publish-id="{{item.publish_id}}"bindtap="messageDelete"></image>
     <view class='user_ID'> 
         <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>  
       <block wx:else> -->
@@ -32,6 +33,7 @@
     </block>
   </view> -->
   <view class="news-item-container">
+
     <block wx:for="{{listofitem}}" wx:for-index="id">
       <text wx:if="{{item.header}}" class="sub-title">{{item.header}}</text>
 <view wx:else class="news-item">
