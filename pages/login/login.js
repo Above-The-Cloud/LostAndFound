@@ -162,8 +162,6 @@ Page({
 
     //用户身份验证
     if(openid){
-
-      console.log('login.php... ')
       wx.request({
         url: serverName + '/login/auto_login.php',
         data: {
@@ -187,13 +185,9 @@ Page({
       })
 
     }else{
-      console.log('else... ')
       console.log(openid)
 
     }
-    console.log(this.data)
-    console.log(app.globalData)
-    console.log("...login onLoad")
 
   },
 
@@ -221,7 +215,7 @@ Page({
         }
         else if (res.data == 'registered'){
           wx.setStorageSync('user_id', user_id);
-          wx.setStorageSync('user_id', res.data.user_id);
+          console.log('-----')
           wx.switchTab({
             url: '../index/index'
           })
