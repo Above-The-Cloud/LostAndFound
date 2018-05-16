@@ -121,6 +121,21 @@ Page({
   logOut:function()//logout注销函数，待写
   {
 
+    console.log("logout---------------")
+    wx.request({
+      url: serverName + '/logout.php',
+      data: {
+        openid: wx.getStorageSync('openid')
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log("---------------")
+        console.log(res.data)
+      }
+    })
   },
   onLoad: function () {
     var user_id = wx.getStorageSync('user_id')
