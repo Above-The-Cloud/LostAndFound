@@ -118,8 +118,12 @@ Page({
       urls: imgList // 需要预览的图片http链接列表
     })
   },
-  logOut:function()//logout注销函数，待写
+  Logout:function()//logout注销函数，待写
   {
+    wx.redirectTo({
+      url: '../login/login',
+    })
+    
 
   },
   onLoad: function () {
