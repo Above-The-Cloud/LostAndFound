@@ -1,8 +1,10 @@
 const app = getApp()
+var serverName = app.globalData.serverName
 Page({
   data: {
     searchs: [],
     current: null,
+    listofitem: [],
     hidden: true, // 加载提示框是否显示  
     scrollTop: 0, // 居顶部高度  
     inputShowed: false, // 搜索输入框是否显示  
@@ -18,14 +20,72 @@ Page({
       histroyShowed: false
     });
   },
+  photopreview: function (event) {//图片点击浏览
+    var src = event.currentTarget.dataset.src;//获取data-src
+    var imgList = event.currentTarget.dataset.list;//获取data-list
+    //console.log(imgList);
+    //图片预览
+    wx.previewImage({
+      current: src, // 当前显示图片的http链接
+      urls: imgList // 需要预览的图片http链接列表
+    })
+  },
   addItem: function () {
     if (this.data.current != null) {
-      // 将所有的后台业务交给app.js
-      app.addItem(this.data.current)
+      // 交给search_database
+      this.search_database(this.data.current, this);
     }
+    // this.setData({
+    //   inputVal: ""
+    // })
+  },
+  //搜索信息的接口，传入搜索的结果
+  Loadmsg: function () {
+    this.data.listofitem = [];
+    var that = this;
+    var i = 0;
+    for (i = 0; i < that.data.search_data.length; i++) {
+      var nickName = that.data.search_data[i].nickName;
+      var Msg = that.data.search_data[i].msg;
+      var user_id = that.data.search_data[i].user_id;
+      var Submission_time = that.data.search_data[i].submission_time.substring(5, that.data.search_data[i].submission_time.length - 3);
+      var imageurl = '';
+      var imageList = that.data.search_data[i].image_url;
+      var user_icon = that.data.search_data[i].avatarUrl;
+      // var nick_name = that.data.search_data[i].nickName,
+      // var avatarUrl = that.data.search_data[i].avatarUrl,
+      if (that.data.search_data[i].image_exist == "1")
+        imageurl = that.data.search_data[i].image_url[0];
+        this.data.listofitem.push({
+          userid: user_id, username: nickName, text: Msg, imagelist: imageList, image: imageurl, usericon: user_icon, sub_time: Submission_time
+        })
+    }
+    console.log('loading over');
+    console.log(this.data.listofitem);
     this.setData({
-      inputVal: ""
+      listofitem: this.data.listofitem
     })
+  },
+  search_database: function (key, obj) {
+    wx.request({
+      url: serverName + '/index/search.php',
+      data: {
+        key: key
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        obj.setData({
+          search_data: res.data
+        })
+        console.log('当前数据库返回的search记录');
+        console.log(obj.data.search_data);
+        obj.Loadmsg();
+      }
+    })
+
   },
   deleteItem: function (e) {
     var key = e.target.dataset.key;

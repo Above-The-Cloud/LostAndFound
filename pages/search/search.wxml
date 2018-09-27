@@ -3,7 +3,7 @@
     <view class="weui-search-bar__form">  
         <view class="weui-search-bar__box">  
             <icon class="weui-icon-search_in-box" type="search" size="14"></icon>  
-            <input type="text" class="weui-search-bar__input" placeholder="请输入丢失的物品信息" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="bindKeyInput"/>  
+            <input type="text" class="weui-search-bar__input" placeholder="请输入丢失或者捡到的物品信息" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="bindKeyInput"/>  
             <view class="weui-icon-clear"  bindtap="clearInput">  
                 <icon type="clear" size="14"></icon>  
             </view>  
@@ -21,3 +21,26 @@
         <icon type="clear"  class="inline" bindtap="deleteItem" data-key="{{item.key}}" size="14"></icon>
     </view>      
 </view> 
+<block wx:for="{{listofitem}}" wx:for-index="id">
+<view class="news-item">
+        <view class='userinfo'>
+        <navigator url="../userinfo/userinfo?userid={{item.userid}}">
+<image src="{{item.usericon}}"class='icon-image'></image></navigator>
+          <view class='username'>
+           <navigator url="../userinfo/userinfo?userid={{item.userid}}">
+            <text selectable='true' >{{item.username}}</text></navigator>
+          </view>
+          <navigator class='detail' url="./msgdetail/msgdetail?username={{item.username}}&usericon={{item.usericon}}&text={{item.text}}&imagelist={{item.imagelist}}&time={{item.sub_time}}&image={{item.image}}&userid={{item.userid}}"hover-class='hover'>...</navigator>
+        </view>
+        <view class="news-item-left">
+                    <navigator url="./msgdetail/msgdetail?username={{item.username}}&usericon={{item.usericon}}&text={{item.text}}&imagelist={{item.imagelist}}&time={{item.sub_time}}&image={{item.image}}&userid={{item.userid}}"hover-class='hover'><text selectable='true' class="news-item-title">{{item.text}}</text></navigator>
+        </view>
+        <view wx:if="{{item.image != ''}}"class="image-container">
+          <block wx:for="{{item.imagelist}}" wx:for-item="specific_url">
+          <image bindtap="photopreview" data-list="{{item.imagelist}}"src="{{specific_url}}" data-src="{{specific_url}}" class="news-image" mode="aspectFill"></image>
+          </block>
+        </view>
+        <view><text class = 'time'>{{item.sub_time}}</text></view>
+      </view>
+    </block>
+

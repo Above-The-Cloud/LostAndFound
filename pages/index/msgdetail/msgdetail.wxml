@@ -13,7 +13,7 @@
   </view>
    <view wx:if="{{image != ''}}"class="image-container">
 <block wx:for="{{imagelist}}" wx:for-item="specific_url">
-          <image bindtap="photopreview" data-list="{{imagelist}}"src="{{specific_url}}" data-src="{{specific_url}}" class="news-image"></image>
+          <image bindtap="photopreview" data-list="{{imagelist}}"src="{{specific_url}}" data-src="{{specific_url}}" mode="aspectFill" class="news-image"></image>
           </block>
         </view>
          <view><text class = 'time'>{{time}}</text></view>

@@ -37,7 +37,7 @@
         </view>
         <view wx:if="{{item.image != ''}}"class="image-container">
           <block wx:for="{{item.imagelist}}" wx:for-item="specific_url">
-          <image bindtap="photopreview" data-list="{{item.imagelist}}"src="{{specific_url}}" data-src="{{specific_url}}" class="news-image"></image>
+          <image bindtap="photopreview" data-list="{{item.imagelist}}"src="{{specific_url}}" data-src="{{specific_url}}" class="news-image" mode="aspectFill"></image>
           </block>
         </view>
         <view><text class = 'time'>{{item.sub_time}}</text></view>
