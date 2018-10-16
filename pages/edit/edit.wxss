@@ -313,7 +313,8 @@
 }
 .button-sp-area{
   margin: 0 auto;
-  width: 30%;
+  width: 50%;
+  align-items: center;
 }
 
 .pic{

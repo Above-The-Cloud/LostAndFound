@@ -61,7 +61,7 @@
 
 <view class="button-sp-area">
         <button type="primary" plain="true"  formType="submit"
- bindtap="stateswitch" >发布</button></view>
+ bindtap="stateswitch" >添加记录</button></view>
     
   </view>
 
@@ -124,7 +124,7 @@
 
 <view class="button-sp-area">
         <button type="primary" plain="true"  formType="submit"
- bindtap="stateswitch" >发布</button></view>
+ bindtap="stateswitch" >添加记录</button></view>
     
   </view>
 

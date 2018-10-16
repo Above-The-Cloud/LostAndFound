@@ -207,6 +207,8 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
+        console.log("register");
+        console.log(res);
         if (res.data == 'unregistered') {
           wx.setStorageSync('user_id', user_id);
           wx.redirectTo({

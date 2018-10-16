@@ -1,4 +1,5 @@
 <!--index.wxml-->
+
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" class="banners" interval="{{interval}}" duration="{{duration}}">
     <block wx:for="{{swiper_url}}">
       <swiper-item class="banner">
@@ -7,6 +8,7 @@
       </swiper-item>
     </block>
   </swiper>
+<navigator url='../edit/edit'>  <image class="append" src="../../images/source/append.png"></image></navigator>
   <view class="swiper-tab">
     <button class ="category" bindtap="actionSheetTap">{{cur_type}}▾</button>
     <action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetChange">
