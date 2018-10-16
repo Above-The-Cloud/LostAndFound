@@ -130,7 +130,6 @@ page {
 }
 .info{
   color: gray;
-  align-items: center;
   font-family: 黑体;
   font-size: 13px;
   /* font-weight:bold; */
@@ -139,6 +138,9 @@ page {
     letter-spacing: -3px;
     color: #ddd;
     font-weight:bold;
+}
+.text-container{
+  text-align: center;
 }
 .cells:after {
   content: " ";

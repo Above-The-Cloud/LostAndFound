@@ -44,10 +44,9 @@ plain="true"type="primary" formType="submit" >确认绑定</button>
  </form>
     </view>
    </view>
-   <view display='inline-block'  flex-direction='row'>
-<text class="line_05">------------------</text>
+   <view class='text-container'>
 <text class='info'>华东师范大学线上失物招领平台</text>
-<text class="line_05">------------------</text></view>
+</view>
    <view class="logo-container">
        <image class="ecnuImage" src="../../images/source/ecnu.jpg"></image>
     <image class="logoImage" src="../../images/logo.png"></image>
