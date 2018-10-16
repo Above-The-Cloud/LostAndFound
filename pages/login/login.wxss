@@ -1,8 +1,14 @@
 /* pages/login/login.wxss */
+page {
+  display: block;
+  min-height: 100%;
+  background-color: #ffffff;
+}
 .picker{
   padding: 19rpx 26rpx;
   background-color: #FFFFFF;
 }
+
 .cells {
   position: relative;
   margin-top: 1.17647059em;
@@ -41,6 +47,7 @@
   word-break: break-all;
 }
 .input {
+  font-size: 16px;
   height: 2.58823529em;
   min-height: 2.58823529em;
   line-height: 2.58823529em;
@@ -80,13 +87,37 @@
   padding-right: 30rpx;
 }
 .btn-area{
-  margin-top: 60rpx;
+  margin-top: 100rpx;
+  margin-left: 220rpx;
   box-sizing: border-box;
   width: 100%;
   padding: 0 30rpx;
 }
 
-
+.nameImage, .keyImage{
+  margin-left: 0px;
+  width: 18px;
+  height: 18px
+}
+.ecnuImage{
+  margin-left: 0px;
+  width:50px;
+  height: 50px;
+}
+.logoImage{
+  margin-right: 0px;
+  width:50px;
+  height: 50px;
+}
+.logo-container{
+  margin-left: 90px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 50%;
+  align-items:center;
+}
 .cells:before {
   content: " ";
   position: absolute;
@@ -96,6 +127,18 @@
   height: 1px;
   border-top: 1rpx solid #D9D9D9;
   color: #D9D9D9;
+}
+.info{
+  color: gray;
+  align-items: center;
+  font-family: 黑体;
+  font-size: 13px;
+  /* font-weight:bold; */
+}
+.line_05{
+    letter-spacing: -3px;
+    color: #ddd;
+    font-weight:bold;
 }
 .cells:after {
   content: " ";

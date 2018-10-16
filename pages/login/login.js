@@ -219,6 +219,11 @@ Page({
           wx.switchTab({
             url: '../index/index'
           })
+          wx.showToast({
+            title: '登录成功',
+            icon: 'success',
+            duration: 5000
+          })
         }
       }
     })

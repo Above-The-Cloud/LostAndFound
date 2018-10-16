@@ -8,36 +8,47 @@
 </template>
 
   <view class="container">
-    <template is="head" data="{{title: '初次登录'}}"/>
+    <!-- <template is="head" data="{{title: '初次登录'}}"/> -->
 
   
  <view class="page-body">
 <form catchsubmit="formSubmit" catchreset="formReset">  
 <view class="page-section">
-      <view class="cells__title">学号：{{inputValue}}</view>
+      <view class="cells__title">学工号：{{inputValue}}</view>
       <view class="cells cells_after-title">
         <view class="cell cell_input">
+        <image class="nameImage" src = "../../images/source/name.png"></image>
           <input class="input"  name='userid' maxlength="11" bindinput="bindKeyInput" placeholder="请输入学工号"/>
         </view>
       </view>
     </view>
 
     <view class="page-section">
-        <view class="page-section-title">我的密码</view>
+        <view class="page-section-title">密码</view>
+
         <view class="cells cells_after-title">
           <view class="cell cell_input">
+              <image class="keyImage" src = "../../images/source/key.png"></image>
             <view class="cell__bd">
-              <input class="input" password="true" name="user_password" placeholder="输入公共数据库密码" />
+              <input class="input" password="true" name="user_password" placeholder="请输入公共数据库密码" />
             </view>
           </view>
         </view>
       </view>
 
       <view class="btn-area">
-        <button type="primary" formType="submit">提交</button>
-        <button formType="reset">重置</button>
-      </view>
-      
+        <button size="mini" loading="{{loading}}"
+plain="true"type="primary" formType="submit" >确认绑定</button>
+</view>
+
  </form>
     </view>
    </view>
+   <view display='inline-block'  flex-direction='row'>
+<text class="line_05">------------------</text>
+<text class='info'>华东师范大学线上失物招领平台</text>
+<text class="line_05">------------------</text></view>
+   <view class="logo-container">
+       <image class="ecnuImage" src="../../images/source/ecnu.jpg"></image>
+    <image class="logoImage" src="../../images/logo.png"></image>
+    </view>
