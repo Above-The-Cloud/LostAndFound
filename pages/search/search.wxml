@@ -30,10 +30,10 @@
            <navigator url="../userinfo/userinfo?userid={{item.userid}}">
             <text selectable='true' >{{item.username}}</text></navigator>
           </view>
-          <navigator class='detail' url="./msgdetail/msgdetail?username={{item.username}}&usericon={{item.usericon}}&text={{item.text}}&imagelist={{item.imagelist}}&time={{item.sub_time}}&image={{item.image}}&userid={{item.userid}}"hover-class='hover'>...</navigator>
+          <!-- <navigator class='detail' url="./msgdetail/msgdetail?username={{item.username}}&usericon={{item.usericon}}&text={{item.text}}&imagelist={{item.imagelist}}&time={{item.sub_time}}&image={{item.image}}&userid={{item.userid}}"hover-class='hover'>...</navigator> -->
         </view>
         <view class="news-item-left">
-                    <navigator url="./msgdetail/msgdetail?username={{item.username}}&usericon={{item.usericon}}&text={{item.text}}&imagelist={{item.imagelist}}&time={{item.sub_time}}&image={{item.image}}&userid={{item.userid}}"hover-class='hover'><text selectable='true' class="news-item-title">{{item.text}}</text></navigator>
+<text selectable='true' class="news-item-title">{{item.text}}</text>
         </view>
         <view wx:if="{{item.image != ''}}"class="image-container">
           <block wx:for="{{item.imagelist}}" wx:for-item="specific_url">

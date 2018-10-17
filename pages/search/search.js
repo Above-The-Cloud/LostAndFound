@@ -61,7 +61,18 @@ Page({
         })
     }
     console.log('loading over');
-    console.log(this.data.listofitem);
+    if(this.data.listofitem.length == 0)
+    wx.showToast({
+      title: '对不起, 没有找到您搜索的物品信息',
+      icon: 'none',
+      duration: 1500
+    })
+    else
+      wx.showToast({
+        title: '搜索到'+this.data.listofitem.length+'条记录',
+        icon: 'none',
+        duration: 1500
+      })
     this.setData({
       listofitem: this.data.listofitem
     })
