@@ -32,6 +32,9 @@ Page({
 
   onLoad: function () {
     console.log("login onLoad...")
+    // wx.redirectTo({
+    //   url: '../initinfo/initinfo'
+    // })
     var that = this
     that.setData({
       userInfo: app.globalData.userInfo
@@ -57,6 +60,7 @@ Page({
           })
           console.log("获取用户信息完成！")
           console.log("openid: " + openid)
+          
         }
       })
     } else {
@@ -90,6 +94,7 @@ Page({
                     wx.setStorageSync('openid', res.data.openid);
                     console.log('getopenid: ' + res.data)
                     console.log("获取用户openid成功！")
+                    
                     console.log("openid: " + res.data.openid)
                   },
                   fail: function (err) {

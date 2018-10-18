@@ -128,16 +128,14 @@ page {
   border-top: 1rpx solid #D9D9D9;
   color: #D9D9D9;
 }
+.foot{
+  bottom: 10px;
+}
 .info{
   color: gray;
   font-family: 黑体;
   font-size: 13px;
   /* font-weight:bold; */
-}
-.line_05{
-    letter-spacing: -3px;
-    color: #ddd;
-    font-weight:bold;
 }
 .text-container{
   text-align: center;
