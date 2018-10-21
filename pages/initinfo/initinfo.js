@@ -44,13 +44,13 @@ Page({
       success: function (res) {
         console.log('setcontact.php: success')
         console.log(res.data)
-        if (res.data == 'true') {
+        if (res.data.code == 0) {
           wx.switchTab({
             url: '../index/index'
           })
         }
         else{
-
+          console.log(res.msg);
         }
       }
     })

@@ -8,7 +8,9 @@
       </swiper-item>
     </block>
   </swiper>
+  <view wx:if="{{check == true}}">
 <navigator url='../edit/edit'>  <image class="append" src="../../images/source/append.png"></image></navigator>
+</view>
   <view class="swiper-tab">
     <button class ="category" bindtap="actionSheetTap">{{cur_type}}▾</button>
     <action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetChange">

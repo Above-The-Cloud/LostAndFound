@@ -4,11 +4,14 @@
 var app = getApp()
 var utils = require('../../utils/util.js')
 var flag = true;
-var type_t = 'found'
+
+
 var serverName = app.globalData.serverName
 var Category = ['所有', '校园卡', '雨伞', '钱包']
 Page({
   data: {
+    check: true,//判断是否是测试账号
+    type_t: 'found',
     swiper_url: [
       '../../images/index/swiper/1.jpg',
       '../../images/index/swiper/2.png',
@@ -204,6 +207,12 @@ Page({
     })
   },
   onLoad: function () {
+    var user_id = wx.getStorageSync('user_id');
+    console.log(user_id);
+    if(user_id=='123456')//判断是否是测试账号
+      this.setData({
+        check: false
+      });
     while(this.data.listfound.length!=1)
       this.data.listfound.pop();
     console.log('清空');
@@ -237,21 +246,27 @@ Page({
   },
   
   //获取发布信息的接口，传入分类数据
-  show_publish_infos: function(type_t, category,obj){
+  show_publish_infos: function(type_t, category, obj){
+    console.log('type_t:'+ type_t);
+    console.log('category:' + category);
+    var  _data;
+    if(category == '所有'){
+      _data = {'type': type_t};
+    }
+    else{
+      _data = { 'type': type_t,'category': category}
+    }
+
     wx.request({
-      url: serverName + '/index/index_publish_info.php',
-      data: {
-        type_t: type_t,
-        category: category,
-      },
+      url: serverName + '/index/show.php',
+      data: _data,
       method: 'GET',
       header: {
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
         obj.setData({
-          publish_data: res.data
-
+          publish_data: res.data.data
         })
         console.log('当前数据库返回的publish记录')
         console.log(obj.data.publish_data)

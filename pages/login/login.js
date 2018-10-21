@@ -19,7 +19,7 @@ Page({
 
 
     //DONE:表单检查
-    console.log(e.detail.value)
+    // console.log(e.detail.value)
     var user_id = e.detail.value.userid;
     var user_password = e.detail.value.user_password;
     var openid = this.data.openid;
@@ -214,13 +214,21 @@ Page({
       success: function (res) {
         console.log("register");
         console.log(res);
-        if (res.data == 'unregistered') {
+        if(res.data.code != 0)
+        {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none',
+            duration: 2000
+          })
+        }
+        if (res.data.data.tag == 'unregistered') {
           wx.setStorageSync('user_id', user_id);
           wx.redirectTo({
             url: '../initinfo/initinfo'
           })
         }
-        else if (res.data == 'registered'){
+        else if (res.data.data.tag == 'registered'){
           wx.setStorageSync('user_id', user_id);
           console.log('-----')
           wx.switchTab({
