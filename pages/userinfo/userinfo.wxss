@@ -97,7 +97,7 @@
   background-color: #f2f2f2;
   width: 100%;
   position: absolute;
-  top:200px;
+  top:170px;
 }
 
 .news-item {

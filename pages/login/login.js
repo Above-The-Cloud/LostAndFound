@@ -14,19 +14,130 @@ Page({
       inputValue: e.detail.value
     })
   },
+  bindPwdInput: function(e){
+    this.setData({
+      pwd:e.detail.value
+    })
+  },
+  bindGetUserInfo:function(e)
+  {
+    console.log('bindgetuserinfo 调用')
+    // console.log(e);
+    this.wxLogin();
+  },
+  wxLogin:function(e){
+    var that = this;
+    var openid;
+    wx.login({
+      success: function (res) {
+        console.log('code: ' + res.code)
+        if (res.code) {
+          wx.getUserInfo({
+            withCredentials: true,
+            success: function (res_user) {
+              wx.request({
+                //后台接口地址
+                url: serverName + '/getopenid.php',
+                data: {
+                  code: res.code,
+                  //encryptedData: res_user.encryptedData,
+                  //iv: res_user.iv
+                },
+                method: 'GET',
+                header: {
+                  'content-type': 'application/json'
+                },
+                success: function (res) {
+                  // this.globalData.userInfo = JSON.parse(res.data);
+                  console.log(res);
+                  that.setData({
+                    // nickName: res.data.nickName,
+                    // avatarUrl: res.data.avatarUrl,
+                    openid: res.data.openid,
+                  })
+                  app.globalData.openid = openid;
+                  wx.setStorageSync('openid', res.data.openid);
+                  // console.log('getopenid: ' + res.data)
+                  console.log("获取用户openid成功！")
+                  console.log("openid: " + res.data.openid)
+                      var user_id = that.data.inputValue;
+    var user_password = that.data.pwd;
+    var openid = that.data.openid;
+    var nickName = that.data.nickName;
+    var avatarUrl = that.data.avatarUrl;
+    that.register(user_id, user_password, openid, nickName, avatarUrl)
+                },
+                fail: function (err) {
+                  console.log(err)
+                }
+              })
+            },
+            fail: function () {
+              wx.showModal({
+                title: '警告通知',
+                content: '您点击了拒绝授权,将无法正常显示个人信息,点击确定重新获取授权。',
+                success: function (res) {
+                  if (res.confirm) {
+                    wx.openSetting({
+                      success: (res) => {
+                        if (res.authSetting["scope.userInfo"]) {////如果用户重新同意了授权登录
+                          wx.login({
+                            success: function (res_login) {
+                              if (res_login.code) {
+                                wx.getUserInfo({
+                                  withCredentials: true,
+                                  success: function (res_user) {
+                                    wx.request({
+                                      url: serverName + '/getopenid.php',
+                                      data: {
+                                        code: res_login.code,
+                                        encryptedData: res_user.encryptedData,
+                                        iv: res_user.iv
+                                      },
+                                      method: 'GET',
+                                      header: {
+                                        'content-type': 'application/json'
+                                      },
+                                      success: function (res) {
+                                        that.setData({
+                                          nickName: res.data.nickName,
+                                          avatarUrl: res.data.avatarUrl,
+
+                                        })
+                                        wx.setStorageSync('openid', res.data.openid);
+                                      }
+                                    })
+                                  }
+                                })
+                              }
+                            }
+                          });
+                        }
+                      },
+                      fail: function (res) {
+
+                      }
+                    })
+
+                  }
+                }
+              })
+            },
+            complete: function (res) {
+
+            }
+          })
+        }
+      }
+    })
+
+  },
   formSubmit: function(e){
     //TODO:表单检查
-
-
+    console.log(this.data);
     //DONE:表单检查
     // console.log(e.detail.value)
-    var user_id = e.detail.value.userid;
-    var user_password = e.detail.value.user_password;
-    var openid = this.data.openid;
-    var nickName = this.data.nickName;
-    var avatarUrl = this.data.avatarUrl;
 
-    this.register(user_id, user_password, openid, nickName, avatarUrl)
     
   },
 
@@ -63,108 +174,7 @@ Page({
           
         }
       })
-    } else {
-      wx.login({
-        success: function (res) {
-          console.log('code: ' + res.code)
-          if (res.code) {
-            wx.getUserInfo({
-              withCredentials: true,
-              success: function (res_user) {
-                wx.request({
-                  //后台接口地址
-                  url: serverName + '/getopenid.php',
-                  data: {
-                    code: res.code,
-                    //encryptedData: res_user.encryptedData,
-                    //iv: res_user.iv
-                  },
-                  method: 'GET',
-                  header: {
-                    'content-type': 'application/json'
-                  },
-                  success: function (res) {
-                    // this.globalData.userInfo = JSON.parse(res.data);
-                    that.setData({
-                      nickName: res.data.nickName,
-                      avatarUrl: res.data.avatarUrl,
-                      openid: res.data.openid,
-                    })
-                    app.globalData.openid = openid;
-                    wx.setStorageSync('openid', res.data.openid);
-                    console.log('getopenid: ' + res.data)
-                    console.log("获取用户openid成功！")
-                    
-                    console.log("openid: " + res.data.openid)
-                  },
-                  fail: function (err) {
-                    console.log(err)
-                  }
-                })
-              }, 
-              
-              fail: function () {
-                wx.showModal({
-                  title: '警告通知',
-                  content: '您点击了拒绝授权,将无法正常显示个人信息,点击确定重新获取授权。',
-                  success: function (res) {
-                    if (res.confirm) {
-                      wx.openSetting({
-                        success: (res) => {
-                          if (res.authSetting["scope.userInfo"]) {////如果用户重新同意了授权登录
-                            wx.login({
-                              success: function (res_login) {
-                                if (res_login.code) {
-                                  wx.getUserInfo({
-                                    withCredentials: true,
-                                    success: function (res_user) {
-                                      wx.request({
-                                        url: serverName + '/getopenid.php',
-                                        data: {
-                                          code: res_login.code,
-                                          encryptedData: res_user.encryptedData,
-                                          iv: res_user.iv
-                                        },
-                                        method: 'GET',
-                                        header: {
-                                          'content-type': 'application/json'
-                                        },
-                                        success: function (res) {
-                                          that.setData({
-                                            nickName: res.data.nickName,
-                                            avatarUrl: res.data.avatarUrl,
-
-                                          })
-                                          wx.setStorageSync('openid', res.data.openid);
-                                        }
-                                      })
-                                    }
-                                  })
-                                }
-                              }
-                            });
-                          }
-                        }, 
-                        fail: function (res) {
-
-                        }
-                      })
-
-                    }
-                  }
-                })
-              }, 
-              complete: function (res) {
-
-              }
-            })
-          }
-        }
-      })
-
     }
-
-
     //用户身份验证
     if(openid){
       wx.request({

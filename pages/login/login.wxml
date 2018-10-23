@@ -9,10 +9,9 @@
 
   <view class="container">
     <!-- <template is="head" data="{{title: '初次登录'}}"/> -->
-
-  
+<!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">获取用户信息</button> -->
  <view class="page-body">
-<form catchsubmit="formSubmit" catchreset="formReset">  
+<form catchreset="formReset">  
 <view class="page-section">
       <view class="cells__title">学工号：{{inputValue}}</view>
       <view class="cells cells_after-title">
@@ -30,15 +29,15 @@
           <view class="cell cell_input">
               <image class="keyImage" src = "../../images/source/key.png"></image>
             <view class="cell__bd">
-              <input class="input" password="true" name="user_password" placeholder="请输入公共数据库密码" />
+              <input bindinput="bindPwdInput"class="input" password="true" name="user_password" placeholder="请输入公共数据库密码" />
             </view>
           </view>
         </view>
       </view>
 
       <view class="btn-area">
-        <button size="mini" loading="{{loading}}"
-plain="true"type="primary" formType="submit" >确认绑定</button>
+        <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo" size="mini" loading="{{loading}}"
+plain="true"type="primary" >确认绑定</button>
 </view>
 
  </form>

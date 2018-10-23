@@ -14,24 +14,7 @@
       </block>
     </view>
 </view>
- <view class="article-title">发表信息</view>
    <view class="con">
-   <!-- <view class="news-item-container">
-     <block wx:for="{{list}}" wx:for-index="id">
-      <text wx:if="{{item.header}}" class="sub-title"></text>
-      <navigator wx:else url=''>
-        <view class="news-item" >
-                <view class="news-item-left">
-                    <view><text class="news-item-title">{{item.text}}</text></view>
-                    <view bindtap="messageDelete"><text>删除</text></view>
-                </view>
-          <view class="news-item-right">
-            <image src="{{item.image}}" class="news-image"/>
-          </view>
-        </view>
-      </navigator>
-    </block>
-  </view> -->
   <view class="news-item-container">
 
     <block wx:for="{{listofitem}}" wx:for-index="id">
