@@ -209,7 +209,7 @@ Page({
   onLoad: function () {
     var user_id = wx.getStorageSync('user_id');
     console.log(user_id);
-    if(user_id=='123456')//判断是否是测试账号
+    if(user_id=='1234567')//判断是否是测试账号
       this.setData({
         check: false
       });
