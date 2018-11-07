@@ -11,7 +11,7 @@
           <view class="kind-list-item-bd {{item.open ? 'kind-list-item-bd-show' : ''}}">
             <view class="navigator-box {{item.open ? 'navigator-box-show' : ''}}">
               <block wx:for-items="{{item.pages}}" wx:for-item="page" wx:key="*item">
-                <navigator url="pages/{{page.url}}" class="navigator">
+                <navigator url="../userinfo/userinfo?userid=111111" class="navigator">
                   <view class="navigator-text">{{page.zh}}</view>
                   <view class="navigator-arrow"></view>
                 </navigator>
