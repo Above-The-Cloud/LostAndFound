@@ -153,6 +153,7 @@ Page({
     })
     //获得用户的openid
     var openid = (wx.getStorageSync('openid'))
+
     if (openid) {
       wx.getUserInfo({
         success: function(res) {
@@ -178,6 +179,7 @@ Page({
     }
     //用户身份验证
     if (openid) {
+      console.log('13:19');
       wx.request({
         url: serverName + '/login/auto_login.php',
         data: {
@@ -189,7 +191,9 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: function(res) {
+          console.log('1322')
           console.log(res)
+          console.log(res.data)
           if (res.data.user_id) {
             wx.setStorageSync('user_id', res.data.user_id);
             wx.switchTab({
@@ -218,7 +222,7 @@ Page({
         nickName: nickName,
         avatarUrl: avatarUrl,
       },
-      method: 'GET',
+      method: 'GET', 
       header: {
         'content-type': 'application/json' // 默认值
       },

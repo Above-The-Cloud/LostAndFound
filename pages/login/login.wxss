@@ -87,8 +87,8 @@ page {
   padding-right: 30rpx;
 }
 .btn-area{
-  margin-top: 100rpx;
-  margin-left: 220rpx;
+  display: flex;
+  justify-content: center;
   box-sizing: border-box;
   width: 100%;
   padding: 0 30rpx;

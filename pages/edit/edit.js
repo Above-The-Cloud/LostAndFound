@@ -23,6 +23,7 @@ Page({
     tempFilePaths:null,
     //分类按钮
     showModalStatus: false,
+    filep:[],
     //导航栏
     navbar: ['LOST', 'FOUND'],
     currentTab: 0,
@@ -66,9 +67,13 @@ Page({
       success: function (res) {
         console.log('chooseimage.......')
         console.log(res)
+        var tmpfile = res.tempFilePaths;
+        console.log(tmpfile);
         that.setData({
-          imageList: res.tempFilePaths
+          imageList: tmpfile,
+          filep:tmpfile
         })
+        console.log(that.data.imageList);
       }
     })
   },
@@ -116,26 +121,25 @@ Page({
     var category = this.data.category
     var title = ''
     var msg = e.detail.value.input
-    var imagesPaths = this.data.imageList
-    console.log("imagelist..........")
-    console.log(this.data.arrayp)
-    console.log(this.data.imageList)
+    var imagesPaths = this.data.filep
+    console.log("imageList..........")
+    console.log(this.data)
     console.log(imagesPaths)
     //在此调用uploadAll接口
     this.uploadAll(user_id, type_t, category, title, msg, imagesPaths)
 
-    //跳转到主页
-    wx.switchTab({
-      url: '../index/index',
-      success: function (e) {
-        var page = getCurrentPages().pop();
-        if (page == undefined || page == null) return;
-        setTimeout(function () {
-          page.onLoad();
-        }, 2000);  
+    // //跳转到主页
+    // wx.switchTab({
+    //   url: '../index/index',
+    //   success: function (e) {
+    //     var page = getCurrentPages().pop();
+    //     if (page == undefined || page == null) return;
+    //     setTimeout(function () {
+    //       page.onLoad();
+    //     }, 2000);  
         
-      }
-    })  
+    //   }
+    // })  
   },
 
   //imagesPaths图片路径数组
@@ -157,7 +161,16 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-          publish_id=res.data
+        // if(res.data.code)
+        if(res.data.code == -2){
+          wx.showToast({
+            title: '对不起，您发送的内容中带有敏感内容，请编辑后重发',
+            icon: 'none'
+          })
+          return;
+        }
+
+        publish_id=res.data.data.publish_id;
         console.log('当前数据库返回的publish_id')
         console.log(publish_id)
         for (var path in imagesPaths){
@@ -179,6 +192,19 @@ Page({
             }
           })
         }
+        //跳转到主页
+        wx.switchTab({
+          url: '../index/index',
+          success: function (e) {
+            var page = getCurrentPages().pop();
+            if (page == undefined || page == null) return;
+            setTimeout(function () {
+              page.onLoad();
+            }, 2000);
+
+          }
+        })
+        
         
       }
     })

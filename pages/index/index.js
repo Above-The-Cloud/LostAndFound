@@ -14,7 +14,7 @@ Page({
     type_t: 'found',
     swiper_url: [
       '../../images/index/swiper/1.jpg',
-      '../../images/index/swiper/2.png',
+      '../../images/index/swiper/2p.jpg',
       '../../images/index/swiper/3.jpeg',
       '../../images/index/swiper/4.jpg'
     ],

@@ -33,36 +33,47 @@ Page({
   },
 
 
-    
-  onLoad1: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
+  onPullDownRefresh: function () {
+    this.onLoad();
+    // console.log('onpull调用前')
+    // var user_id = wx.getStorageSync('user_id')
+    // console.log(this.data);
+    // //console.log(user_id);
 
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+    // // this.get_current_user_info(user_id);
+    // this.get_publish_of_mine(user_id);
+    // console.log('调用后')
+    // console.log(this.data);
   },
+  // onLoad1: function () {
+  //   if (app.globalData.userInfo) {
+  //     this.setData({
+  //       userInfo: app.globalData.userInfo,
+  //       hasUserInfo: true
+  //     })
+  //   } else if (this.data.canIUse) {
+  //     // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+  //     // 所以此处加入 callback 以防止这种情况
+  //     app.userInfoReadyCallback = res => {
+  //       this.setData({
+  //         userInfo: res.userInfo,
+  //         hasUserInfo: true
+  //       })
+
+  //     }
+  //   } else {
+  //     // 在没有 open-type=getUserInfo 版本的兼容处理
+  //     wx.getUserInfo({
+  //       success: res => {
+  //         app.globalData.userInfo = res.userInfo
+  //         this.setData({
+  //           userInfo: res.userInfo,
+  //           hasUserInfo: true
+  //         })
+  //       }
+  //     })
+  //   }
+  // },
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail
@@ -100,12 +111,8 @@ Page({
       //   else
       //   this.data.listlost.push({ username: userid, text: Msg, image: imageurl, usericon: user_icon, sub_time: Submission_time });
     }
-    if (this.data.activeIndex == 1)
-      this.setData({
-        listofitem: this.data.listfound
-      })
-    else this.setData({
-      listofitem: this.data.listlost
+    this.setData({
+      listofitem: this.data.listfound
     })
   },
   photopreview: function (event) {//图片点击浏览
@@ -150,15 +157,16 @@ Page({
     console.log('llllllalala')
     console.log(this.data)
    // console.log(publish_data)
-    while (this.data.listfound.length != 1)
+    while (this.data.listfound.length != 0)
       this.data.listfound.pop();
+    
     console.log('清空');
     console.log(this.data.listfound);
     console.log('上面是found信息')
-    while (this.data.listlost.length != 1)
+    while (this.data.listlost.length != 0)
       this.data.listlost.pop();
     console.log(this.data.listlost);
-    // console.log('上面是lost信息')
+    console.log('上面是lost信息')
     var that = this;
 
     this.index = 1
@@ -179,10 +187,24 @@ Page({
   //删除函数
   messageDelete: function (e) {
     //TODO:调用函数deleteSingleMassageById(publish_id)
-    console.log(e);
-    console.log(e.target.dataset.publishId);
-    var pubid = e.target.dataset.publishId;
-    this.deleteSingleMassageById(pubid);
+    var that = this;
+    wx.showActionSheet({
+      itemList: ['确认删除'],
+      success(res) {
+        console.log(res.tapIndex)
+        if(res.tapIndex == 0)
+        {
+          console.log(e);
+          console.log(e.target.dataset.publishId);
+          var pubid = e.target.dataset.publishId;
+          that.deleteSingleMassageById(pubid);
+        }
+      },
+      fail(res) {
+        console.log(res.errMsg)
+      }
+    })
+
   },
 
   deleteSingleMassageById: function (publish_id) {
@@ -255,7 +277,6 @@ Page({
         console.log(res)
         that.setData({
           publish_data: res.data
-
         })
         var publish_data=res.data
         that.Loadmsg(publish_data)
