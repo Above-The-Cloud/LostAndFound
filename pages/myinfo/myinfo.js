@@ -125,6 +125,28 @@ Page({
       urls: imgList // 需要预览的图片http链接列表
     })
   },
+  Setting:function(){
+    var that = this;
+    wx.showActionSheet({
+      itemList: ['联系方式修改', '退出登录'],
+      success(res) {
+        console.log(res.tapIndex)
+        if (res.tapIndex == 0) {
+          console.log('联系方式修改')
+          wx.navigateTo({
+            url: '../modifyinfo/modifyinfo',
+          })
+        }
+        else
+        {
+          that.Logout();
+        }
+      },
+      fail(res) {
+        console.log(res.errMsg)
+      }
+    })
+  },
   Logout:function()//logout注销函数，待写
   {
     
@@ -154,7 +176,10 @@ Page({
     
     this.get_current_user_info(user_id);
     this.get_publish_of_mine(user_id);
-    console.log('llllllalala')
+    wx.showToast({
+      title: '下拉可以刷新个人信息',
+      icon: 'none'
+    })
     console.log(this.data)
    // console.log(publish_data)
     while (this.data.listfound.length != 0)

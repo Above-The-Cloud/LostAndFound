@@ -189,3 +189,11 @@
   height: 20px;
   z-index: 2;
 }
+._setting{
+  position:absolute;
+  right:5%;
+  top: 5%;
+  width: 25px;
+  height: 25px;
+  z-index: 2;
+}

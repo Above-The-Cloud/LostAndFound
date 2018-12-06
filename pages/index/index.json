@@ -1,5 +1,6 @@
 {
   "window": {
     "enablePullDownRefresh": true
-  }
+  },
+    "navigationBarTitleText": "ECNU线上失物招领平台"
 }

@@ -1,0 +1,34 @@
+<form catchsubmit="formSubmit" catchreset="formReset">
+    <view class="page-section">
+      <view class="cells__title">请选择联系方式</view>
+      <view class="cells cells_after-title">
+        <view class="cell cell_input">
+
+          <view class="cell__hd">
+            <view class="label">当前选择：</view>
+          </view>
+
+          <view class="cell__bd">
+            <picker bindchange="bindPickerChange" name='contact_type' value="{{index}}" range="{{array}}">
+              <view class="input">{{array[index]}}</view>
+            </picker>
+          </view>
+
+        </view>
+      </view>
+   </view>
+    <view class="page-section">
+        <view class="page-section-title">联系方式：</view>
+        <view class="cells cells_after-title">
+          <view class="cell cell_input">
+            <view class="cell__bd">
+              <input class="input" name="contact_value" placeholder="请输入联系方式" />
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="btn-area">
+        <button type='primary'size='mini'plain='true' formType="submit">确认</button>
+        <!-- <button formType="reset">重置</button> -->
+      </view>
+ </form>

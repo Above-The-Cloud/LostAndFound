@@ -10,12 +10,13 @@
     "pages/myinfo/myinfo",
     "pages/test/index",
     "pages/search/search",
-    "pages/userinfo/userinfo"
+    "pages/userinfo/userinfo",
+    "pages/modifyinfo/modifyinfo"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "LOST&FOUND",
+    "navigationBarTitleText": "ECNU线上失物招领平台",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
   },
@@ -33,7 +34,6 @@
         "iconPath": "images/tabbar/msg.png",
         "selectedIconPath": "images/tabbar/msg_selected.png"
       },
-
       {
         "pagePath": "pages/myinfo/myinfo",
         "text": "我的",

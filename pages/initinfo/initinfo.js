@@ -4,7 +4,7 @@ var serverName = app.globalData.serverName
 
 Page({
   data: {
-    array: ['QQ', '微信号', '手机号', '邮箱'],
+    array: ['手机号', 'QQ', '微信号'],
     index: 0,
 
   },
